@@ -1,0 +1,4 @@
+.vc-score { display: grid; grid-template-columns: 170px minmax(0, 1fr) 44px; align-items: center; gap: 10px; }
+.vc-score__label { font-size: var(--vc-text-sm); }
+.vc-score__bar { height: 12px; border-radius: 0 4px 4px 0; background: var(--vc-color-accent); min-width: 2px; }
+.vc-score__value { font: 700 var(--vc-text-sm) var(--vc-font-data); text-align: right; font-variant-numeric: tabular-nums; }

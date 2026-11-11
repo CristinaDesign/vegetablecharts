@@ -1,0 +1,8 @@
+.vc-card { font: inherit; text-align: center; cursor: pointer; background: transparent; color: var(--vc-color-ink);
+  border: var(--vc-border-width) solid var(--vc-color-ink); border-radius: var(--vc-radius-sm); padding: var(--vc-space-3) 14px;
+  display: grid; gap: 6px; align-content: start; width: 100%; opacity: .42; transition: opacity .2s, background .2s; }
+.vc-card:hover { opacity: .75; }
+.vc-card[aria-pressed="true"] { background: var(--vc-color-panel); opacity: 1; }
+.vc-card:focus-visible { outline: var(--vc-focus-ring); outline-offset: 3px; }
+.vc-card b { font-size: var(--vc-text-md); letter-spacing: .25px; }
+.vc-card span { font-size: 13px; line-height: 20px; letter-spacing: .25px; }
