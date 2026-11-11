@@ -1,0 +1,12 @@
+.vc-switch { display: inline-flex; align-items: center; gap: 10px; background: none; border: 0; padding: var(--vc-space-1);
+  cursor: pointer; font: 500 var(--vc-text-sm) var(--vc-font-display); color: var(--vc-color-ink-2); }
+.vc-switch__track { position: relative; width: 58px; height: 30px; border-radius: var(--vc-radius-pill);
+  background: var(--vc-color-panel); border: var(--vc-border-width) solid var(--vc-color-ink);
+  transition: background-color var(--vc-duration); }
+.vc-switch__knob { position: absolute; top: 2px; left: 2px; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--vc-color-ink); color: var(--vc-color-on-ink); display: grid; place-items: center;
+  transition: transform var(--vc-duration) var(--vc-ease); }
+.vc-switch__knob svg { width: 14px; height: 14px; }
+.vc-switch[aria-checked="true"] .vc-switch__knob { transform: translateX(28px); }
+.vc-switch:focus-visible { outline: var(--vc-focus-ring); outline-offset: 3px; border-radius: var(--vc-radius-pill); }
+.vc-switch:disabled { opacity: .4; cursor: not-allowed; }
