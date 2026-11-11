@@ -1,0 +1,700 @@
+{
+  "v": 0,
+  "components": {
+    "components-button": {
+      "id": "components-button",
+      "name": "Button",
+      "path": "./src/components/Button/Button.stories.tsx",
+      "jsDocTags": {},
+      "description": "Button. Note: the prototype had no standalone button, so this is derived from its\n card/pill style (2px ink border, brown ink, leaf-green focus ring). Review it.",
+      "reactDocgen": {
+        "description": "Button. Note: the prototype had no standalone button, so this is derived from its\n card/pill style (2px ink border, brown ink, leaf-green focus ring). Review it.",
+        "methods": [],
+        "displayName": "Button",
+        "definedInFile": "/home/claude/vegetablecharts/src/components/Button/Button.tsx",
+        "actualName": "Button",
+        "exportName": "Button",
+        "props": {
+          "variant": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "'primary' | 'secondary' | 'link'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'primary'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'secondary'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'link'"
+                }
+              ]
+            },
+            "description": "primary = the one main action; secondary = everything else; link = low-emphasis text action.",
+            "defaultValue": {
+              "value": "'primary'",
+              "computed": false
+            }
+          },
+          "className": {
+            "defaultValue": {
+              "value": "''",
+              "computed": false
+            },
+            "required": false
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "components-button--primary",
+          "name": "Primary",
+          "snippet": "const Primary = () => <Button variant=\"primary\">Show all data as a table</Button>;"
+        },
+        {
+          "id": "components-button--secondary",
+          "name": "Secondary",
+          "snippet": "const Secondary = () => <Button variant=\"secondary\">Show all data as a table</Button>;"
+        },
+        {
+          "id": "components-button--link",
+          "name": "Link",
+          "snippet": "const Link = () => <Button variant=\"link\">Show all data as a table</Button>;"
+        },
+        {
+          "id": "components-button--disabled",
+          "name": "Disabled",
+          "snippet": "const Disabled = () => <Button variant=\"primary\" disabled>Show all data as a table</Button>;"
+        },
+        {
+          "id": "components-button--all-variants",
+          "name": "All Variants",
+          "snippet": "const AllVariants = () => (\n  <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>\n    <Button variant=\"primary\">Primary</Button>\n    <Button variant=\"secondary\">Secondary</Button>\n    <Button variant=\"link\">Link</Button>\n    <Button disabled>Disabled</Button>\n  </div>\n);"
+        }
+      ],
+      "import": "import { Button } from 'vegetablecharts';"
+    },
+    "components-disclosure": {
+      "id": "components-disclosure",
+      "name": "Disclosure",
+      "path": "./src/components/Disclosure/Disclosure.stories.tsx",
+      "jsDocTags": {},
+      "description": "Show/hide section built on the native details element (keyboard and screen reader support for free).\n Origin: \"Show all data as a table\".",
+      "reactDocgen": {
+        "description": "Show/hide section built on the native details element (keyboard and screen reader support for free).\n Origin: \"Show all data as a table\".",
+        "methods": [],
+        "displayName": "Disclosure",
+        "definedInFile": "/home/claude/vegetablecharts/src/components/Disclosure/Disclosure.tsx",
+        "actualName": "Disclosure",
+        "exportName": "Disclosure",
+        "props": {
+          "summary": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "children": {
+            "required": true,
+            "tsType": {
+              "name": "ReactReactNode",
+              "raw": "React.ReactNode"
+            },
+            "description": ""
+          },
+          "defaultOpen": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "components-disclosure--closed",
+          "name": "Closed",
+          "snippet": "const Closed = () => <Disclosure summary=\"Show all data as a table\">Hidden content appears here when opened.</Disclosure>;"
+        },
+        {
+          "id": "components-disclosure--open",
+          "name": "Open",
+          "snippet": "const Open = () => <Disclosure summary=\"Show all data as a table\" defaultOpen>Hidden content appears here when opened.</Disclosure>;"
+        }
+      ],
+      "import": "import { Disclosure } from 'vegetablecharts';"
+    },
+    "components-legend-marker": {
+      "id": "components-legend-marker",
+      "name": "LegendMarker",
+      "path": "./src/components/LegendMarker/LegendMarker.stories.tsx",
+      "jsDocTags": {},
+      "description": "Small dot plus label explaining a chart marker. Origin: the chart legend.",
+      "reactDocgen": {
+        "description": "Small dot plus label explaining a chart marker. Origin: the chart legend.",
+        "methods": [],
+        "displayName": "LegendMarker",
+        "definedInFile": "/home/claude/vegetablecharts/src/components/LegendMarker/LegendMarker.tsx",
+        "actualName": "LegendMarker",
+        "exportName": "LegendMarker",
+        "props": {
+          "kind": {
+            "required": true,
+            "tsType": {
+              "name": "union",
+              "raw": "'official' | 'estimated'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'official'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'estimated'"
+                }
+              ]
+            },
+            "description": "solid = official data; estimated = dashed double ring."
+          },
+          "label": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "components-legend-marker--official",
+          "name": "Official",
+          "snippet": "const Official = () => <LegendMarker kind=\"official\" label=\"Official price\" />;"
+        },
+        {
+          "id": "components-legend-marker--estimated",
+          "name": "Estimated",
+          "snippet": "const Estimated = () => <LegendMarker kind=\"estimated\" label=\"Estimated price\" />;"
+        },
+        {
+          "id": "components-legend-marker--legend",
+          "name": "Legend",
+          "snippet": "const Legend = () => (\n  <div style={{ display: 'flex', gap: 22 }}>\n    <LegendMarker kind=\"official\" label=\"Official price (MAPA)\" />\n    <LegendMarker kind=\"estimated\" label=\"Estimated from product group\" />\n  </div>\n);"
+        }
+      ],
+      "import": "import { LegendMarker } from 'vegetablecharts';"
+    },
+    "components-score-bar": {
+      "id": "components-score-bar",
+      "name": "ScoreBar",
+      "path": "./src/components/ScoreBar/ScoreBar.stories.tsx",
+      "jsDocTags": {},
+      "description": "Horizontal bar showing a score out of a maximum. Origin: the \"1 € best buys\" ranking.",
+      "reactDocgen": {
+        "description": "Horizontal bar showing a score out of a maximum. Origin: the \"1 € best buys\" ranking.",
+        "methods": [],
+        "displayName": "ScoreBar",
+        "definedInFile": "/home/claude/vegetablecharts/src/components/ScoreBar/ScoreBar.tsx",
+        "actualName": "ScoreBar",
+        "exportName": "ScoreBar",
+        "props": {
+          "label": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "value": {
+            "required": true,
+            "tsType": {
+              "name": "number"
+            },
+            "description": ""
+          },
+          "max": {
+            "required": false,
+            "tsType": {
+              "name": "number"
+            },
+            "description": "Value that fills the bar completely. Defaults to 100.",
+            "defaultValue": {
+              "value": "100",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "components-score-bar--default",
+          "name": "Default",
+          "snippet": "const Default = () => <ScoreBar label=\"Spinach\" value={78} />;"
+        },
+        {
+          "id": "components-score-bar--low",
+          "name": "Low",
+          "snippet": "const Low = () => <ScoreBar label=\"Lettuce\" value={12} />;"
+        },
+        {
+          "id": "components-score-bar--ranking",
+          "name": "Ranking",
+          "snippet": "const Ranking = () => (\n  <div style={{ display: 'grid', gap: 8 }}>\n    {[['Spinach', 78], ['Broccoli', 64], ['Cabbage', 52], ['Carrot', 41]].map(([l, v]) => <ScoreBar key={l} label={l as string} value={v as number} />)}\n  </div>\n);"
+        }
+      ],
+      "import": "import { ScoreBar } from 'vegetablecharts';"
+    },
+    "components-segmented-control": {
+      "id": "components-segmented-control",
+      "name": "SegmentedControl",
+      "path": "./src/components/SegmentedControl/SegmentedControl.stories.tsx",
+      "jsDocTags": {},
+      "description": "Pill-shaped choice between a few options; exactly one is always selected.\n Origin: the \"Edible part / Whole, as bought\" price switch above the chart.",
+      "reactDocgen": {
+        "description": "Pill-shaped choice between a few options; exactly one is always selected.\n Origin: the \"Edible part / Whole, as bought\" price switch above the chart.",
+        "methods": [],
+        "displayName": "SegmentedControl",
+        "definedInFile": "/home/claude/vegetablecharts/src/components/SegmentedControl/SegmentedControl.tsx",
+        "actualName": "SegmentedControl",
+        "exportName": "SegmentedControl",
+        "props": {
+          "label": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "Describes the choice for screen readers, e.g. \"Price basis\"."
+          },
+          "options": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "SegmentedOption",
+                  "elements": [
+                    {
+                      "name": "T"
+                    }
+                  ],
+                  "raw": "SegmentedOption<T>"
+                }
+              ],
+              "raw": "SegmentedOption<T>[]"
+            },
+            "description": ""
+          },
+          "value": {
+            "required": true,
+            "tsType": {
+              "name": "T"
+            },
+            "description": ""
+          },
+          "onChange": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(value: T) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "T"
+                    },
+                    "name": "value"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "components-segmented-control--first-selected",
+          "name": "First Selected",
+          "snippet": "const FirstSelected = () => <SegmentedControl\n    label=\"Price basis\"\n    options={[\n      { value: 'edible', label: 'Edible part' },\n      { value: 'bought', label: 'Whole, as bought' },\n    ]}\n    value=\"edible\"\n    onChange={() => {}} />;"
+        },
+        {
+          "id": "components-segmented-control--second-selected",
+          "name": "Second Selected",
+          "snippet": "const SecondSelected = () => <SegmentedControl\n    label=\"Price basis\"\n    options={[\n      { value: 'edible', label: 'Edible part' },\n      { value: 'bought', label: 'Whole, as bought' },\n    ]}\n    value=\"bought\"\n    onChange={() => {}} />;"
+        },
+        {
+          "id": "components-segmented-control--three-options",
+          "name": "Three Options",
+          "snippet": "const ThreeOptions = () => <SegmentedControl\n    label=\"Price basis\"\n    options={[{ value: 'a', label: 'Day' }, { value: 'b', label: 'Week' }, { value: 'c', label: 'Month' }]}\n    value=\"b\"\n    onChange={() => {}} />;"
+        },
+        {
+          "id": "components-segmented-control--interactive",
+          "name": "Interactive",
+          "snippet": "const Interactive = () => {\n    const [v, setV] = useState('edible')\n\n    return (\n        <SegmentedControl\n            label=\"Price basis\"\n            options={[\n              { value: 'edible', label: 'Edible part' },\n              { value: 'bought', label: 'Whole, as bought' },\n            ]}\n            value={v}\n            onChange={setV} />\n    );\n};"
+        }
+      ],
+      "import": "import { SegmentedControl } from 'vegetablecharts';"
+    },
+    "components-select": {
+      "id": "components-select",
+      "name": "Select",
+      "path": "./src/components/Select/Select.stories.tsx",
+      "jsDocTags": {},
+      "description": "Dropdown. Origin: the variable picker shown on phones in the Vegetable Chart.",
+      "reactDocgen": {
+        "description": "Dropdown. Origin: the variable picker shown on phones in the Vegetable Chart.",
+        "methods": [],
+        "displayName": "Select",
+        "definedInFile": "/home/claude/vegetablecharts/src/components/Select/Select.tsx",
+        "actualName": "Select",
+        "exportName": "Select",
+        "props": {
+          "label": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "Describes the dropdown for screen readers."
+          },
+          "options": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "SelectOption"
+                }
+              ],
+              "raw": "SelectOption[]"
+            },
+            "description": ""
+          },
+          "value": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "onChange": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(value: string) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "string"
+                    },
+                    "name": "value"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "disabled": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "components-select--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Select\n    label=\"Variable on the horizontal axis\"\n    options={[\n      { value: 'score', label: 'Nutrient density' }, { value: 'protein', label: 'Protein' },\n      { value: 'fiber', label: 'Fiber' }, { value: 'vitc', label: 'Vitamin C' },\n    ]}\n    value=\"score\"\n    onChange={() => {}} />;"
+        },
+        {
+          "id": "components-select--disabled",
+          "name": "Disabled",
+          "snippet": "const Disabled = () => <Select\n    label=\"Variable on the horizontal axis\"\n    options={[\n      { value: 'score', label: 'Nutrient density' }, { value: 'protein', label: 'Protein' },\n      { value: 'fiber', label: 'Fiber' }, { value: 'vitc', label: 'Vitamin C' },\n    ]}\n    value=\"score\"\n    onChange={() => {}}\n    disabled />;"
+        },
+        {
+          "id": "components-select--interactive",
+          "name": "Interactive",
+          "snippet": "const Interactive = () => {\n    const [v, setV] = useState('score');\n\n    return (\n        <Select\n            label=\"Variable on the horizontal axis\"\n            options={[\n              { value: 'score', label: 'Nutrient density' }, { value: 'protein', label: 'Protein' },\n              { value: 'fiber', label: 'Fiber' }, { value: 'vitc', label: 'Vitamin C' },\n            ]}\n            value={v}\n            onChange={setV} />\n    );\n};"
+        }
+      ],
+      "import": "import { Select } from 'vegetablecharts';"
+    },
+    "components-selectable-card": {
+      "id": "components-selectable-card",
+      "name": "SelectableCard",
+      "path": "./src/components/SelectableCard/SelectableCard.stories.tsx",
+      "jsDocTags": {},
+      "description": "Card you pick one of. Selected = filled and fully opaque; unselected = faded outline.\n Origin: the six variable cards above the chart.",
+      "reactDocgen": {
+        "description": "Card you pick one of. Selected = filled and fully opaque; unselected = faded outline.\n Origin: the six variable cards above the chart.",
+        "methods": [],
+        "displayName": "SelectableCard",
+        "definedInFile": "/home/claude/vegetablecharts/src/components/SelectableCard/SelectableCard.tsx",
+        "actualName": "SelectableCard",
+        "exportName": "SelectableCard",
+        "props": {
+          "title": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "description": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "selected": {
+            "required": true,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": ""
+          },
+          "onSelect": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "components-selectable-card--unselected",
+          "name": "Unselected",
+          "snippet": "const Unselected = () => <SelectableCard\n    title=\"Protein\"\n    description=\"grams per 100 kcal\"\n    selected={false}\n    onSelect={() => {}} />;"
+        },
+        {
+          "id": "components-selectable-card--selected",
+          "name": "Selected",
+          "snippet": "const Selected = () => <SelectableCard\n    title=\"Protein\"\n    description=\"grams per 100 kcal\"\n    selected\n    onSelect={() => {}} />;"
+        },
+        {
+          "id": "components-selectable-card--group",
+          "name": "Group",
+          "snippet": "const Group = () => {\n  const items = ['Nutrient density', 'Protein', 'Fiber', 'Vitamin C']\n  const [sel, setSel] = useState(items[0])\n  return (\n    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 180px)', gap: 20 }}>\n      {items.map((t) => <SelectableCard key={t} title={t} description=\"per 100 kcal\" selected={sel === t} onSelect={() => setSel(t)} />)}\n    </div>\n  )\n};"
+        }
+      ],
+      "import": "import { SelectableCard } from 'vegetablecharts';"
+    },
+    "components-switch": {
+      "id": "components-switch",
+      "name": "Switch",
+      "path": "./src/components/Switch/Switch.stories.tsx",
+      "jsDocTags": {},
+      "description": "On/off switch. Origin: the light/dark mode toggle in the Vegetable Chart header.",
+      "reactDocgen": {
+        "description": "On/off switch. Origin: the light/dark mode toggle in the Vegetable Chart header.",
+        "methods": [],
+        "displayName": "Switch",
+        "definedInFile": "/home/claude/vegetablecharts/src/components/Switch/Switch.tsx",
+        "actualName": "Switch",
+        "exportName": "Switch",
+        "props": {
+          "label": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "Visible label next to the switch. Also read by screen readers."
+          },
+          "checked": {
+            "required": true,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": ""
+          },
+          "onChange": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(checked: boolean) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "boolean"
+                    },
+                    "name": "checked"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "iconOff": {
+            "required": false,
+            "tsType": {
+              "name": "ReactReactNode",
+              "raw": "React.ReactNode"
+            },
+            "description": "Optional icons shown on the knob: off state and on state (e.g. sun / moon)."
+          },
+          "iconOn": {
+            "required": false,
+            "tsType": {
+              "name": "ReactReactNode",
+              "raw": "React.ReactNode"
+            },
+            "description": ""
+          },
+          "disabled": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "components-switch--off",
+          "name": "Off",
+          "snippet": "const Off = () => <Switch\n    label=\"Dark mode\"\n    checked={false}\n    onChange={() => {}}\n    iconOff={<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2.5\" strokeLinecap=\"round\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2\"/></svg>}\n    iconOn={<svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z\"/></svg>} />;"
+        },
+        {
+          "id": "components-switch--on",
+          "name": "On",
+          "snippet": "const On = () => <Switch\n    label=\"Dark mode\"\n    checked\n    onChange={() => {}}\n    iconOff={<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2.5\" strokeLinecap=\"round\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2\"/></svg>}\n    iconOn={<svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z\"/></svg>} />;"
+        },
+        {
+          "id": "components-switch--disabled",
+          "name": "Disabled",
+          "snippet": "const Disabled = () => <Switch\n    label=\"Dark mode\"\n    checked={false}\n    onChange={() => {}}\n    iconOff={<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2.5\" strokeLinecap=\"round\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2\"/></svg>}\n    iconOn={<svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z\"/></svg>}\n    disabled />;"
+        },
+        {
+          "id": "components-switch--interactive",
+          "name": "Interactive",
+          "snippet": "const Interactive = () => {\n    const [on, setOn] = useState(false)\n\n    return (\n        <Switch\n            label=\"Dark mode\"\n            iconOff={<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2.5\" strokeLinecap=\"round\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2\"/></svg>}\n            iconOn={<svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z\"/></svg>}\n            checked={on}\n            onChange={setOn} />\n    );\n};"
+        }
+      ],
+      "import": "import { Switch } from 'vegetablecharts';"
+    },
+    "components-table": {
+      "id": "components-table",
+      "name": "Table",
+      "path": "./src/components/Table/Table.stories.tsx",
+      "jsDocTags": {},
+      "description": "Data table with right-aligned tabular numbers. Origin: the full data table.",
+      "reactDocgen": {
+        "description": "Data table with right-aligned tabular numbers. Origin: the full data table.",
+        "methods": [],
+        "displayName": "Table",
+        "definedInFile": "/home/claude/vegetablecharts/src/components/Table/Table.tsx",
+        "actualName": "Table",
+        "exportName": "Table",
+        "props": {
+          "columns": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "string"
+                }
+              ],
+              "raw": "string[]"
+            },
+            "description": "Column headings. The first column is text (left); the rest are numbers (right)."
+          },
+          "rows": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "Array",
+                  "elements": [
+                    {
+                      "name": "unknown"
+                    }
+                  ],
+                  "raw": "(string | number)[]"
+                }
+              ],
+              "raw": "(string | number)[][]"
+            },
+            "description": ""
+          },
+          "caption": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "components-table--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Table\n    caption=\"Vegetables by price and score\"\n    columns={['Vegetable', '€ / kg', 'Score']}\n    rows={[['Spinach', 4.1, 78], ['Broccoli', 2.9, 64], ['Carrot', 1.2, 41], ['Cabbage', 1.1, 52]]} />;"
+        }
+      ],
+      "import": "import { Table } from 'vegetablecharts';"
+    },
+    "foundations-tokens": {
+      "id": "foundations-tokens",
+      "name": "Tokens",
+      "path": "./src/tokens/Tokens.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component import found",
+        "message": "No component file found for the \"Tokens\" component.\n  54 | }\n  55 |\n> 56 | const meta = { title: 'Foundations/Tokens', component: Tokens, parameters: { layout: 'padded' } } satisfies Meta<typeof Tokens>\n     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  57 | export default meta\n  58 | export const Overview: StoryObj<typeof meta> = {}\n  59 |\n\n./src/tokens/Tokens.stories.tsx:\nimport type { Meta, StoryObj } from '@storybook/react-vite'\n\nconst colors: [string, string][] = [\n  ['--vc-color-bg', 'Page background'], ['--vc-color-panel', 'Raised surface / selected'], ['--vc-color-line', 'Subtle strokes'],\n  ['--vc-color-ink', 'Primary text and borders'], ['--vc-color-ink-2', 'Secondary text'], ['--vc-color-muted', 'Inactive text'],\n  ['--vc-color-accent', 'Leaf green: focus and data'], ['--vc-color-on-ink', 'Text on ink fills'],\n]\nconst spaces = ['--vc-space-1', '--vc-space-2', '--vc-space-3', '--vc-space-4', '--vc-space-5', '--vc-space-6']\nconst texts: [string, string][] = [['--vc-text-sm', '14'], ['--vc-text-md', '16'], ['--vc-text-lg', '18'], ['--vc-text-xl', '20'], ['--vc-text-title', '24']]\n\nfunction Tokens() {\n  return (\n    <div style={{ display: 'grid', gap: 40, maxWidth: 900 }}>\n      <section>\n        <h2>Colour</h2>\n        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 16 }}>\n          {colors.map(([v, d]) => (\n            <div key={v}>\n              <div style={{ height: 64, borderRadius: 8, background: `var(${v})`, border: '2px solid var(--vc-color-ink)' }} />\n              <b>{d}</b><br /><code>{v}</code>\n            </div>\n          ))}\n        </div>\n      </section>\n      <section>\n        <h2>Typography</h2>\n        <p style={{ fontFamily: 'var(--vc-font-display)', fontSize: 24, margin: 0 }}>Display: Alegreya Sans, for headings and interface</p>\n        <p style={{ fontFamily: 'var(--vc-font-data)', fontSize: 24, margin: '8px 0' }}>Data: Alegreya, for numbers and chart text 0123456789</p>\n        {texts.map(([v, px]) => <div key={v} style={{ fontSize: `var(${v})` }}>{px}px <code>{v}</code></div>)}\n      </section>\n      <section>\n        <h2>Spacing</h2>\n        {spaces.map((v) => (\n          <div key={v} style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>\n            <div style={{ width: `var(${v})`, height: 16, background: 'var(--vc-color-accent)' }} /><code>{v}</code>\n          </div>\n        ))}\n      </section>\n      <section>\n        <h2>Shape and elevation</h2>\n        <div style={{ display: 'flex', gap: 24 }}>\n          {['--vc-radius-sm', '--vc-radius-lg', '--vc-radius-pill'].map((v) => (\n            <div key={v} style={{ textAlign: 'center' }}>\n              <div style={{ width: 96, height: 56, border: '2px solid var(--vc-color-ink)', borderRadius: `var(${v})` }} /><code>{v}</code>\n            </div>\n          ))}\n          <div style={{ textAlign: 'center' }}>\n            <div style={{ width: 96, height: 56, borderRadius: 8, background: 'var(--vc-color-bg)', boxShadow: 'var(--vc-shadow-raised)' }} /><code>--vc-shadow-raised</code>\n          </div>\n        </div>\n      </section>\n    </div>\n  )\n}\n\nconst meta = { title: 'Foundations/Tokens', component: Tokens, parameters: { layout: 'padded' } } satisfies Meta<typeof Tokens>\nexport default meta\nexport const Overview: StoryObj<typeof meta> = {}\n"
+      },
+      "stories": [
+        {
+          "id": "foundations-tokens--overview",
+          "name": "Overview",
+          "error": {
+            "name": "Error",
+            "message": "Could not generate snippet without component name."
+          }
+        }
+      ],
+      "import": "import { Tokens } from 'vegetablecharts';"
+    }
+  },
+  "meta": {
+    "docgen": "react-docgen",
+    "durationMs": 284
+  }
+}

@@ -9,7 +9,8 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "build-docs": "storybook build -o docs && touch docs/.nojekyll"
   },
   "dependencies": {
     "react": "^19.3.1",

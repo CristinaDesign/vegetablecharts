@@ -1,0 +1,2056 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Components Manifest</title>
+  <style>
+      :root {
+          --bg: #0b0c10;
+          --panel: #121318;
+          --muted: #9aa0a6;
+          --fg: #e8eaed;
+          --ok: #22c55e;
+          --info: #1e88e5;
+          --err: #c62828;
+          --ok-bg: #0c1a13;
+          --info-bg: #0c1624;
+          --err-bg: #1a0e0e;
+          --chip: #1f2330;
+          --border: #2b2f3a;
+          --link: #8ab4f8;
+          --active-ring: 1px; /* 1px active ring for pills and toggles */
+      }
+
+      * {
+          box-sizing: border-box;
+      }
+
+      html,
+      body {
+          margin: 0;
+          background: var(--bg);
+          color: var(--fg);
+          font: 14px/1.5 system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Ubuntu,
+          Cantarell,
+          'Helvetica Neue',
+          Arial,
+          'Noto Sans';
+      }
+
+      .wrap {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 16px 20px;
+      }
+
+      header {
+          position: sticky;
+          top: 0;
+          backdrop-filter: blur(6px);
+          background: color-mix(in srgb, var(--bg) 84%, transparent);
+          border-bottom: 1px solid var(--border);
+          z-index: 10;
+      }
+
+      h1 {
+          font-size: 20px;
+          margin: 0 0 6px;
+      }
+
+      .summary {
+          display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+          align-items: center;
+      }
+
+      /* Top filter pills */
+      .filter-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 12px;
+          border: 1px solid var(--border);
+          border-radius: 999px;
+          background: var(--panel);
+          text-decoration: none;
+          cursor: pointer;
+          user-select: none;
+          color: var(--fg);
+      }
+
+      .filter-pill.ok {
+          color: #b9f6ca;
+          border-color: color-mix(in srgb, var(--ok) 55%, var(--border));
+          background: color-mix(in srgb, var(--ok) 18%, #000);
+      }
+
+      .filter-pill.info {
+          color: #b3d9ff;
+          border-color: color-mix(in srgb, var(--info) 55%, var(--border));
+          background: var(--info-bg);
+      }
+
+      .filter-pill.err {
+          color: #ff9aa0;
+          border-color: color-mix(in srgb, var(--err) 55%, var(--border));
+          background: var(--err-bg);
+      }
+
+      .filter-pill.all {
+          color: #d7dbe0;
+          border-color: var(--border);
+          background: var(--panel);
+      }
+
+      .filter-pill[aria-disabled='true'] {
+          cursor: default;
+          text-decoration: none;
+      }
+
+      .filter-pill:focus,
+      .filter-pill:active {
+          outline: none;
+          box-shadow: none;
+      }
+
+      /* Selected top pill ring via :target */
+      #filter-all:target ~ header .filter-pill[data-k='all'],
+      #filter-errors:target ~ header .filter-pill[data-k='errors'],
+      #filter-infos:target ~ header .filter-pill[data-k='infos'],
+      #filter-story-errors:target ~ header .filter-pill[data-k='story-errors'],
+      #filter-story-warnings:target ~ header .filter-pill[data-k='story-warnings'],
+      #filter-no-api:target ~ header .filter-pill[data-k='no-api'],
+      #filter-doc-errors:target ~ header .filter-pill[data-k='docs'],
+      #filter-docs:target ~ header .filter-pill[data-k='docs'] {
+          box-shadow: 0 0 0 var(--active-ring) currentColor;
+          border-color: currentColor;
+      }
+
+      /* Hidden targets for filtering */
+      #filter-all,
+      #filter-errors,
+      #filter-infos,
+      #filter-story-errors,
+      #filter-story-warnings,
+      #filter-no-api,
+      #filter-doc-errors,
+      #filter-docs {
+          display: none;
+      }
+
+      main {
+          padding: 36px 0 40px;
+      }
+
+      .grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 18px;
+      }
+
+      /* one card per row */
+
+      .card {
+          border: 1px solid var(--border);
+          background: var(--panel);
+          border-radius: 14px;
+          padding: 14px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          /* Keep a deep-linked card clear of the sticky header when scrolled into view */
+          scroll-margin-top: 110px;
+      }
+
+      /* Highlight the card deep-linked via components.html#<manifest-id> */
+      .card:target {
+          box-shadow: 0 0 0 2px var(--info);
+          border-color: var(--info);
+      }
+
+      .head {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+      }
+
+      .title {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
+      }
+
+      .title h2 {
+          font-size: 16px;
+          margin: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+      }
+
+      .meta {
+          font-size: 12px;
+          color: var(--muted);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+      }
+
+      .kv {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+      }
+
+      .chip {
+          font-size: 12px;
+          padding: 4px 8px;
+          border-radius: 999px;
+          background: var(--chip);
+          border: 1px solid var(--border);
+      }
+
+      .hint {
+          color: var(--muted);
+          font-size: 12px;
+      }
+
+      .badges {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+      }
+
+      /* Per-card badges: labels become toggles when clickable */
+      .badge {
+          font-size: 12px;
+          padding: 3px 8px;
+          border-radius: 999px;
+          border: 1px solid var(--border);
+          background: var(--chip);
+          color: #d7dbe0;
+      }
+
+      .badge.ok {
+          color: #b9f6ca;
+          border-color: color-mix(in srgb, var(--ok) 55%, var(--border));
+      }
+
+      .badge.info {
+          color: #b3d9ff;
+          border-color: color-mix(in srgb, var(--info) 55%, var(--border));
+      }
+
+      .badge.err {
+          color: #ff9aa0;
+          border-color: color-mix(in srgb, var(--err) 55%, var(--border));
+      }
+
+      .snippet-warning {
+          margin-top: 8px;
+          padding: 8px 10px;
+          border-radius: 8px;
+          border: 1px solid color-mix(in srgb, var(--info) 45%, var(--border));
+          background: var(--info-bg);
+          color: #b3d9ff;
+          font-size: 12px;
+      }
+
+      .as-toggle {
+          cursor: pointer;
+      }
+
+      /* 1px ring on active toggle */
+      .tg-err:checked + label.as-toggle,
+      .tg-info:checked + label.as-toggle,
+      .tg-stories:checked + label.as-toggle,
+      .tg-docs:checked + label.as-toggle,
+      .tg-subcomponents:checked + label.as-toggle,
+      .tg-content:checked + label.as-toggle,
+      .tg-props:checked + label.as-toggle {
+          box-shadow: 0 0 0 var(--active-ring) currentColor;
+          border-color: currentColor;
+      }
+
+      /* Panels: hidden by default, shown when respective toggle checked */
+      .panels {
+          display: grid;
+          gap: 10px;
+      }
+
+      .panel {
+          display: none;
+      }
+
+      .tg-err:checked ~ .panels .panel-err {
+          display: grid;
+      }
+
+      .tg-info:checked ~ .panels .panel-info {
+          display: grid;
+          gap: 8px;
+      }
+
+      .tg-stories:checked ~ .panels .panel-stories {
+          display: grid;
+          gap: 8px;
+      }
+
+      .tg-docs:checked ~ .panels .panel-docs {
+          display: grid;
+          gap: 8px;
+      }
+
+      .tg-subcomponents:checked ~ .panels .panel-subcomponents {
+          display: grid;
+          gap: 8px;
+      }
+
+      .tg-content:checked ~ .panels .panel-content {
+          display: grid;
+          gap: 8px;
+      }
+
+      .tg-props:checked ~ .panels .panel-props {
+          display: grid;
+      }
+
+      /* Colored notes for API error + info */
+      .note {
+          padding: 12px;
+          border: 1px solid var(--border);
+          border-radius: 10px;
+      }
+
+      .note.err {
+          border-color: color-mix(in srgb, var(--err) 55%, var(--border));
+          background: var(--err-bg);
+          color: #ffd1d4;
+      }
+
+      .note.info {
+          border-color: color-mix(in srgb, var(--info) 55%, var(--border));
+          background: var(--info-bg);
+          color: #d6e8ff;
+      }
+
+      .note.ok {
+          border-color: color-mix(in srgb, var(--ok) 55%, var(--border));
+          background: var(--ok-bg);
+          color: var(--fg);
+      }
+
+      .note-title {
+          font-weight: 600;
+          margin-bottom: 6px;
+      }
+
+      .note-body {
+          white-space: normal;
+      }
+
+      /* Story error cards */
+      .ex {
+          padding: 10px;
+          border: 1px solid var(--border);
+          border-radius: 10px;
+          background: #0f131b;
+      }
+
+      .ex.err {
+          border-color: color-mix(in srgb, var(--err) 55%, var(--border));
+      }
+
+      .row {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex-wrap: wrap;
+      }
+
+      .status-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          display: inline-block;
+      }
+
+      .dot-ok {
+          background: var(--ok);
+      }
+
+      .dot-err {
+          background: var(--err);
+      }
+
+      .ex-name {
+          font-weight: 600;
+      }
+
+      /* Error groups (visible in errors filter) */
+      .error-groups {
+          display: none;
+          margin-bottom: 16px;
+      }
+
+      .group {
+          border: 1px solid var(--border);
+          background: var(--panel);
+          border-radius: 14px;
+          overflow: hidden;
+      }
+
+      .group + .group {
+          margin-top: 12px;
+      }
+
+      .group-header {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 12px 14px;
+          cursor: pointer;
+          border-bottom: 1px solid var(--border);
+      }
+
+      .group-header:hover {
+          background: #141722;
+      }
+
+      .group-title {
+          font-weight: 600;
+          flex: 1;
+      }
+
+      .group-count {
+          font-size: 12px;
+          color: var(--muted);
+      }
+
+      .group-cards {
+          display: none;
+          padding: 12px;
+      }
+
+      .group .card {
+          margin: 12px 0;
+      }
+
+      .group .card:first-child {
+          margin-top: 0;
+      }
+
+      .group .card:last-child {
+          margin-bottom: 0;
+      }
+
+      /* caret rotation */
+      .group-tg:checked + label .caret {
+          transform: rotate(90deg);
+      }
+
+      .caret {
+          transition: transform 0.15s ease;
+      }
+
+      /* toggle body */
+      .group-tg:checked ~ .group-cards {
+          display: block;
+      }
+
+      /* CSS-only filtering of cards via top pills */
+      #filter-errors:target ~ main .card:not(.has-error):not(.has-story-error) {
+          display: none;
+      }
+
+      #filter-infos:target ~ main .card:not(.has-info) {
+          display: none;
+      }
+
+      #filter-story-errors:target ~ main .card:not(.has-story-error) {
+          display: none;
+      }
+
+      #filter-story-warnings:target ~ main .card:not(.has-story-warning) {
+          display: none;
+      }
+
+      #filter-no-api:target ~ main .card:not(.missing-api) {
+          display: none;
+      }
+
+      #filter-doc-errors:target ~ main .card:not(.has-doc-error) {
+          display: none;
+      }
+
+      #filter-docs:target ~ main .card:has(> .tg-docs),
+      #filter-docs:target ~ main .card.is-doc {
+          display: block;
+      }
+
+      #filter-docs:target ~ main .card:not(:has(> .tg-docs)):not(.is-doc) {
+          display: none;
+      }
+
+      #filter-all:target ~ main .card {
+          display: block;
+      }
+
+      /* In errors view, hide standalone component-error cards in the regular grid (they will appear in groups) */
+      #filter-errors:target ~ main .grid .card.has-error {
+          display: none;
+      }
+
+      /* Show grouped section only in errors view */
+      #filter-errors:target ~ main .error-groups {
+          display: block;
+      }
+
+      /* Section titles */
+      .section-title {
+          font-size: 16px;
+          font-weight: 600;
+          color: var(--muted);
+          margin: 24px 0 12px;
+          padding-bottom: 8px;
+          border-bottom: 1px solid var(--border);
+      }
+      .section-title:first-child {
+          margin-top: 0;
+      }
+
+      /* When a toggle is checked, show the corresponding panel */
+      .card > .tg-err:checked ~ .panels .panel-err {
+          display: grid;
+      }
+      
+      .card > .tg-info:checked ~ .panels .panel-info {
+          display: grid;
+      }
+      
+      .card > .tg-stories:checked ~ .panels .panel-stories {
+          display: grid;
+      }
+
+      .card > .tg-docs:checked ~ .panels .panel-docs {
+          display: grid;
+      }
+
+      .card > .tg-subcomponents:checked ~ .panels .panel-subcomponents {
+          display: grid;
+      }
+
+      .card > .tg-content:checked ~ .panels .panel-content {
+          display: grid;
+      }
+
+      /* Add vertical spacing around panels only when any panel is visible */
+      .card > .tg-err:checked ~ .panels,
+      .card > .tg-info:checked ~ .panels,
+      .card > .tg-stories:checked ~ .panels,
+      .card > .tg-docs:checked ~ .panels,
+      .card > .tg-subcomponents:checked ~ .panels,
+      .card > .tg-content:checked ~ .panels,
+      .card > .tg-props:checked ~ .panels {
+          margin: 10px 0;
+      }
+
+      /* Optional: a subtle 1px ring on the active badge, using :has() if available */
+      @supports selector(.card:has(.tg-err:checked)) {
+          .card:has(.tg-err:checked) label[for$='-err'],
+          .card:has(.tg-info:checked) label[for$='-info'],
+          .card:has(.tg-stories:checked) label[for$='-stories'],
+          .card:has(.tg-docs:checked) label[for$='-docs'],
+          .card:has(.tg-subcomponents:checked) label[for$='-subcomponents'],
+          .card:has(.tg-content:checked) label[for$='-content'],
+          .card:has(.tg-props:checked) label[for$='-props'] {
+              box-shadow: 0 0 0 1px currentColor;
+              border-color: currentColor;
+          }
+      }
+
+      /* Wrap long lines in code blocks at ~120 characters */
+      pre, code {
+          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      }
+      pre {
+          white-space: pre-wrap;
+          overflow-wrap: anywhere;
+          word-break: break-word;
+          overflow-x: auto; /* fallback for extremely long tokens */
+          margin: 8px 0 0;
+      }
+      pre > code {
+          display: block;
+          white-space: inherit;
+          overflow-wrap: inherit;
+          word-break: inherit;
+          inline-size: min(100%, 120ch);
+      }
+
+      /* MDX content container for docs */
+      .mdx-content {
+          background: #0f131b;
+          border: 1px solid var(--border);
+          border-radius: 10px;
+          padding: 12px;
+          max-height: 400px;
+          overflow-y: auto;
+          margin-top: 8px;
+      }
+  </style>
+</head>
+<body>
+<!-- Hidden targets for the top-level filters -->
+<span id="filter-all"></span>
+<span id="filter-errors"></span>
+<span id="filter-infos"></span>
+<span id="filter-story-errors"></span>
+<span id="filter-story-warnings"></span>
+<span id="filter-no-api"></span>
+<span id="filter-doc-errors"></span>
+<span id="filter-docs"></span>
+<header>
+  <div class="wrap">
+    <h1>Manifest Debugger</h1>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/10 API error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">1/10 info</a><a class="filter-pill err" data-k="story-errors" href="#filter-story-errors">1/29 story errors</a></div>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <div class="note info" style="margin-bottom: 16px;">
+            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>0.3s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
+            <pre><code>typescript: {
+  reactDocgen: 'react-docgen-typescript',
+}</code></pre>
+            Note: <code>react-docgen-typescript</code> can be slower. If performance is acceptable for your project, it generally produces better results.
+            <a href="https://storybook.js.org/docs/api/main-config/main-config-typescript#reactdocgen" target="_blank">Learn more</a>
+          </div>
+    <h2 class="section-title">Components</h2>
+    <div class="grid" role="list">
+      
+<article
+  id="components-button"
+  class="card 
+  no-error
+  no-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="Button">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> Button</h2>
+      <div class="badges">
+        <label for="c-0-components-button-props" class="badge ok as-toggle">2 prop types</label>
+        
+        <label for="c-0-components-button-stories" class="badge ok as-toggle">5 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/Button/Button.stories.tsx">components-button · ./src/components/Button/Button.stories.tsx</div>
+    
+    <div class="hint">Button. Note: the prototype had no standalone button, so this is derived from its
+ card/pill style (2px ink border, brown ink, leaf-green focus ring). Review it.</div>
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  
+  <input id="c-0-components-button-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-0-components-button-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">2 prop types</span>
+            </div>
+            <pre><code>Component: src/components/Button/Button.tsx::Button</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>className?: any = &#39;&#39;
+
+/**
+ * primary = the one main action; secondary = everything else; link = low-emphasis text action.
+ */
+variant?: &#39;primary&#39; | &#39;secondary&#39; | &#39;link&#39; = &#39;primary&#39;</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { Button } from 'vegetablecharts';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Primary</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Primary = () =&gt; &lt;Button variant=&quot;primary&quot;&gt;Show all data as a table&lt;/Button&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Secondary</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Secondary = () =&gt; &lt;Button variant=&quot;secondary&quot;&gt;Show all data as a table&lt;/Button&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Link</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Link = () =&gt; &lt;Button variant=&quot;link&quot;&gt;Show all data as a table&lt;/Button&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Disabled</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Disabled = () =&gt; &lt;Button variant=&quot;primary&quot; disabled&gt;Show all data as a table&lt;/Button&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">All Variants</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const AllVariants = () =&gt; (
+  &lt;div style={{ display: &#39;flex&#39;, gap: 16, alignItems: &#39;center&#39; }}&gt;
+    &lt;Button variant=&quot;primary&quot;&gt;Primary&lt;/Button&gt;
+    &lt;Button variant=&quot;secondary&quot;&gt;Secondary&lt;/Button&gt;
+    &lt;Button variant=&quot;link&quot;&gt;Link&lt;/Button&gt;
+    &lt;Button disabled&gt;Disabled&lt;/Button&gt;
+  &lt;/div&gt;
+);</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  id="components-disclosure"
+  class="card 
+  no-error
+  no-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="Disclosure">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> Disclosure</h2>
+      <div class="badges">
+        <label for="c-1-components-disclosure-props" class="badge ok as-toggle">3 prop types</label>
+        
+        <label for="c-1-components-disclosure-stories" class="badge ok as-toggle">2 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/Disclosure/Disclosure.stories.tsx">components-disclosure · ./src/components/Disclosure/Disclosure.stories.tsx</div>
+    
+    <div class="hint">Show/hide section built on the native details element (keyboard and screen reader support for free).
+ Origin: &quot;Show all data as a table&quot;.</div>
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  
+  <input id="c-1-components-disclosure-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-1-components-disclosure-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">3 prop types</span>
+            </div>
+            <pre><code>Component: src/components/Disclosure/Disclosure.tsx::Disclosure</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>children: React.ReactNode
+
+defaultOpen?: boolean
+
+summary: string</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { Disclosure } from 'vegetablecharts';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Closed</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Closed = () =&gt; &lt;Disclosure summary=&quot;Show all data as a table&quot;&gt;Hidden content appears here when opened.&lt;/Disclosure&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Open</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Open = () =&gt; &lt;Disclosure summary=&quot;Show all data as a table&quot; defaultOpen&gt;Hidden content appears here when opened.&lt;/Disclosure&gt;;</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  id="components-legend-marker"
+  class="card 
+  no-error
+  no-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="LegendMarker">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> LegendMarker</h2>
+      <div class="badges">
+        <label for="c-2-components-legend-marker-props" class="badge ok as-toggle">2 prop types</label>
+        
+        <label for="c-2-components-legend-marker-stories" class="badge ok as-toggle">3 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/LegendMarker/LegendMarker.stories.tsx">components-legend-marker · ./src/components/LegendMarker/LegendMarker.stories.tsx</div>
+    
+    <div class="hint">Small dot plus label explaining a chart marker. Origin: the chart legend.</div>
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  
+  <input id="c-2-components-legend-marker-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-2-components-legend-marker-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">2 prop types</span>
+            </div>
+            <pre><code>Component: src/components/LegendMarker/LegendMarker.tsx::LegendMarker</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>/**
+ * solid = official data; estimated = dashed double ring.
+ */
+kind: &#39;official&#39; | &#39;estimated&#39;
+
+label: string</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { LegendMarker } from 'vegetablecharts';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Official</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Official = () =&gt; &lt;LegendMarker kind=&quot;official&quot; label=&quot;Official price&quot; /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Estimated</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Estimated = () =&gt; &lt;LegendMarker kind=&quot;estimated&quot; label=&quot;Estimated price&quot; /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Legend</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Legend = () =&gt; (
+  &lt;div style={{ display: &#39;flex&#39;, gap: 22 }}&gt;
+    &lt;LegendMarker kind=&quot;official&quot; label=&quot;Official price (MAPA)&quot; /&gt;
+    &lt;LegendMarker kind=&quot;estimated&quot; label=&quot;Estimated from product group&quot; /&gt;
+  &lt;/div&gt;
+);</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  id="components-score-bar"
+  class="card 
+  no-error
+  no-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="ScoreBar">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> ScoreBar</h2>
+      <div class="badges">
+        <label for="c-3-components-score-bar-props" class="badge ok as-toggle">3 prop types</label>
+        
+        <label for="c-3-components-score-bar-stories" class="badge ok as-toggle">3 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/ScoreBar/ScoreBar.stories.tsx">components-score-bar · ./src/components/ScoreBar/ScoreBar.stories.tsx</div>
+    
+    <div class="hint">Horizontal bar showing a score out of a maximum. Origin: the &quot;1 € best buys&quot; ranking.</div>
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  
+  <input id="c-3-components-score-bar-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-3-components-score-bar-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">3 prop types</span>
+            </div>
+            <pre><code>Component: src/components/ScoreBar/ScoreBar.tsx::ScoreBar</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>label: string
+
+/**
+ * Value that fills the bar completely. Defaults to 100.
+ */
+max?: number = 100
+
+value: number</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { ScoreBar } from 'vegetablecharts';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;ScoreBar label=&quot;Spinach&quot; value={78} /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Low</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Low = () =&gt; &lt;ScoreBar label=&quot;Lettuce&quot; value={12} /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Ranking</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Ranking = () =&gt; (
+  &lt;div style={{ display: &#39;grid&#39;, gap: 8 }}&gt;
+    {[[&#39;Spinach&#39;, 78], [&#39;Broccoli&#39;, 64], [&#39;Cabbage&#39;, 52], [&#39;Carrot&#39;, 41]].map(([l, v]) =&gt; &lt;ScoreBar key={l} label={l as string} value={v as number} /&gt;)}
+  &lt;/div&gt;
+);</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  id="components-segmented-control"
+  class="card 
+  no-error
+  no-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="SegmentedControl">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> SegmentedControl</h2>
+      <div class="badges">
+        <label for="c-4-components-segmented-control-props" class="badge ok as-toggle">4 prop types</label>
+        
+        <label for="c-4-components-segmented-control-stories" class="badge ok as-toggle">4 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/SegmentedControl/SegmentedControl.stories.tsx">components-segmented-control · ./src/components/SegmentedControl/SegmentedControl.stories.tsx</div>
+    
+    <div class="hint">Pill-shaped choice between a few options; exactly one is always selected.
+ Origin: the &quot;Edible part / Whole, as bought&quot; price switch above the chart.</div>
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  
+  <input id="c-4-components-segmented-control-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-4-components-segmented-control-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">4 prop types</span>
+            </div>
+            <pre><code>Component: src/components/SegmentedControl/SegmentedControl.tsx::SegmentedControl</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>/**
+ * Describes the choice for screen readers, e.g. &quot;Price basis&quot;.
+ */
+label: string
+
+onChange: (value: T) =&gt; void
+
+options: SegmentedOption&lt;T&gt;[]
+
+value: T</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { SegmentedControl } from 'vegetablecharts';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">First Selected</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const FirstSelected = () =&gt; &lt;SegmentedControl
+    label=&quot;Price basis&quot;
+    options={[
+      { value: &#39;edible&#39;, label: &#39;Edible part&#39; },
+      { value: &#39;bought&#39;, label: &#39;Whole, as bought&#39; },
+    ]}
+    value=&quot;edible&quot;
+    onChange={() =&gt; {}} /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Second Selected</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const SecondSelected = () =&gt; &lt;SegmentedControl
+    label=&quot;Price basis&quot;
+    options={[
+      { value: &#39;edible&#39;, label: &#39;Edible part&#39; },
+      { value: &#39;bought&#39;, label: &#39;Whole, as bought&#39; },
+    ]}
+    value=&quot;bought&quot;
+    onChange={() =&gt; {}} /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Three Options</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const ThreeOptions = () =&gt; &lt;SegmentedControl
+    label=&quot;Price basis&quot;
+    options={[{ value: &#39;a&#39;, label: &#39;Day&#39; }, { value: &#39;b&#39;, label: &#39;Week&#39; }, { value: &#39;c&#39;, label: &#39;Month&#39; }]}
+    value=&quot;b&quot;
+    onChange={() =&gt; {}} /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Interactive</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Interactive = () =&gt; {
+    const [v, setV] = useState(&#39;edible&#39;)
+
+    return (
+        &lt;SegmentedControl
+            label=&quot;Price basis&quot;
+            options={[
+              { value: &#39;edible&#39;, label: &#39;Edible part&#39; },
+              { value: &#39;bought&#39;, label: &#39;Whole, as bought&#39; },
+            ]}
+            value={v}
+            onChange={setV} /&gt;
+    );
+};</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  id="components-select"
+  class="card 
+  no-error
+  no-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="Select">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> Select</h2>
+      <div class="badges">
+        <label for="c-5-components-select-props" class="badge ok as-toggle">5 prop types</label>
+        
+        <label for="c-5-components-select-stories" class="badge ok as-toggle">3 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/Select/Select.stories.tsx">components-select · ./src/components/Select/Select.stories.tsx</div>
+    
+    <div class="hint">Dropdown. Origin: the variable picker shown on phones in the Vegetable Chart.</div>
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  
+  <input id="c-5-components-select-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-5-components-select-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">5 prop types</span>
+            </div>
+            <pre><code>Component: src/components/Select/Select.tsx::Select</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>disabled?: boolean
+
+/**
+ * Describes the dropdown for screen readers.
+ */
+label: string
+
+onChange: (value: string) =&gt; void
+
+options: SelectOption[]
+
+value: string</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { Select } from 'vegetablecharts';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;Select
+    label=&quot;Variable on the horizontal axis&quot;
+    options={[
+      { value: &#39;score&#39;, label: &#39;Nutrient density&#39; }, { value: &#39;protein&#39;, label: &#39;Protein&#39; },
+      { value: &#39;fiber&#39;, label: &#39;Fiber&#39; }, { value: &#39;vitc&#39;, label: &#39;Vitamin C&#39; },
+    ]}
+    value=&quot;score&quot;
+    onChange={() =&gt; {}} /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Disabled</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Disabled = () =&gt; &lt;Select
+    label=&quot;Variable on the horizontal axis&quot;
+    options={[
+      { value: &#39;score&#39;, label: &#39;Nutrient density&#39; }, { value: &#39;protein&#39;, label: &#39;Protein&#39; },
+      { value: &#39;fiber&#39;, label: &#39;Fiber&#39; }, { value: &#39;vitc&#39;, label: &#39;Vitamin C&#39; },
+    ]}
+    value=&quot;score&quot;
+    onChange={() =&gt; {}}
+    disabled /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Interactive</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Interactive = () =&gt; {
+    const [v, setV] = useState(&#39;score&#39;);
+
+    return (
+        &lt;Select
+            label=&quot;Variable on the horizontal axis&quot;
+            options={[
+              { value: &#39;score&#39;, label: &#39;Nutrient density&#39; }, { value: &#39;protein&#39;, label: &#39;Protein&#39; },
+              { value: &#39;fiber&#39;, label: &#39;Fiber&#39; }, { value: &#39;vitc&#39;, label: &#39;Vitamin C&#39; },
+            ]}
+            value={v}
+            onChange={setV} /&gt;
+    );
+};</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  id="components-selectable-card"
+  class="card 
+  no-error
+  no-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="SelectableCard">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> SelectableCard</h2>
+      <div class="badges">
+        <label for="c-6-components-selectable-card-props" class="badge ok as-toggle">4 prop types</label>
+        
+        <label for="c-6-components-selectable-card-stories" class="badge ok as-toggle">3 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/SelectableCard/SelectableCard.stories.tsx">components-selectable-card · ./src/components/SelectableCard/SelectableCard.stories.tsx</div>
+    
+    <div class="hint">Card you pick one of. Selected = filled and fully opaque; unselected = faded outline.
+ Origin: the six variable cards above the chart.</div>
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  
+  <input id="c-6-components-selectable-card-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-6-components-selectable-card-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">4 prop types</span>
+            </div>
+            <pre><code>Component: src/components/SelectableCard/SelectableCard.tsx::SelectableCard</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>description?: string
+
+onSelect: () =&gt; void
+
+selected: boolean
+
+title: string</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { SelectableCard } from 'vegetablecharts';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Unselected</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Unselected = () =&gt; &lt;SelectableCard
+    title=&quot;Protein&quot;
+    description=&quot;grams per 100 kcal&quot;
+    selected={false}
+    onSelect={() =&gt; {}} /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Selected</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Selected = () =&gt; &lt;SelectableCard
+    title=&quot;Protein&quot;
+    description=&quot;grams per 100 kcal&quot;
+    selected
+    onSelect={() =&gt; {}} /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Group</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Group = () =&gt; {
+  const items = [&#39;Nutrient density&#39;, &#39;Protein&#39;, &#39;Fiber&#39;, &#39;Vitamin C&#39;]
+  const [sel, setSel] = useState(items[0])
+  return (
+    &lt;div style={{ display: &#39;grid&#39;, gridTemplateColumns: &#39;repeat(4, 180px)&#39;, gap: 20 }}&gt;
+      {items.map((t) =&gt; &lt;SelectableCard key={t} title={t} description=&quot;per 100 kcal&quot; selected={sel === t} onSelect={() =&gt; setSel(t)} /&gt;)}
+    &lt;/div&gt;
+  )
+};</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  id="components-switch"
+  class="card 
+  no-error
+  no-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="Switch">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> Switch</h2>
+      <div class="badges">
+        <label for="c-7-components-switch-props" class="badge ok as-toggle">6 prop types</label>
+        
+        <label for="c-7-components-switch-stories" class="badge ok as-toggle">4 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/Switch/Switch.stories.tsx">components-switch · ./src/components/Switch/Switch.stories.tsx</div>
+    
+    <div class="hint">On/off switch. Origin: the light/dark mode toggle in the Vegetable Chart header.</div>
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  
+  <input id="c-7-components-switch-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-7-components-switch-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">6 prop types</span>
+            </div>
+            <pre><code>Component: src/components/Switch/Switch.tsx::Switch</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>checked: boolean
+
+disabled?: boolean
+
+/**
+ * Optional icons shown on the knob: off state and on state (e.g. sun / moon).
+ */
+iconOff?: React.ReactNode
+
+iconOn?: React.ReactNode
+
+/**
+ * Visible label next to the switch. Also read by screen readers.
+ */
+label: string
+
+onChange: (checked: boolean) =&gt; void</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { Switch } from 'vegetablecharts';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Off</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Off = () =&gt; &lt;Switch
+    label=&quot;Dark mode&quot;
+    checked={false}
+    onChange={() =&gt; {}}
+    iconOff={&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; strokeWidth=&quot;2.5&quot; strokeLinecap=&quot;round&quot;&gt;&lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;4&quot;/&gt;&lt;path d=&quot;M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2&quot;/&gt;&lt;/svg&gt;}
+    iconOn={&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z&quot;/&gt;&lt;/svg&gt;} /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">On</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const On = () =&gt; &lt;Switch
+    label=&quot;Dark mode&quot;
+    checked
+    onChange={() =&gt; {}}
+    iconOff={&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; strokeWidth=&quot;2.5&quot; strokeLinecap=&quot;round&quot;&gt;&lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;4&quot;/&gt;&lt;path d=&quot;M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2&quot;/&gt;&lt;/svg&gt;}
+    iconOn={&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z&quot;/&gt;&lt;/svg&gt;} /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Disabled</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Disabled = () =&gt; &lt;Switch
+    label=&quot;Dark mode&quot;
+    checked={false}
+    onChange={() =&gt; {}}
+    iconOff={&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; strokeWidth=&quot;2.5&quot; strokeLinecap=&quot;round&quot;&gt;&lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;4&quot;/&gt;&lt;path d=&quot;M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2&quot;/&gt;&lt;/svg&gt;}
+    iconOn={&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z&quot;/&gt;&lt;/svg&gt;}
+    disabled /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Interactive</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Interactive = () =&gt; {
+    const [on, setOn] = useState(false)
+
+    return (
+        &lt;Switch
+            label=&quot;Dark mode&quot;
+            iconOff={&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; strokeWidth=&quot;2.5&quot; strokeLinecap=&quot;round&quot;&gt;&lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;4&quot;/&gt;&lt;path d=&quot;M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2&quot;/&gt;&lt;/svg&gt;}
+            iconOn={&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z&quot;/&gt;&lt;/svg&gt;}
+            checked={on}
+            onChange={setOn} /&gt;
+    );
+};</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  id="components-table"
+  class="card 
+  no-error
+  no-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="Table">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> Table</h2>
+      <div class="badges">
+        <label for="c-8-components-table-props" class="badge ok as-toggle">3 prop types</label>
+        
+        <label for="c-8-components-table-stories" class="badge ok as-toggle">1 story</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/Table/Table.stories.tsx">components-table · ./src/components/Table/Table.stories.tsx</div>
+    
+    <div class="hint">Data table with right-aligned tabular numbers. Origin: the full data table.</div>
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  
+  <input id="c-8-components-table-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-8-components-table-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">3 prop types</span>
+            </div>
+            <pre><code>Component: src/components/Table/Table.tsx::Table</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>caption?: string
+
+/**
+ * Column headings. The first column is text (left); the rest are numbers (right).
+ */
+columns: string[]
+
+rows: (string | number)[][]</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { Table } from 'vegetablecharts';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;Table
+    caption=&quot;Vegetables by price and score&quot;
+    columns={[&#39;Vegetable&#39;, &#39;€ / kg&#39;, &#39;Score&#39;]}
+    rows={[[&#39;Spinach&#39;, 4.1, 78], [&#39;Broccoli&#39;, 2.9, 64], [&#39;Carrot&#39;, 1.2, 41], [&#39;Cabbage&#39;, 1.1, 52]]} /&gt;;</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  id="foundations-tokens"
+  class="card 
+  has-error
+  has-info
+  has-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="Tokens">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-err"></span> Tokens</h2>
+      <div class="badges">
+        <label for="c-9-foundations-tokens-err" class="badge err as-toggle">API error</label>
+        <label for="c-9-foundations-tokens-info" class="badge info as-toggle">1 info</label>
+        <label for="c-9-foundations-tokens-stories" class="badge err as-toggle">1/1 story errors</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/tokens/Tokens.stories.tsx">foundations-tokens · ./src/tokens/Tokens.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  <input id="c-9-foundations-tokens-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-9-foundations-tokens-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-9-foundations-tokens-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  
+
+  <div class="panels">
+    
+        <div class="panel panel-err">
+          
+    <div class="note err">
+      <div class="note-title">API error</div>
+      <div class="note-body"><pre><code>No component file found for the &quot;Tokens&quot; component.
+  54 | }
+  55 |
+&gt; 56 | const meta = { title: &#39;Foundations/Tokens&#39;, component: Tokens, parameters: { layout: &#39;padded&#39; } } satisfies Meta&lt;typeof Tokens&gt;
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  57 | export default meta
+  58 | export const Overview: StoryObj&lt;typeof meta&gt; = {}
+  59 |
+
+./src/tokens/Tokens.stories.tsx:
+import type { Meta, StoryObj } from &#39;@storybook/react-vite&#39;
+
+const colors: [string, string][] = [
+  [&#39;--vc-color-bg&#39;, &#39;Page background&#39;], [&#39;--vc-color-panel&#39;, &#39;Raised surface / selected&#39;], [&#39;--vc-color-line&#39;, &#39;Subtle strokes&#39;],
+  [&#39;--vc-color-ink&#39;, &#39;Primary text and borders&#39;], [&#39;--vc-color-ink-2&#39;, &#39;Secondary text&#39;], [&#39;--vc-color-muted&#39;, &#39;Inactive text&#39;],
+  [&#39;--vc-color-accent&#39;, &#39;Leaf green: focus and data&#39;], [&#39;--vc-color-on-ink&#39;, &#39;Text on ink fills&#39;],
+]
+const spaces = [&#39;--vc-space-1&#39;, &#39;--vc-space-2&#39;, &#39;--vc-space-3&#39;, &#39;--vc-space-4&#39;, &#39;--vc-space-5&#39;, &#39;--vc-space-6&#39;]
+const texts: [string, string][] = [[&#39;--vc-text-sm&#39;, &#39;14&#39;], [&#39;--vc-text-md&#39;, &#39;16&#39;], [&#39;--vc-text-lg&#39;, &#39;18&#39;], [&#39;--vc-text-xl&#39;, &#39;20&#39;], [&#39;--vc-text-title&#39;, &#39;24&#39;]]
+
+function Tokens() {
+  return (
+    &lt;div style={{ display: &#39;grid&#39;, gap: 40, maxWidth: 900 }}&gt;
+      &lt;section&gt;
+        &lt;h2&gt;Colour&lt;/h2&gt;
+        &lt;div style={{ display: &#39;grid&#39;, gridTemplateColumns: &#39;repeat(auto-fill, minmax(200px, 1fr))&#39;, gap: 16 }}&gt;
+          {colors.map(([v, d]) =&gt; (
+            &lt;div key={v}&gt;
+              &lt;div style={{ height: 64, borderRadius: 8, background: `var(${v})`, border: &#39;2px solid var(--vc-color-ink)&#39; }} /&gt;
+              &lt;b&gt;{d}&lt;/b&gt;&lt;br /&gt;&lt;code&gt;{v}&lt;/code&gt;
+            &lt;/div&gt;
+          ))}
+        &lt;/div&gt;
+      &lt;/section&gt;
+      &lt;section&gt;
+        &lt;h2&gt;Typography&lt;/h2&gt;
+        &lt;p style={{ fontFamily: &#39;var(--vc-font-display)&#39;, fontSize: 24, margin: 0 }}&gt;Display: Alegreya Sans, for headings and interface&lt;/p&gt;
+        &lt;p style={{ fontFamily: &#39;var(--vc-font-data)&#39;, fontSize: 24, margin: &#39;8px 0&#39; }}&gt;Data: Alegreya, for numbers and chart text 0123456789&lt;/p&gt;
+        {texts.map(([v, px]) =&gt; &lt;div key={v} style={{ fontSize: `var(${v})` }}&gt;{px}px &lt;code&gt;{v}&lt;/code&gt;&lt;/div&gt;)}
+      &lt;/section&gt;
+      &lt;section&gt;
+        &lt;h2&gt;Spacing&lt;/h2&gt;
+        {spaces.map((v) =&gt; (
+          &lt;div key={v} style={{ display: &#39;flex&#39;, alignItems: &#39;center&#39;, gap: 12, marginBottom: 6 }}&gt;
+            &lt;div style={{ width: `var(${v})`, height: 16, background: &#39;var(--vc-color-accent)&#39; }} /&gt;&lt;code&gt;{v}&lt;/code&gt;
+          &lt;/div&gt;
+        ))}
+      &lt;/section&gt;
+      &lt;section&gt;
+        &lt;h2&gt;Shape and elevation&lt;/h2&gt;
+        &lt;div style={{ display: &#39;flex&#39;, gap: 24 }}&gt;
+          {[&#39;--vc-radius-sm&#39;, &#39;--vc-radius-lg&#39;, &#39;--vc-radius-pill&#39;].map((v) =&gt; (
+            &lt;div key={v} style={{ textAlign: &#39;center&#39; }}&gt;
+              &lt;div style={{ width: 96, height: 56, border: &#39;2px solid var(--vc-color-ink)&#39;, borderRadius: `var(${v})` }} /&gt;&lt;code&gt;{v}&lt;/code&gt;
+            &lt;/div&gt;
+          ))}
+          &lt;div style={{ textAlign: &#39;center&#39; }}&gt;
+            &lt;div style={{ width: 96, height: 56, borderRadius: 8, background: &#39;var(--vc-color-bg)&#39;, boxShadow: &#39;var(--vc-shadow-raised)&#39; }} /&gt;&lt;code&gt;--vc-shadow-raised&lt;/code&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/div&gt;
+  )
+}
+
+const meta = { title: &#39;Foundations/Tokens&#39;, component: Tokens, parameters: { layout: &#39;padded&#39; } } satisfies Meta&lt;typeof Tokens&gt;
+export default meta
+export const Overview: StoryObj&lt;typeof meta&gt; = {}
+</code></pre></div>
+    </div>
+        </div>
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+    
+        <div class="panel panel-stories">
+          
+            <div class="note err">
+              <div class="row">
+                <span class="ex-name">Overview</span>
+                <span class="badge err">story error</span>
+                
+              </div>
+              
+              
+              
+              
+              <pre><code>Could not generate snippet without component name.</code></pre>
+            </div>
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { Tokens } from 'vegetablecharts';</code></pre>
+              </div>
+          
+          
+        </div>
+    
+    
+  </div>
+</article>
+    </div>
+    <div class="error-groups" role="region" aria-label="API error groups">
+        <section class="group">
+          <input id="no-component-import-found-toggle" class="group-tg" type="checkbox" hidden />
+          <label for="no-component-import-found-toggle" class="group-header">
+            <span class="caret">▸</span>
+            <span class="group-title">No component import found</span>
+            <span class="group-count">1</span>
+          </label>
+          <div class="group-cards">
+<article
+  
+  class="card 
+  has-error
+  has-info
+  has-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="Tokens">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-err"></span> Tokens</h2>
+      <div class="badges">
+        <label for="c-error-0-foundations-tokens-err" class="badge err as-toggle">API error</label>
+        <label for="c-error-0-foundations-tokens-info" class="badge info as-toggle">1 info</label>
+        <label for="c-error-0-foundations-tokens-stories" class="badge err as-toggle">1/1 story errors</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/tokens/Tokens.stories.tsx">foundations-tokens · ./src/tokens/Tokens.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  <input id="c-error-0-foundations-tokens-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-error-0-foundations-tokens-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-error-0-foundations-tokens-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  
+
+  <div class="panels">
+    
+        <div class="panel panel-err">
+          
+    <div class="note err">
+      <div class="note-title">API error</div>
+      <div class="note-body"><pre><code>No component file found for the &quot;Tokens&quot; component.
+  54 | }
+  55 |
+&gt; 56 | const meta = { title: &#39;Foundations/Tokens&#39;, component: Tokens, parameters: { layout: &#39;padded&#39; } } satisfies Meta&lt;typeof Tokens&gt;
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  57 | export default meta
+  58 | export const Overview: StoryObj&lt;typeof meta&gt; = {}
+  59 |
+
+./src/tokens/Tokens.stories.tsx:
+import type { Meta, StoryObj } from &#39;@storybook/react-vite&#39;
+
+const colors: [string, string][] = [
+  [&#39;--vc-color-bg&#39;, &#39;Page background&#39;], [&#39;--vc-color-panel&#39;, &#39;Raised surface / selected&#39;], [&#39;--vc-color-line&#39;, &#39;Subtle strokes&#39;],
+  [&#39;--vc-color-ink&#39;, &#39;Primary text and borders&#39;], [&#39;--vc-color-ink-2&#39;, &#39;Secondary text&#39;], [&#39;--vc-color-muted&#39;, &#39;Inactive text&#39;],
+  [&#39;--vc-color-accent&#39;, &#39;Leaf green: focus and data&#39;], [&#39;--vc-color-on-ink&#39;, &#39;Text on ink fills&#39;],
+]
+const spaces = [&#39;--vc-space-1&#39;, &#39;--vc-space-2&#39;, &#39;--vc-space-3&#39;, &#39;--vc-space-4&#39;, &#39;--vc-space-5&#39;, &#39;--vc-space-6&#39;]
+const texts: [string, string][] = [[&#39;--vc-text-sm&#39;, &#39;14&#39;], [&#39;--vc-text-md&#39;, &#39;16&#39;], [&#39;--vc-text-lg&#39;, &#39;18&#39;], [&#39;--vc-text-xl&#39;, &#39;20&#39;], [&#39;--vc-text-title&#39;, &#39;24&#39;]]
+
+function Tokens() {
+  return (
+    &lt;div style={{ display: &#39;grid&#39;, gap: 40, maxWidth: 900 }}&gt;
+      &lt;section&gt;
+        &lt;h2&gt;Colour&lt;/h2&gt;
+        &lt;div style={{ display: &#39;grid&#39;, gridTemplateColumns: &#39;repeat(auto-fill, minmax(200px, 1fr))&#39;, gap: 16 }}&gt;
+          {colors.map(([v, d]) =&gt; (
+            &lt;div key={v}&gt;
+              &lt;div style={{ height: 64, borderRadius: 8, background: `var(${v})`, border: &#39;2px solid var(--vc-color-ink)&#39; }} /&gt;
+              &lt;b&gt;{d}&lt;/b&gt;&lt;br /&gt;&lt;code&gt;{v}&lt;/code&gt;
+            &lt;/div&gt;
+          ))}
+        &lt;/div&gt;
+      &lt;/section&gt;
+      &lt;section&gt;
+        &lt;h2&gt;Typography&lt;/h2&gt;
+        &lt;p style={{ fontFamily: &#39;var(--vc-font-display)&#39;, fontSize: 24, margin: 0 }}&gt;Display: Alegreya Sans, for headings and interface&lt;/p&gt;
+        &lt;p style={{ fontFamily: &#39;var(--vc-font-data)&#39;, fontSize: 24, margin: &#39;8px 0&#39; }}&gt;Data: Alegreya, for numbers and chart text 0123456789&lt;/p&gt;
+        {texts.map(([v, px]) =&gt; &lt;div key={v} style={{ fontSize: `var(${v})` }}&gt;{px}px &lt;code&gt;{v}&lt;/code&gt;&lt;/div&gt;)}
+      &lt;/section&gt;
+      &lt;section&gt;
+        &lt;h2&gt;Spacing&lt;/h2&gt;
+        {spaces.map((v) =&gt; (
+          &lt;div key={v} style={{ display: &#39;flex&#39;, alignItems: &#39;center&#39;, gap: 12, marginBottom: 6 }}&gt;
+            &lt;div style={{ width: `var(${v})`, height: 16, background: &#39;var(--vc-color-accent)&#39; }} /&gt;&lt;code&gt;{v}&lt;/code&gt;
+          &lt;/div&gt;
+        ))}
+      &lt;/section&gt;
+      &lt;section&gt;
+        &lt;h2&gt;Shape and elevation&lt;/h2&gt;
+        &lt;div style={{ display: &#39;flex&#39;, gap: 24 }}&gt;
+          {[&#39;--vc-radius-sm&#39;, &#39;--vc-radius-lg&#39;, &#39;--vc-radius-pill&#39;].map((v) =&gt; (
+            &lt;div key={v} style={{ textAlign: &#39;center&#39; }}&gt;
+              &lt;div style={{ width: 96, height: 56, border: &#39;2px solid var(--vc-color-ink)&#39;, borderRadius: `var(${v})` }} /&gt;&lt;code&gt;{v}&lt;/code&gt;
+            &lt;/div&gt;
+          ))}
+          &lt;div style={{ textAlign: &#39;center&#39; }}&gt;
+            &lt;div style={{ width: 96, height: 56, borderRadius: 8, background: &#39;var(--vc-color-bg)&#39;, boxShadow: &#39;var(--vc-shadow-raised)&#39; }} /&gt;&lt;code&gt;--vc-shadow-raised&lt;/code&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/div&gt;
+  )
+}
+
+const meta = { title: &#39;Foundations/Tokens&#39;, component: Tokens, parameters: { layout: &#39;padded&#39; } } satisfies Meta&lt;typeof Tokens&gt;
+export default meta
+export const Overview: StoryObj&lt;typeof meta&gt; = {}
+</code></pre></div>
+    </div>
+        </div>
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+    
+        <div class="panel panel-stories">
+          
+            <div class="note err">
+              <div class="row">
+                <span class="ex-name">Overview</span>
+                <span class="badge err">story error</span>
+                
+              </div>
+              
+              
+              
+              
+              <pre><code>Could not generate snippet without component name.</code></pre>
+            </div>
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { Tokens } from 'vegetablecharts';</code></pre>
+              </div>
+          
+          
+        </div>
+    
+    
+  </div>
+</article></div>
+        </section>
+      </div>
+    
+    
+  </div>
+</main>
+</body>
+</html>  
