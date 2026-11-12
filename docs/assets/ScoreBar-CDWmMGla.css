@@ -1,1 +1,0 @@
-.vc-score{grid-template-columns:170px minmax(0,1fr) 44px;align-items:center;gap:10px;display:grid}.vc-score__label{font-size:var(--vc-text-sm)}.vc-score__bar{background:var(--vc-color-accent);border-radius:0 4px 4px 0;min-width:2px;height:12px}.vc-score__value{font:700 var(--vc-text-sm) var(--vc-font-data);text-align:right;font-variant-numeric:tabular-nums}

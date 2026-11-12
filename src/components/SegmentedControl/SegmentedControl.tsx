@@ -14,7 +14,7 @@ export interface SegmentedControlProps<T extends string> {
  *  Origin: the "Edible part / Whole, as bought" price switch above the chart. */
 export function SegmentedControl<T extends string>({ label, options, value, onChange }: SegmentedControlProps<T>) {
   return (
-    <div className="vc-seg" role="radiogroup" aria-label={label}>
+    <div className="cg-seg" role="radiogroup" aria-label={label}>
       {options.map((o) => (
         <button
           key={o.value}

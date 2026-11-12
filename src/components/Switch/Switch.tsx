@@ -19,13 +19,13 @@ export function Switch({ label, checked, onChange, iconOff, iconOn, disabled }: 
       role="switch"
       aria-checked={checked}
       disabled={disabled}
-      className="vc-switch"
+      className="cg-switch"
       onClick={() => onChange(!checked)}
     >
-      <span className="vc-switch__track">
-        <span className="vc-switch__knob">{checked ? iconOn : iconOff}</span>
+      <span className="cg-switch__track">
+        <span className="cg-switch__knob">{checked ? iconOn : iconOff}</span>
       </span>
-      <span className="vc-switch__label">{label}</span>
+      <span className="cg-switch__label">{label}</span>
     </button>
   )
 }

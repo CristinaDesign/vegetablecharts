@@ -1,0 +1,1 @@
+.cg-score{grid-template-columns:170px minmax(0,1fr) 44px;align-items:center;gap:10px;display:grid}.cg-score__label{font-size:var(--cg-text-sm)}.cg-score__bar{background:var(--cg-color-accent);border-radius:0 4px 4px 0;min-width:2px;height:12px}.cg-score__value{font:700 var(--cg-text-sm) var(--cg-font-data);text-align:right;font-variant-numeric:tabular-nums}

@@ -11,7 +11,7 @@ export interface SelectableCardProps {
  *  Origin: the six variable cards above the chart. */
 export function SelectableCard({ title, description, selected, onSelect }: SelectableCardProps) {
   return (
-    <button type="button" className="vc-card" aria-pressed={selected} onClick={onSelect}>
+    <button type="button" className="cg-card" aria-pressed={selected} onClick={onSelect}>
       <b>{title}</b>
       {description && <span>{description}</span>}
     </button>

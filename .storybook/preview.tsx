@@ -19,6 +19,7 @@ const preview: Preview = {
   ],
   parameters: {
     layout: 'fullscreen',
+    options: { storySort: { order: ['Introduction', 'Foundations', 'Components'] } },
     controls: { matchers: { color: /(background|color)$/i, date: /Date$/i } },
     a11y: { test: 'todo' },
   },

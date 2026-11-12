@@ -620,13 +620,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/10 API error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">1/10 info</a><a class="filter-pill err" data-k="story-errors" href="#filter-story-errors">1/29 story errors</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/10 API error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">1/10 info</a><a class="filter-pill err" data-k="story-errors" href="#filter-story-errors">1/29 story errors</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">1 doc ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note info" style="margin-bottom: 16px;">
-            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>0.2s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
+            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>0.3s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
             <pre><code>typescript: {
   reactDocgen: 'react-docgen-typescript',
 }</code></pre>
@@ -702,7 +702,7 @@ variant?: &#39;primary&#39; | &#39;secondary&#39; | &#39;link&#39; = &#39;primar
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { Button } from 'vegetablecharts';</code></pre>
+                <pre><code>import { Button } from 'cool-graphs';</code></pre>
               </div>
           
           
@@ -833,7 +833,7 @@ summary: string</code></pre>
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { Disclosure } from 'vegetablecharts';</code></pre>
+                <pre><code>import { Disclosure } from 'cool-graphs';</code></pre>
               </div>
           
           
@@ -927,7 +927,7 @@ label: string</code></pre>
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { LegendMarker } from 'vegetablecharts';</code></pre>
+                <pre><code>import { LegendMarker } from 'cool-graphs';</code></pre>
               </div>
           
           
@@ -1038,7 +1038,7 @@ value: number</code></pre>
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { ScoreBar } from 'vegetablecharts';</code></pre>
+                <pre><code>import { ScoreBar } from 'cool-graphs';</code></pre>
               </div>
           
           
@@ -1151,7 +1151,7 @@ value: T</code></pre>
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { SegmentedControl } from 'vegetablecharts';</code></pre>
+                <pre><code>import { SegmentedControl } from 'cool-graphs';</code></pre>
               </div>
           
           
@@ -1302,7 +1302,7 @@ value: string</code></pre>
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { Select } from 'vegetablecharts';</code></pre>
+                <pre><code>import { Select } from 'cool-graphs';</code></pre>
               </div>
           
           
@@ -1436,7 +1436,7 @@ title: string</code></pre>
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { SelectableCard } from 'vegetablecharts';</code></pre>
+                <pre><code>import { SelectableCard } from 'cool-graphs';</code></pre>
               </div>
           
           
@@ -1567,7 +1567,7 @@ onChange: (checked: boolean) =&gt; void</code></pre>
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { Switch } from 'vegetablecharts';</code></pre>
+                <pre><code>import { Switch } from 'cool-graphs';</code></pre>
               </div>
           
           
@@ -1710,7 +1710,7 @@ rows: (string | number)[][]</code></pre>
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { Table } from 'vegetablecharts';</code></pre>
+                <pre><code>import { Table } from 'cool-graphs';</code></pre>
               </div>
           
           
@@ -1775,26 +1775,27 @@ rows: (string | number)[][]</code></pre>
     <div class="note err">
       <div class="note-title">API error</div>
       <div class="note-body"><pre><code>No component file found for the &quot;Tokens&quot; component.
-  56 | }
-  57 |
-&gt; 58 | const meta = { title: &#39;Foundations/Tokens&#39;, component: Tokens, parameters: { layout: &#39;padded&#39; } } satisfies Meta&lt;typeof Tokens&gt;
+  57 | }
+  58 |
+&gt; 59 | const meta = { title: &#39;Foundations/Tokens&#39;, component: Tokens, parameters: { layout: &#39;padded&#39; } } satisfies Meta&lt;typeof Tokens&gt;
      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  59 | export default meta
-  60 | export const Overview: StoryObj&lt;typeof meta&gt; = {}
-  61 |
+  60 | export default meta
+  61 | export const Overview: StoryObj&lt;typeof meta&gt; = {}
+  62 |
 
 ./src/tokens/Tokens.stories.tsx:
 import type { Meta, StoryObj } from &#39;@storybook/react-vite&#39;
 
 const colors: [string, string][] = [
-  [&#39;--vc-color-bg&#39;, &#39;Page background&#39;], [&#39;--vc-color-panel&#39;, &#39;Raised surface / selected&#39;], [&#39;--vc-color-line&#39;, &#39;Subtle strokes&#39;],
-  [&#39;--vc-color-ink&#39;, &#39;Primary text and borders&#39;], [&#39;--vc-color-ink-2&#39;, &#39;Secondary text&#39;], [&#39;--vc-color-muted&#39;, &#39;Inactive text&#39;],
-  [&#39;--vc-color-accent&#39;, &#39;Vivid green: focus and data&#39;], [&#39;--vc-color-on-ink&#39;, &#39;Text on ink fills&#39;],
-  [&#39;--vc-color-error&#39;, &#39;Error&#39;], [&#39;--vc-color-warning&#39;, &#39;Warning&#39;], [&#39;--vc-color-success&#39;, &#39;Success&#39;],
-  [&#39;--vc-color-error-bg&#39;, &#39;Error tint&#39;], [&#39;--vc-color-warning-bg&#39;, &#39;Warning tint&#39;], [&#39;--vc-color-success-bg&#39;, &#39;Success tint&#39;],
+  [&#39;--cg-color-bg&#39;, &#39;Page background&#39;], [&#39;--cg-color-panel&#39;, &#39;Raised surface / selected&#39;], [&#39;--cg-color-line&#39;, &#39;Subtle strokes&#39;],
+  [&#39;--cg-color-ink&#39;, &#39;Primary text and borders&#39;], [&#39;--cg-color-ink-2&#39;, &#39;Secondary text&#39;], [&#39;--cg-color-muted&#39;, &#39;Inactive text&#39;],
+  [&#39;--cg-color-accent&#39;, &#39;Vivid green: focus and data&#39;], [&#39;--cg-color-on-ink&#39;, &#39;Text on ink fills&#39;],
+  [&#39;--cg-color-error&#39;, &#39;Error: icons, borders&#39;], [&#39;--cg-color-warning&#39;, &#39;Warning: icons, borders&#39;], [&#39;--cg-color-success&#39;, &#39;Success: icons, borders&#39;],
+  [&#39;--cg-color-error-text&#39;, &#39;Error: text&#39;], [&#39;--cg-color-warning-text&#39;, &#39;Warning: text&#39;], [&#39;--cg-color-success-text&#39;, &#39;Success: text&#39;],
+  [&#39;--cg-color-error-bg&#39;, &#39;Error tint&#39;], [&#39;--cg-color-warning-bg&#39;, &#39;Warning tint&#39;], [&#39;--cg-color-success-bg&#39;, &#39;Success tint&#39;],
 ]
-const spaces = [&#39;--vc-space-1&#39;, &#39;--vc-space-2&#39;, &#39;--vc-space-3&#39;, &#39;--vc-space-4&#39;, &#39;--vc-space-5&#39;, &#39;--vc-space-6&#39;]
-const texts: [string, string][] = [[&#39;--vc-text-sm&#39;, &#39;14&#39;], [&#39;--vc-text-md&#39;, &#39;16&#39;], [&#39;--vc-text-lg&#39;, &#39;18&#39;], [&#39;--vc-text-xl&#39;, &#39;20&#39;], [&#39;--vc-text-title&#39;, &#39;24&#39;]]
+const spaces = [&#39;--cg-space-1&#39;, &#39;--cg-space-2&#39;, &#39;--cg-space-3&#39;, &#39;--cg-space-4&#39;, &#39;--cg-space-5&#39;, &#39;--cg-space-6&#39;]
+const texts: [string, string][] = [[&#39;--cg-text-sm&#39;, &#39;14&#39;], [&#39;--cg-text-md&#39;, &#39;16&#39;], [&#39;--cg-text-lg&#39;, &#39;18&#39;], [&#39;--cg-text-xl&#39;, &#39;20&#39;], [&#39;--cg-text-title&#39;, &#39;24&#39;]]
 
 function Tokens() {
   return (
@@ -1804,7 +1805,7 @@ function Tokens() {
         &lt;div style={{ display: &#39;grid&#39;, gridTemplateColumns: &#39;repeat(auto-fill, minmax(200px, 1fr))&#39;, gap: 16 }}&gt;
           {colors.map(([v, d]) =&gt; (
             &lt;div key={v}&gt;
-              &lt;div style={{ height: 64, borderRadius: 8, background: `var(${v})`, border: &#39;2px solid var(--vc-color-ink)&#39; }} /&gt;
+              &lt;div style={{ height: 64, borderRadius: 8, background: `var(${v})`, border: &#39;2px solid var(--cg-color-ink)&#39; }} /&gt;
               &lt;b&gt;{d}&lt;/b&gt;&lt;br /&gt;&lt;code&gt;{v}&lt;/code&gt;
             &lt;/div&gt;
           ))}
@@ -1812,28 +1813,28 @@ function Tokens() {
       &lt;/section&gt;
       &lt;section&gt;
         &lt;h2&gt;Typography&lt;/h2&gt;
-        &lt;p style={{ fontFamily: &#39;var(--vc-font-display)&#39;, fontSize: 24, margin: 0 }}&gt;Display: Alegreya Sans, for headings and interface&lt;/p&gt;
-        &lt;p style={{ fontFamily: &#39;var(--vc-font-data)&#39;, fontSize: 24, margin: &#39;8px 0&#39; }}&gt;Data: Alegreya, for numbers and chart text 0123456789&lt;/p&gt;
+        &lt;p style={{ fontFamily: &#39;var(--cg-font-display)&#39;, fontSize: 24, margin: 0 }}&gt;Display: Alegreya Sans, for headings and interface&lt;/p&gt;
+        &lt;p style={{ fontFamily: &#39;var(--cg-font-data)&#39;, fontSize: 24, margin: &#39;8px 0&#39; }}&gt;Data: Alegreya, for numbers and chart text 0123456789&lt;/p&gt;
         {texts.map(([v, px]) =&gt; &lt;div key={v} style={{ fontSize: `var(${v})` }}&gt;{px}px &lt;code&gt;{v}&lt;/code&gt;&lt;/div&gt;)}
       &lt;/section&gt;
       &lt;section&gt;
         &lt;h2&gt;Spacing&lt;/h2&gt;
         {spaces.map((v) =&gt; (
           &lt;div key={v} style={{ display: &#39;flex&#39;, alignItems: &#39;center&#39;, gap: 12, marginBottom: 6 }}&gt;
-            &lt;div style={{ width: `var(${v})`, height: 16, background: &#39;var(--vc-color-accent)&#39; }} /&gt;&lt;code&gt;{v}&lt;/code&gt;
+            &lt;div style={{ width: `var(${v})`, height: 16, background: &#39;var(--cg-color-accent)&#39; }} /&gt;&lt;code&gt;{v}&lt;/code&gt;
           &lt;/div&gt;
         ))}
       &lt;/section&gt;
       &lt;section&gt;
         &lt;h2&gt;Shape and elevation&lt;/h2&gt;
         &lt;div style={{ display: &#39;flex&#39;, gap: 24 }}&gt;
-          {[&#39;--vc-radius-sm&#39;, &#39;--vc-radius-lg&#39;, &#39;--vc-radius-pill&#39;].map((v) =&gt; (
+          {[&#39;--cg-radius-sm&#39;, &#39;--cg-radius-lg&#39;, &#39;--cg-radius-pill&#39;].map((v) =&gt; (
             &lt;div key={v} style={{ textAlign: &#39;center&#39; }}&gt;
-              &lt;div style={{ width: 96, height: 56, border: &#39;2px solid var(--vc-color-ink)&#39;, borderRadius: `var(${v})` }} /&gt;&lt;code&gt;{v}&lt;/code&gt;
+              &lt;div style={{ width: 96, height: 56, border: &#39;2px solid var(--cg-color-ink)&#39;, borderRadius: `var(${v})` }} /&gt;&lt;code&gt;{v}&lt;/code&gt;
             &lt;/div&gt;
           ))}
           &lt;div style={{ textAlign: &#39;center&#39; }}&gt;
-            &lt;div style={{ width: 96, height: 56, borderRadius: 8, background: &#39;var(--vc-color-bg)&#39;, boxShadow: &#39;var(--vc-shadow-raised)&#39; }} /&gt;&lt;code&gt;--vc-shadow-raised&lt;/code&gt;
+            &lt;div style={{ width: 96, height: 56, borderRadius: 8, background: &#39;var(--cg-color-bg)&#39;, boxShadow: &#39;var(--cg-shadow-raised)&#39; }} /&gt;&lt;code&gt;--cg-shadow-raised&lt;/code&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/section&gt;
@@ -1877,7 +1878,7 @@ export const Overview: StoryObj&lt;typeof meta&gt; = {}
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { Tokens } from 'vegetablecharts';</code></pre>
+                <pre><code>import { Tokens } from 'cool-graphs';</code></pre>
               </div>
           
           
@@ -1939,26 +1940,27 @@ export const Overview: StoryObj&lt;typeof meta&gt; = {}
     <div class="note err">
       <div class="note-title">API error</div>
       <div class="note-body"><pre><code>No component file found for the &quot;Tokens&quot; component.
-  56 | }
-  57 |
-&gt; 58 | const meta = { title: &#39;Foundations/Tokens&#39;, component: Tokens, parameters: { layout: &#39;padded&#39; } } satisfies Meta&lt;typeof Tokens&gt;
+  57 | }
+  58 |
+&gt; 59 | const meta = { title: &#39;Foundations/Tokens&#39;, component: Tokens, parameters: { layout: &#39;padded&#39; } } satisfies Meta&lt;typeof Tokens&gt;
      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  59 | export default meta
-  60 | export const Overview: StoryObj&lt;typeof meta&gt; = {}
-  61 |
+  60 | export default meta
+  61 | export const Overview: StoryObj&lt;typeof meta&gt; = {}
+  62 |
 
 ./src/tokens/Tokens.stories.tsx:
 import type { Meta, StoryObj } from &#39;@storybook/react-vite&#39;
 
 const colors: [string, string][] = [
-  [&#39;--vc-color-bg&#39;, &#39;Page background&#39;], [&#39;--vc-color-panel&#39;, &#39;Raised surface / selected&#39;], [&#39;--vc-color-line&#39;, &#39;Subtle strokes&#39;],
-  [&#39;--vc-color-ink&#39;, &#39;Primary text and borders&#39;], [&#39;--vc-color-ink-2&#39;, &#39;Secondary text&#39;], [&#39;--vc-color-muted&#39;, &#39;Inactive text&#39;],
-  [&#39;--vc-color-accent&#39;, &#39;Vivid green: focus and data&#39;], [&#39;--vc-color-on-ink&#39;, &#39;Text on ink fills&#39;],
-  [&#39;--vc-color-error&#39;, &#39;Error&#39;], [&#39;--vc-color-warning&#39;, &#39;Warning&#39;], [&#39;--vc-color-success&#39;, &#39;Success&#39;],
-  [&#39;--vc-color-error-bg&#39;, &#39;Error tint&#39;], [&#39;--vc-color-warning-bg&#39;, &#39;Warning tint&#39;], [&#39;--vc-color-success-bg&#39;, &#39;Success tint&#39;],
+  [&#39;--cg-color-bg&#39;, &#39;Page background&#39;], [&#39;--cg-color-panel&#39;, &#39;Raised surface / selected&#39;], [&#39;--cg-color-line&#39;, &#39;Subtle strokes&#39;],
+  [&#39;--cg-color-ink&#39;, &#39;Primary text and borders&#39;], [&#39;--cg-color-ink-2&#39;, &#39;Secondary text&#39;], [&#39;--cg-color-muted&#39;, &#39;Inactive text&#39;],
+  [&#39;--cg-color-accent&#39;, &#39;Vivid green: focus and data&#39;], [&#39;--cg-color-on-ink&#39;, &#39;Text on ink fills&#39;],
+  [&#39;--cg-color-error&#39;, &#39;Error: icons, borders&#39;], [&#39;--cg-color-warning&#39;, &#39;Warning: icons, borders&#39;], [&#39;--cg-color-success&#39;, &#39;Success: icons, borders&#39;],
+  [&#39;--cg-color-error-text&#39;, &#39;Error: text&#39;], [&#39;--cg-color-warning-text&#39;, &#39;Warning: text&#39;], [&#39;--cg-color-success-text&#39;, &#39;Success: text&#39;],
+  [&#39;--cg-color-error-bg&#39;, &#39;Error tint&#39;], [&#39;--cg-color-warning-bg&#39;, &#39;Warning tint&#39;], [&#39;--cg-color-success-bg&#39;, &#39;Success tint&#39;],
 ]
-const spaces = [&#39;--vc-space-1&#39;, &#39;--vc-space-2&#39;, &#39;--vc-space-3&#39;, &#39;--vc-space-4&#39;, &#39;--vc-space-5&#39;, &#39;--vc-space-6&#39;]
-const texts: [string, string][] = [[&#39;--vc-text-sm&#39;, &#39;14&#39;], [&#39;--vc-text-md&#39;, &#39;16&#39;], [&#39;--vc-text-lg&#39;, &#39;18&#39;], [&#39;--vc-text-xl&#39;, &#39;20&#39;], [&#39;--vc-text-title&#39;, &#39;24&#39;]]
+const spaces = [&#39;--cg-space-1&#39;, &#39;--cg-space-2&#39;, &#39;--cg-space-3&#39;, &#39;--cg-space-4&#39;, &#39;--cg-space-5&#39;, &#39;--cg-space-6&#39;]
+const texts: [string, string][] = [[&#39;--cg-text-sm&#39;, &#39;14&#39;], [&#39;--cg-text-md&#39;, &#39;16&#39;], [&#39;--cg-text-lg&#39;, &#39;18&#39;], [&#39;--cg-text-xl&#39;, &#39;20&#39;], [&#39;--cg-text-title&#39;, &#39;24&#39;]]
 
 function Tokens() {
   return (
@@ -1968,7 +1970,7 @@ function Tokens() {
         &lt;div style={{ display: &#39;grid&#39;, gridTemplateColumns: &#39;repeat(auto-fill, minmax(200px, 1fr))&#39;, gap: 16 }}&gt;
           {colors.map(([v, d]) =&gt; (
             &lt;div key={v}&gt;
-              &lt;div style={{ height: 64, borderRadius: 8, background: `var(${v})`, border: &#39;2px solid var(--vc-color-ink)&#39; }} /&gt;
+              &lt;div style={{ height: 64, borderRadius: 8, background: `var(${v})`, border: &#39;2px solid var(--cg-color-ink)&#39; }} /&gt;
               &lt;b&gt;{d}&lt;/b&gt;&lt;br /&gt;&lt;code&gt;{v}&lt;/code&gt;
             &lt;/div&gt;
           ))}
@@ -1976,28 +1978,28 @@ function Tokens() {
       &lt;/section&gt;
       &lt;section&gt;
         &lt;h2&gt;Typography&lt;/h2&gt;
-        &lt;p style={{ fontFamily: &#39;var(--vc-font-display)&#39;, fontSize: 24, margin: 0 }}&gt;Display: Alegreya Sans, for headings and interface&lt;/p&gt;
-        &lt;p style={{ fontFamily: &#39;var(--vc-font-data)&#39;, fontSize: 24, margin: &#39;8px 0&#39; }}&gt;Data: Alegreya, for numbers and chart text 0123456789&lt;/p&gt;
+        &lt;p style={{ fontFamily: &#39;var(--cg-font-display)&#39;, fontSize: 24, margin: 0 }}&gt;Display: Alegreya Sans, for headings and interface&lt;/p&gt;
+        &lt;p style={{ fontFamily: &#39;var(--cg-font-data)&#39;, fontSize: 24, margin: &#39;8px 0&#39; }}&gt;Data: Alegreya, for numbers and chart text 0123456789&lt;/p&gt;
         {texts.map(([v, px]) =&gt; &lt;div key={v} style={{ fontSize: `var(${v})` }}&gt;{px}px &lt;code&gt;{v}&lt;/code&gt;&lt;/div&gt;)}
       &lt;/section&gt;
       &lt;section&gt;
         &lt;h2&gt;Spacing&lt;/h2&gt;
         {spaces.map((v) =&gt; (
           &lt;div key={v} style={{ display: &#39;flex&#39;, alignItems: &#39;center&#39;, gap: 12, marginBottom: 6 }}&gt;
-            &lt;div style={{ width: `var(${v})`, height: 16, background: &#39;var(--vc-color-accent)&#39; }} /&gt;&lt;code&gt;{v}&lt;/code&gt;
+            &lt;div style={{ width: `var(${v})`, height: 16, background: &#39;var(--cg-color-accent)&#39; }} /&gt;&lt;code&gt;{v}&lt;/code&gt;
           &lt;/div&gt;
         ))}
       &lt;/section&gt;
       &lt;section&gt;
         &lt;h2&gt;Shape and elevation&lt;/h2&gt;
         &lt;div style={{ display: &#39;flex&#39;, gap: 24 }}&gt;
-          {[&#39;--vc-radius-sm&#39;, &#39;--vc-radius-lg&#39;, &#39;--vc-radius-pill&#39;].map((v) =&gt; (
+          {[&#39;--cg-radius-sm&#39;, &#39;--cg-radius-lg&#39;, &#39;--cg-radius-pill&#39;].map((v) =&gt; (
             &lt;div key={v} style={{ textAlign: &#39;center&#39; }}&gt;
-              &lt;div style={{ width: 96, height: 56, border: &#39;2px solid var(--vc-color-ink)&#39;, borderRadius: `var(${v})` }} /&gt;&lt;code&gt;{v}&lt;/code&gt;
+              &lt;div style={{ width: 96, height: 56, border: &#39;2px solid var(--cg-color-ink)&#39;, borderRadius: `var(${v})` }} /&gt;&lt;code&gt;{v}&lt;/code&gt;
             &lt;/div&gt;
           ))}
           &lt;div style={{ textAlign: &#39;center&#39; }}&gt;
-            &lt;div style={{ width: 96, height: 56, borderRadius: 8, background: &#39;var(--vc-color-bg)&#39;, boxShadow: &#39;var(--vc-shadow-raised)&#39; }} /&gt;&lt;code&gt;--vc-shadow-raised&lt;/code&gt;
+            &lt;div style={{ width: 96, height: 56, borderRadius: 8, background: &#39;var(--cg-color-bg)&#39;, boxShadow: &#39;var(--cg-shadow-raised)&#39; }} /&gt;&lt;code&gt;--cg-shadow-raised&lt;/code&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/section&gt;
@@ -2041,7 +2043,7 @@ export const Overview: StoryObj&lt;typeof meta&gt; = {}
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { Tokens } from 'vegetablecharts';</code></pre>
+                <pre><code>import { Tokens } from 'cool-graphs';</code></pre>
               </div>
           
           
@@ -2052,7 +2054,55 @@ export const Overview: StoryObj&lt;typeof meta&gt; = {}
 </article></div>
         </section>
       </div>
+    <h2 class="section-title">Unattached Docs</h2>
+    <div class="grid" role="list">
+      
+<article
+  class="card is-doc no-doc-error"
+  role="listitem"
+  aria-label="Docs">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> Introduction</h2>
+      <div class="badges">
+        
+        <label for="doc-0-introduction-docs-content" class="badge ok as-toggle">view content</label>
+      </div>
+    </div>
+    <div class="meta" title="./src/Introduction.mdx">introduction--docs · ./src/Introduction.mdx</div>
+    <div># Cool Graphs design system Cool Graphs is a small design system for data-focused pages: c...</div>
+  </div>
+
+  <!-- Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="doc-0-introduction-docs-content" class="tg tg-content" type="checkbox" hidden />
+
+  <div class="panels">
     
+    
+        <div class="panel panel-content">
+          <div class="mdx-content">
+            <pre><code>import { Meta } from &#39;@storybook/addon-docs/blocks&#39;;
+
+&lt;Meta title=&quot;Introduction&quot; /&gt;
+
+# Cool Graphs design system
+
+Cool Graphs is a small design system for data-focused pages: charts, rankings and tables that explain what something costs or contains. It is built from the Vegetable Chart prototype, which compares 27 vegetables sold in Spain by nutritional value and price. The prototype is only the example. The system itself is not specific to vegetables.
+
+**What is here.** Design tokens (colour, type, spacing, shape) and nine components: Switch, Segmented control, Button, Select, Selectable card, Disclosure, Table, Legend marker and Score bar. Each has a story for every state. Use the Theme menu in the toolbar to view light and dark.
+
+**Units.** Colours are hex values. Sizes and spacing are in pixels (px). Contrast is the WCAG ratio, such as 4.5:1. The smallest clickable target is 30 px.
+
+**Where the values come from.** Colours, fonts, radii and shadows were taken directly from the Vegetable Chart prototype. The accent green, the status colours (error, warning, success) and the Button were added afterwards. Every text colour is at least 4.5:1 against its background in both themes, and every icon or border colour is at least 3:1, measured with the standard WCAG formula.
+
+**Status.** Draft 3. The components are not yet used in a live product, and the scatter chart is not part of the system. The written rules are in `DESIGN.md` in the repository.
+</code></pre>
+          </div>
+        </div>
+  </div>
+</article>
+    </div>
     
   </div>
 </main>

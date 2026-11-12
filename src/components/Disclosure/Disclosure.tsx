@@ -6,9 +6,9 @@ export interface DisclosureProps { summary: string; children: React.ReactNode; d
  *  Origin: "Show all data as a table". */
 export function Disclosure({ summary, children, defaultOpen }: DisclosureProps) {
   return (
-    <details className="vc-disclosure" open={defaultOpen}>
+    <details className="cg-disclosure" open={defaultOpen}>
       <summary>{summary}</summary>
-      <div className="vc-disclosure__body">{children}</div>
+      <div className="cg-disclosure__body">{children}</div>
     </details>
   )
 }

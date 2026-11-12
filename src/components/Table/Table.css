@@ -1,6 +1,6 @@
-.vc-table { overflow-x: auto; }
-.vc-table table { border-collapse: collapse; width: 100%; font: var(--vc-text-sm) var(--vc-font-data); font-variant-numeric: tabular-nums; }
-.vc-table th, .vc-table td { padding: 6px 10px; text-align: right; border-bottom: 1px solid var(--vc-color-panel); white-space: nowrap; }
-.vc-table th:first-child, .vc-table td:first-child { text-align: left; }
-.vc-table th { font: 700 13px var(--vc-font-display); color: var(--vc-color-ink-2); }
-.vc-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.cg-table { overflow-x: auto; }
+.cg-table table { border-collapse: collapse; width: 100%; font: var(--cg-text-sm) var(--cg-font-data); font-variant-numeric: tabular-nums; }
+.cg-table th, .cg-table td { padding: 6px 10px; text-align: right; border-bottom: 1px solid var(--cg-color-panel); white-space: nowrap; }
+.cg-table th:first-child, .cg-table td:first-child { text-align: left; }
+.cg-table th { font: 700 13px var(--cg-font-display); color: var(--cg-color-ink-2); }
+.cg-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

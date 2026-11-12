@@ -3,80 +3,83 @@
    Switch theme with <html data-theme="light|dark">; without it, follows the OS setting. */
 :root {
   /* Colour (semantic names: what it is FOR, not what colour it is) */
-  --vc-color-bg: #FFF5ED;        /* page background */
-  --vc-color-panel: #F1DFD1;     /* raised surface, selected state */
-  --vc-color-line: #FAE5D5;      /* subtle strokes */
-  --vc-color-ink: #5A3C21;       /* primary text, borders */
-  --vc-color-ink-2: #724318;     /* secondary text, labels */
-  --vc-color-muted: #A88A70;     /* inactive text */
-  --vc-color-accent: #168F00;    /* vivid green: focus ring, data marks (as bright as 3:1 on cream allows) */
-  --vc-color-on-ink: #FFF5ED;    /* text placed on an ink-coloured fill */
-  --vc-shadow-color: rgb(90 60 33 / .15);
+  --cg-color-bg: #FFF5ED;        /* page background */
+  --cg-color-panel: #F1DFD1;     /* raised surface, selected state */
+  --cg-color-line: #FAE5D5;      /* subtle strokes */
+  --cg-color-ink: #5A3C21;       /* primary text, borders */
+  --cg-color-ink-2: #724318;     /* secondary text, labels */
+  --cg-color-muted: #A88A70;     /* inactive text */
+  --cg-color-accent: #168F00;    /* vivid green: focus ring, data marks (as bright as 3:1 on cream allows) */
+  --cg-color-on-ink: #FFF5ED;    /* text placed on an ink-coloured fill */
+  --cg-shadow-color: rgb(90 60 33 / .15);
 
-  /* Status colours: each is for text, icons and outlines (4.5:1 or better on bg and panel).
-     The -bg tint is a soft fill behind it. Always pair with an icon or words, never colour alone. */
-  --vc-color-error: #B3261E;   --vc-color-error-bg: #FBE3DF;
-  --vc-color-warning: #A14600; --vc-color-warning-bg: #FCE9D2;
-  --vc-color-success: #1F6B3A; --vc-color-success-bg: #DDF0E1;
-  --vc-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%235A3C21' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");  /* dropdown arrow */
+  /* Status colours. Each has three parts:
+       color      bright, for icons, borders and stripes (3:1 or better on bg and panel)
+       color-text deeper, for text (4.5:1 or better on bg, panel and its own tint)
+       color-bg   soft tint behind the message
+     Always pair with an icon or words, never colour alone. */
+  --cg-color-error: #F91C0C;   --cg-color-error-text: #C90D00;   --cg-color-error-bg: #FCE4E0;
+  --cg-color-warning: #CC5E04; --cg-color-warning-text: #A34900; --cg-color-warning-bg: #FFEBD3;
+  --cg-color-success: #11914D; --cg-color-success-text: #007527; --cg-color-success-bg: #DEF5E4;
+  --cg-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%235A3C21' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");  /* dropdown arrow */
 
   /* Typography */
-  --vc-font-display: "Alegreya Sans", "Trebuchet MS", system-ui, sans-serif;
-  --vc-font-data: "Alegreya", Georgia, "Times New Roman", serif;
-  --vc-text-sm: 14px;
-  --vc-text-md: 16px;
-  --vc-text-lg: 18px;
-  --vc-text-xl: 20px;
-  --vc-text-title: 24px;
+  --cg-font-display: "Alegreya Sans", "Trebuchet MS", system-ui, sans-serif;
+  --cg-font-data: "Alegreya", Georgia, "Times New Roman", serif;
+  --cg-text-sm: 14px;
+  --cg-text-md: 16px;
+  --cg-text-lg: 18px;
+  --cg-text-xl: 20px;
+  --cg-text-title: 24px;
 
   /* Shape, spacing, motion */
-  --vc-radius-sm: 8px;
-  --vc-radius-lg: 16px;
-  --vc-radius-pill: 999px;
-  --vc-border-width: 2px;
-  --vc-target-min: 30px;        /* minimum height/width of anything clickable */
-  --vc-space-1: 4px;
-  --vc-space-2: 8px;
-  --vc-space-3: 12px;
-  --vc-space-4: 16px;
-  --vc-space-5: 24px;
-  --vc-space-6: 40px;
-  --vc-shadow-raised: 0 6px 18px var(--vc-shadow-color);
-  --vc-focus-ring: 3px solid var(--vc-color-accent);
-  --vc-duration: .25s;
-  --vc-ease: cubic-bezier(.2, .7, .2, 1);
+  --cg-radius-sm: 8px;
+  --cg-radius-lg: 16px;
+  --cg-radius-pill: 999px;
+  --cg-border-width: 2px;
+  --cg-target-min: 30px;        /* minimum height/width of anything clickable */
+  --cg-space-1: 4px;
+  --cg-space-2: 8px;
+  --cg-space-3: 12px;
+  --cg-space-4: 16px;
+  --cg-space-5: 24px;
+  --cg-space-6: 40px;
+  --cg-shadow-raised: 0 6px 18px var(--cg-shadow-color);
+  --cg-focus-ring: 3px solid var(--cg-color-accent);
+  --cg-duration: .25s;
+  --cg-ease: cubic-bezier(.2, .7, .2, 1);
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --vc-color-bg: #1C1612; --vc-color-panel: #2B221C; --vc-color-line: #3A2E26;
-    --vc-color-ink: #F2E4D6; --vc-color-ink-2: #D8B898; --vc-color-muted: #9C8370;
-    --vc-color-accent: #8CFF45; --vc-color-on-ink: #1C1612;
-    --vc-shadow-color: rgb(0 0 0 / .45);
-    --vc-color-error: #FF8A80;   --vc-color-error-bg: #3D1E1B;
-    --vc-color-warning: #FFA24D; --vc-color-warning-bg: #3A2711;
-    --vc-color-success: #5FC283; --vc-color-success-bg: #1B2F22;
-    --vc-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23F2E4D6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    --cg-color-bg: #1C1612; --cg-color-panel: #2B221C; --cg-color-line: #3A2E26;
+    --cg-color-ink: #F2E4D6; --cg-color-ink-2: #D8B898; --cg-color-muted: #9C8370;
+    --cg-color-accent: #8CFF45; --cg-color-on-ink: #1C1612;
+    --cg-shadow-color: rgb(0 0 0 / .45);
+    --cg-color-error: #FF8A80;   --cg-color-error-text: #FF8A80;   --cg-color-error-bg: #3D1E1B;
+    --cg-color-warning: #FFA24D; --cg-color-warning-text: #FFA24D; --cg-color-warning-bg: #3A2711;
+    --cg-color-success: #5FC283; --cg-color-success-text: #5FC283; --cg-color-success-bg: #1B2F22;
+    --cg-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23F2E4D6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --vc-color-bg: #1C1612; --vc-color-panel: #2B221C; --vc-color-line: #3A2E26;
-  --vc-color-ink: #F2E4D6; --vc-color-ink-2: #D8B898; --vc-color-muted: #9C8370;
-  --vc-color-accent: #8CFF45; --vc-color-on-ink: #1C1612;
-  --vc-shadow-color: rgb(0 0 0 / .45);
-  --vc-color-error: #FF8A80;   --vc-color-error-bg: #3D1E1B;
-  --vc-color-warning: #FFA24D; --vc-color-warning-bg: #3A2711;
-  --vc-color-success: #5FC283; --vc-color-success-bg: #1B2F22;
-  --vc-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23F2E4D6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --cg-color-bg: #1C1612; --cg-color-panel: #2B221C; --cg-color-line: #3A2E26;
+  --cg-color-ink: #F2E4D6; --cg-color-ink-2: #D8B898; --cg-color-muted: #9C8370;
+  --cg-color-accent: #8CFF45; --cg-color-on-ink: #1C1612;
+  --cg-shadow-color: rgb(0 0 0 / .45);
+  --cg-color-error: #FF8A80;   --cg-color-error-text: #FF8A80;   --cg-color-error-bg: #3D1E1B;
+  --cg-color-warning: #FFA24D; --cg-color-warning-text: #FFA24D; --cg-color-warning-bg: #3A2711;
+  --cg-color-success: #5FC283; --cg-color-success-text: #5FC283; --cg-color-success-bg: #1B2F22;
+  --cg-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23F2E4D6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   color-scheme: dark;
 }
 
 body {
-  background: var(--vc-color-bg);
-  color: var(--vc-color-ink);
-  font: var(--vc-text-md)/1.5 var(--vc-font-display);
-  transition: background-color var(--vc-duration), color var(--vc-duration);
+  background: var(--cg-color-bg);
+  color: var(--cg-color-ink);
+  font: var(--cg-text-md)/1.5 var(--cg-font-display);
+  transition: background-color var(--cg-duration), color var(--cg-duration);
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

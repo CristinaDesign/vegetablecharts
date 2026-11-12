@@ -1,6 +1,6 @@
-.vc-select { width: 100%; font: 700 var(--vc-text-md) var(--vc-font-display); letter-spacing: .25px; color: var(--vc-color-ink);
-  background-color: var(--vc-color-panel); border: var(--vc-border-width) solid var(--vc-color-ink); border-radius: var(--vc-radius-sm);
-  padding: var(--vc-space-3) 44px var(--vc-space-3) 14px; appearance: none; -webkit-appearance: none; cursor: pointer;
-  background-image: var(--vc-chevron); background-repeat: no-repeat; background-position: right 16px center; }
-.vc-select:focus-visible { outline: var(--vc-focus-ring); outline-offset: 3px; }
-.vc-select:disabled { opacity: .4; cursor: not-allowed; }
+.cg-select { width: 100%; font: 700 var(--cg-text-md) var(--cg-font-display); letter-spacing: .25px; color: var(--cg-color-ink);
+  background-color: var(--cg-color-panel); border: var(--cg-border-width) solid var(--cg-color-ink); border-radius: var(--cg-radius-sm);
+  padding: var(--cg-space-3) 44px var(--cg-space-3) 14px; appearance: none; -webkit-appearance: none; cursor: pointer;
+  background-image: var(--cg-chevron); background-repeat: no-repeat; background-position: right 16px center; }
+.cg-select:focus-visible { outline: var(--cg-focus-ring); outline-offset: 3px; }
+.cg-select:disabled { opacity: .4; cursor: not-allowed; }

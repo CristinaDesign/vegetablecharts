@@ -10,9 +10,9 @@ export interface TableProps {
 /** Data table with right-aligned tabular numbers. Origin: the full data table. */
 export function Table({ columns, rows, caption }: TableProps) {
   return (
-    <div className="vc-table">
+    <div className="cg-table">
       <table>
-        {caption && <caption className="vc-sr-only">{caption}</caption>}
+        {caption && <caption className="cg-sr-only">{caption}</caption>}
         <thead><tr>{columns.map((c) => <th key={c} scope="col">{c}</th>)}</tr></thead>
         <tbody>{rows.map((r, i) => <tr key={i}>{r.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody>
       </table>

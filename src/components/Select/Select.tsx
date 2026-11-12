@@ -13,7 +13,7 @@ export interface SelectProps {
 /** Dropdown. Origin: the variable picker shown on phones in the Vegetable Chart. */
 export function Select({ label, options, value, onChange, disabled }: SelectProps) {
   return (
-    <select className="vc-select" aria-label={label} value={value} disabled={disabled} onChange={(e) => onChange(e.target.value)}>
+    <select className="cg-select" aria-label={label} value={value} disabled={disabled} onChange={(e) => onChange(e.target.value)}>
       {options.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
     </select>
   )
