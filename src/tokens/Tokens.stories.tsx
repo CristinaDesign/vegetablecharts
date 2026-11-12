@@ -3,7 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const colors: [string, string][] = [
   ['--vc-color-bg', 'Page background'], ['--vc-color-panel', 'Raised surface / selected'], ['--vc-color-line', 'Subtle strokes'],
   ['--vc-color-ink', 'Primary text and borders'], ['--vc-color-ink-2', 'Secondary text'], ['--vc-color-muted', 'Inactive text'],
-  ['--vc-color-accent', 'Leaf green: focus and data'], ['--vc-color-on-ink', 'Text on ink fills'],
+  ['--vc-color-accent', 'Vivid green: focus and data'], ['--vc-color-on-ink', 'Text on ink fills'],
+  ['--vc-color-error', 'Error'], ['--vc-color-warning', 'Warning'], ['--vc-color-success', 'Success'],
+  ['--vc-color-error-bg', 'Error tint'], ['--vc-color-warning-bg', 'Warning tint'], ['--vc-color-success-bg', 'Success tint'],
 ]
 const spaces = ['--vc-space-1', '--vc-space-2', '--vc-space-3', '--vc-space-4', '--vc-space-5', '--vc-space-6']
 const texts: [string, string][] = [['--vc-text-sm', '14'], ['--vc-text-md', '16'], ['--vc-text-lg', '18'], ['--vc-text-xl', '20'], ['--vc-text-title', '24']]

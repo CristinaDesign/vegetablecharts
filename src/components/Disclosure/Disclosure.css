@@ -1,5 +1,5 @@
 .vc-disclosure { font-size: 15px; }
-.vc-disclosure summary { cursor: pointer; color: var(--vc-color-ink-2); font-weight: 500; }
+.vc-disclosure summary { min-height: var(--vc-target-min); display: flex; align-items: center; cursor: pointer; color: var(--vc-color-ink-2); font-weight: 500; }
 .vc-disclosure summary:hover { color: var(--vc-color-ink); }
 .vc-disclosure summary:focus-visible { outline: var(--vc-focus-ring); outline-offset: 3px; border-radius: 4px; }
 .vc-disclosure__body { margin-top: var(--vc-space-3); }

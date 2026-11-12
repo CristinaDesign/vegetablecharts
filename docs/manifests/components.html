@@ -626,7 +626,7 @@
 <main>
   <div class="wrap">
     <div class="note info" style="margin-bottom: 16px;">
-            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>0.3s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
+            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>0.2s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
             <pre><code>typescript: {
   reactDocgen: 'react-docgen-typescript',
 }</code></pre>
@@ -1775,13 +1775,13 @@ rows: (string | number)[][]</code></pre>
     <div class="note err">
       <div class="note-title">API error</div>
       <div class="note-body"><pre><code>No component file found for the &quot;Tokens&quot; component.
-  54 | }
-  55 |
-&gt; 56 | const meta = { title: &#39;Foundations/Tokens&#39;, component: Tokens, parameters: { layout: &#39;padded&#39; } } satisfies Meta&lt;typeof Tokens&gt;
+  56 | }
+  57 |
+&gt; 58 | const meta = { title: &#39;Foundations/Tokens&#39;, component: Tokens, parameters: { layout: &#39;padded&#39; } } satisfies Meta&lt;typeof Tokens&gt;
      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  57 | export default meta
-  58 | export const Overview: StoryObj&lt;typeof meta&gt; = {}
-  59 |
+  59 | export default meta
+  60 | export const Overview: StoryObj&lt;typeof meta&gt; = {}
+  61 |
 
 ./src/tokens/Tokens.stories.tsx:
 import type { Meta, StoryObj } from &#39;@storybook/react-vite&#39;
@@ -1789,7 +1789,9 @@ import type { Meta, StoryObj } from &#39;@storybook/react-vite&#39;
 const colors: [string, string][] = [
   [&#39;--vc-color-bg&#39;, &#39;Page background&#39;], [&#39;--vc-color-panel&#39;, &#39;Raised surface / selected&#39;], [&#39;--vc-color-line&#39;, &#39;Subtle strokes&#39;],
   [&#39;--vc-color-ink&#39;, &#39;Primary text and borders&#39;], [&#39;--vc-color-ink-2&#39;, &#39;Secondary text&#39;], [&#39;--vc-color-muted&#39;, &#39;Inactive text&#39;],
-  [&#39;--vc-color-accent&#39;, &#39;Leaf green: focus and data&#39;], [&#39;--vc-color-on-ink&#39;, &#39;Text on ink fills&#39;],
+  [&#39;--vc-color-accent&#39;, &#39;Vivid green: focus and data&#39;], [&#39;--vc-color-on-ink&#39;, &#39;Text on ink fills&#39;],
+  [&#39;--vc-color-error&#39;, &#39;Error&#39;], [&#39;--vc-color-warning&#39;, &#39;Warning&#39;], [&#39;--vc-color-success&#39;, &#39;Success&#39;],
+  [&#39;--vc-color-error-bg&#39;, &#39;Error tint&#39;], [&#39;--vc-color-warning-bg&#39;, &#39;Warning tint&#39;], [&#39;--vc-color-success-bg&#39;, &#39;Success tint&#39;],
 ]
 const spaces = [&#39;--vc-space-1&#39;, &#39;--vc-space-2&#39;, &#39;--vc-space-3&#39;, &#39;--vc-space-4&#39;, &#39;--vc-space-5&#39;, &#39;--vc-space-6&#39;]
 const texts: [string, string][] = [[&#39;--vc-text-sm&#39;, &#39;14&#39;], [&#39;--vc-text-md&#39;, &#39;16&#39;], [&#39;--vc-text-lg&#39;, &#39;18&#39;], [&#39;--vc-text-xl&#39;, &#39;20&#39;], [&#39;--vc-text-title&#39;, &#39;24&#39;]]
@@ -1937,13 +1939,13 @@ export const Overview: StoryObj&lt;typeof meta&gt; = {}
     <div class="note err">
       <div class="note-title">API error</div>
       <div class="note-body"><pre><code>No component file found for the &quot;Tokens&quot; component.
-  54 | }
-  55 |
-&gt; 56 | const meta = { title: &#39;Foundations/Tokens&#39;, component: Tokens, parameters: { layout: &#39;padded&#39; } } satisfies Meta&lt;typeof Tokens&gt;
+  56 | }
+  57 |
+&gt; 58 | const meta = { title: &#39;Foundations/Tokens&#39;, component: Tokens, parameters: { layout: &#39;padded&#39; } } satisfies Meta&lt;typeof Tokens&gt;
      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  57 | export default meta
-  58 | export const Overview: StoryObj&lt;typeof meta&gt; = {}
-  59 |
+  59 | export default meta
+  60 | export const Overview: StoryObj&lt;typeof meta&gt; = {}
+  61 |
 
 ./src/tokens/Tokens.stories.tsx:
 import type { Meta, StoryObj } from &#39;@storybook/react-vite&#39;
@@ -1951,7 +1953,9 @@ import type { Meta, StoryObj } from &#39;@storybook/react-vite&#39;
 const colors: [string, string][] = [
   [&#39;--vc-color-bg&#39;, &#39;Page background&#39;], [&#39;--vc-color-panel&#39;, &#39;Raised surface / selected&#39;], [&#39;--vc-color-line&#39;, &#39;Subtle strokes&#39;],
   [&#39;--vc-color-ink&#39;, &#39;Primary text and borders&#39;], [&#39;--vc-color-ink-2&#39;, &#39;Secondary text&#39;], [&#39;--vc-color-muted&#39;, &#39;Inactive text&#39;],
-  [&#39;--vc-color-accent&#39;, &#39;Leaf green: focus and data&#39;], [&#39;--vc-color-on-ink&#39;, &#39;Text on ink fills&#39;],
+  [&#39;--vc-color-accent&#39;, &#39;Vivid green: focus and data&#39;], [&#39;--vc-color-on-ink&#39;, &#39;Text on ink fills&#39;],
+  [&#39;--vc-color-error&#39;, &#39;Error&#39;], [&#39;--vc-color-warning&#39;, &#39;Warning&#39;], [&#39;--vc-color-success&#39;, &#39;Success&#39;],
+  [&#39;--vc-color-error-bg&#39;, &#39;Error tint&#39;], [&#39;--vc-color-warning-bg&#39;, &#39;Warning tint&#39;], [&#39;--vc-color-success-bg&#39;, &#39;Success tint&#39;],
 ]
 const spaces = [&#39;--vc-space-1&#39;, &#39;--vc-space-2&#39;, &#39;--vc-space-3&#39;, &#39;--vc-space-4&#39;, &#39;--vc-space-5&#39;, &#39;--vc-space-6&#39;]
 const texts: [string, string][] = [[&#39;--vc-text-sm&#39;, &#39;14&#39;], [&#39;--vc-text-md&#39;, &#39;16&#39;], [&#39;--vc-text-lg&#39;, &#39;18&#39;], [&#39;--vc-text-xl&#39;, &#39;20&#39;], [&#39;--vc-text-title&#39;, &#39;24&#39;]]
