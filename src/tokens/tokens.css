@@ -38,6 +38,7 @@
   --cg-radius-pill: 999px;
   --cg-border-width: 2px;
   --cg-target-min: 30px;        /* minimum height/width of anything clickable */
+  --cg-icon-size: 24px;         /* default icon size */
   --cg-space-1: 4px;
   --cg-space-2: 8px;
   --cg-space-3: 12px;

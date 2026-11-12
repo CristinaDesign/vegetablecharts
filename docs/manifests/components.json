@@ -22,6 +22,117 @@
       ],
       "import": "import { Tokens } from 'cool-graphs';"
     },
+    "components-banner": {
+      "id": "components-banner",
+      "name": "Banner",
+      "path": "./src/components/Banner/Banner.stories.tsx",
+      "jsDocTags": {},
+      "description": "Message banner. Always shows an icon and words together, so the status never depends on colour alone.\n Errors are announced to screen readers immediately; the others politely.",
+      "reactDocgen": {
+        "description": "Message banner. Always shows an icon and words together, so the status never depends on colour alone.\n Errors are announced to screen readers immediately; the others politely.",
+        "methods": [],
+        "displayName": "Banner",
+        "definedInFile": "/home/claude/vegetablecharts/src/components/Banner/Banner.tsx",
+        "actualName": "Banner",
+        "exportName": "Banner",
+        "props": {
+          "variant": {
+            "required": true,
+            "tsType": {
+              "name": "union",
+              "raw": "'error' | 'warning' | 'success' | 'info'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'error'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'warning'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'success'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'info'"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "title": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "Short heading. Optional, but recommended when the message has more than one sentence."
+          },
+          "children": {
+            "required": true,
+            "tsType": {
+              "name": "ReactReactNode",
+              "raw": "React.ReactNode"
+            },
+            "description": "The message itself: say what happened and what to do next."
+          },
+          "onDismiss": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": "If given, a close button appears. The page decides what happens on close."
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "components-banner--success",
+          "name": "Success",
+          "snippet": "const Success = () => <Banner variant=\"success\" title=\"Data updated\">Prices now reflect July 2026 averages in € per kilo.</Banner>;"
+        },
+        {
+          "id": "components-banner--warning",
+          "name": "Warning",
+          "snippet": "const Warning = () => <Banner variant=\"warning\" title=\"Some prices are estimates\">Six vegetables use an estimated price until wholesale data is connected.</Banner>;"
+        },
+        {
+          "id": "components-banner--error",
+          "name": "Error",
+          "snippet": "const Error = () => <Banner variant=\"error\" title=\"Could not load the data\">The price list did not load. Check your connection and try again.</Banner>;"
+        },
+        {
+          "id": "components-banner--info",
+          "name": "Info",
+          "snippet": "const Info = () => <Banner variant=\"info\">Scores are calculated per 100 kcal, using 12 nutrients.</Banner>;"
+        },
+        {
+          "id": "components-banner--without-title",
+          "name": "Without Title",
+          "snippet": "const WithoutTitle = () => <Banner variant=\"warning\">Estimated price.</Banner>;"
+        },
+        {
+          "id": "components-banner--dismissible",
+          "name": "Dismissible",
+          "snippet": "const Dismissible = (args) => {\n  const [open, setOpen] = useState(true)\n  return open ? <Banner {...args} variant=\"success\" title=\"Saved\" onDismiss={() => setOpen(false)}>Your selection was saved.</Banner> : <button onClick={() => setOpen(true)}>Show again</button>\n};"
+        },
+        {
+          "id": "components-banner--all-variants",
+          "name": "All Variants",
+          "snippet": "const AllVariants = () => (\n  <div style={{ display: 'grid', gap: 12, maxWidth: 640 }}>\n    <Banner variant=\"success\" title=\"Data updated\">Prices now reflect July 2026 averages in € per kilo.</Banner>\n    <Banner variant=\"warning\" title=\"Some prices are estimates\">Six vegetables use an estimated price until wholesale data is connected.</Banner>\n    <Banner variant=\"error\" title=\"Could not load the data\">The price list did not load. Check your connection and try again.</Banner>\n    <Banner variant=\"info\">Scores are calculated per 100 kcal, using 12 nutrients.</Banner>\n  </div>\n);"
+        }
+      ],
+      "import": "import { Banner } from 'cool-graphs';"
+    },
     "components-button": {
       "id": "components-button",
       "name": "Button",
@@ -151,6 +262,149 @@
         }
       ],
       "import": "import { Disclosure } from 'cool-graphs';"
+    },
+    "components-icon": {
+      "id": "components-icon",
+      "name": "Icon",
+      "path": "./src/components/Icon/Icon.stories.tsx",
+      "jsDocTags": {},
+      "description": "Material Design icon (outlined). Takes the colour of the surrounding text (currentColor).",
+      "reactDocgen": {
+        "description": "Material Design icon (outlined). Takes the colour of the surrounding text (currentColor).",
+        "methods": [],
+        "displayName": "Icon",
+        "definedInFile": "/home/claude/vegetablecharts/src/components/Icon/Icon.tsx",
+        "actualName": "Icon",
+        "exportName": "Icon",
+        "props": {
+          "name": {
+            "required": true,
+            "tsType": {
+              "name": "union",
+              "raw": "keyof typeof icons",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "download"
+                },
+                {
+                  "name": "literal",
+                  "value": "description"
+                },
+                {
+                  "name": "literal",
+                  "value": "restaurant"
+                },
+                {
+                  "name": "literal",
+                  "value": "shopping_cart"
+                },
+                {
+                  "name": "literal",
+                  "value": "euro"
+                },
+                {
+                  "name": "literal",
+                  "value": "bar_chart"
+                },
+                {
+                  "name": "literal",
+                  "value": "scatter_plot"
+                },
+                {
+                  "name": "literal",
+                  "value": "table_chart"
+                },
+                {
+                  "name": "literal",
+                  "value": "search"
+                },
+                {
+                  "name": "literal",
+                  "value": "filter_list"
+                },
+                {
+                  "name": "literal",
+                  "value": "info"
+                },
+                {
+                  "name": "literal",
+                  "value": "warning"
+                },
+                {
+                  "name": "literal",
+                  "value": "error"
+                },
+                {
+                  "name": "literal",
+                  "value": "check_circle"
+                },
+                {
+                  "name": "literal",
+                  "value": "close"
+                },
+                {
+                  "name": "literal",
+                  "value": "expand_more"
+                },
+                {
+                  "name": "literal",
+                  "value": "light_mode"
+                },
+                {
+                  "name": "literal",
+                  "value": "dark_mode"
+                },
+                {
+                  "name": "literal",
+                  "value": "grass"
+                },
+                {
+                  "name": "literal",
+                  "value": "help_outline"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "size": {
+            "required": false,
+            "tsType": {
+              "name": "number"
+            },
+            "description": "Width and height in px. Default 24. Use 16, 24 or 32.",
+            "defaultValue": {
+              "value": "24",
+              "computed": false
+            }
+          },
+          "label": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "Accessible name. If the icon sits next to words that say the same thing, leave this out:\n it is then hidden from screen readers. For an icon that stands alone, always set it."
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "components-icon--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Icon name=\"download\" />;"
+        },
+        {
+          "id": "components-icon--sizes",
+          "name": "Sizes",
+          "snippet": "const Sizes = () => (\n  <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>\n    {[16, 24, 32].map((s) => <span key={s} style={{ textAlign: 'center' }}><Icon name=\"restaurant\" size={s} /><br /><code>{s}px</code></span>)}\n  </div>\n);"
+        },
+        {
+          "id": "components-icon--gallery",
+          "name": "All icons (24px)",
+          "snippet": "const Gallery = () => (\n  <div>\n    <p style={{ maxWidth: 620, marginTop: 0 }}>\n      {names.length} icons from Material Design (outlined style), each on a 24 × 24 px grid and shown here at the default size of 24 px.\n      Icons take the colour of the text around them. Use the name shown under each icon when asking for it in code.\n    </p>\n    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: 16 }}>\n      {names.map((n) => (\n        <div key={n} style={{ display: 'grid', justifyItems: 'center', gap: 6, padding: 12, border: '1px solid var(--cg-color-panel)', borderRadius: 8 }}>\n          <Icon name={n} />\n          <b style={{ fontSize: 14 }}>{iconLabels[n]}</b>\n          <code>{n}</code>\n        </div>\n      ))}\n    </div>\n  </div>\n);"
+        }
+      ],
+      "import": "import { Icon } from 'cool-graphs';"
     },
     "components-legend-marker": {
       "id": "components-legend-marker",
@@ -695,6 +949,6 @@
   },
   "meta": {
     "docgen": "react-docgen",
-    "durationMs": 272
+    "durationMs": 275
   }
 }

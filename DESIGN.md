@@ -2,7 +2,7 @@
 
 _Cool Graphs is the name of this design system. The Vegetable Chart prototype is only the example it was built from._
 
-> **Status: draft 3.** Inferred from the Vegetable Chart prototype and the components in this repo, then corrected by the designer. Items still marked **(?)** need a decision. Edit freely; this file is meant to be read by people and by AI tools before they design or build anything.
+> **Status: draft 4.** Inferred from the Vegetable Chart prototype and the components in this repo, then corrected by the designer. Items still marked **(?)** need a decision. Edit freely; this file is meant to be read by people and by AI tools before they design or build anything.
 
 ## 1. What we are designing
 
@@ -46,6 +46,12 @@ All values live in `src/tokens/tokens.css` as CSS variables starting with `--cg-
 | Show many rows of numbers | **Table** | Using it for layout |
 | Explain a chart marker | **Legend marker** | Colour-only legends |
 | Show an item's score out of a maximum | **Score bar** | Scores without the number beside the bar |
+| Tell people something happened or needs attention | **Banner** (error, warning, success, info) | Using colour without the icon and words; stacking more than two at once |
+| Make a label or control easier to recognise | **Icon** | Using an icon alone when its meaning is not obvious |
+
+**Icons:** 20 Material Design icons (outlined), 24px by default, and 16 or 32px when needed. An icon next to words that say the same thing is hidden from screen readers. An icon that stands alone must have a text label. A clickable icon-only control must still be at least 30px wide and tall.
+
+**Banners:** the icon and the words are always shown together. Say what happened and what to do next, in plain language. Errors interrupt screen readers, the others do not. Use **info** for neutral notes that are not a status.
 
 **Touch targets:** all of these meet the 30px minimum. The Segmented control and Disclosure were raised to meet it.
 
@@ -84,8 +90,8 @@ People should be able to trust and understand what they see. For every page, scr
 ## 8. Known gaps and open questions
 
 - **Button** is new; the prototype had no standalone button. Review its look.
-- Status colours exist as tokens, but there is no component that uses them yet (for example a message banner or form error). **(?)** Build one?
-- **(?)** Icons: the dark mode knob has a sun and moon, but there is no icon set yet.
+- **(?)** Form field errors (a message under an input) are not built yet. The Banner covers page-level messages.
+- The icon set has 20 icons. More can be added from the same Material set when a screen needs them.
 - The GitHub repository is still called `vegetablecharts`. It can be renamed to `cool-graphs` in the repository's settings on GitHub.
 - Table sorting, tooltips, and the chart are not built yet.
 
