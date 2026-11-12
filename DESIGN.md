@@ -95,7 +95,11 @@ People should be able to trust and understand what they see. For every page, scr
 - The GitHub repository is still called `vegetablecharts`. It can be renamed to `cool-graphs` in the repository's settings on GitHub.
 - Table sorting, tooltips, and the chart are not built yet.
 
-## 9. How to change this system
+## 9. For AI agents and teammates
+
+An instruction file for building new pages with this system is in `.claude/skills/cool-graphs-design/SKILL.md`. It covers the workflow, the rules that never bend, how to work from Figma designs, and a pattern for clickable illustration pages.
+
+## 10. How to change this system
 
 1. Change or add a token first, in `src/tokens/tokens.css`.
 2. Build or update the component in `src/components/<Name>/` with a story for each state, in light and dark.
