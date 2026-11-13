@@ -8,6 +8,7 @@
   --cg-color-ink: var(--cg-brown-700);
   --cg-color-ink-2: var(--cg-brown-650);
   --cg-color-muted: var(--cg-brown-500);
+  --cg-color-control-off: var(--cg-brown-550);
   --cg-color-accent: var(--cg-lime-500);
   --cg-color-on-ink: var(--cg-brown-50);
   --cg-color-border-soft: var(--cg-brown-400);
@@ -35,6 +36,7 @@
     --cg-color-ink: var(--cg-brown-150);
     --cg-color-ink-2: var(--cg-brown-300);
     --cg-color-muted: var(--cg-brown-550);
+    --cg-color-control-off: var(--cg-brown-550);
     --cg-color-accent: var(--cg-lime-200);
     --cg-color-on-ink: var(--cg-brown-900);
     --cg-color-header: var(--cg-brown-750);
@@ -61,6 +63,7 @@
   --cg-color-ink: var(--cg-brown-150);
   --cg-color-ink-2: var(--cg-brown-300);
   --cg-color-muted: var(--cg-brown-550);
+  --cg-color-control-off: var(--cg-brown-550);
   --cg-color-accent: var(--cg-lime-200);
   --cg-color-on-ink: var(--cg-brown-900);
   --cg-color-header: var(--cg-brown-750);

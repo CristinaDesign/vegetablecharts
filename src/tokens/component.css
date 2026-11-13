@@ -26,6 +26,11 @@
   --cg-card-border-soft: var(--cg-color-border-soft);
   --cg-card-border-selected: var(--cg-color-ink);
   --cg-card-bg-selected: var(--cg-color-panel);
+  /* Switch */
+  --cg-switch-off-border: var(--cg-color-control-off);
+  --cg-switch-off-knob: var(--cg-color-control-off);
+  --cg-switch-on-bg: var(--cg-color-ink);
+  --cg-switch-on-knob: var(--cg-color-on-ink);
   /* Button */
   --cg-button-primary-bg: var(--cg-color-ink);
   --cg-button-primary-text: var(--cg-color-on-ink);

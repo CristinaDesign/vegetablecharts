@@ -1,1 +1,0 @@
-import{t as e}from"./iframe-D7-DnFWT.js";e();
