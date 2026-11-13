@@ -2,7 +2,7 @@
 
 _Cool Graphs is the name of this design system. The Vegetable Chart prototype is only the example it was built from._
 
-> **Status: draft 4.** Inferred from the Vegetable Chart prototype and the components in this repo, then corrected by the designer. Items still marked **(?)** need a decision. Edit freely; this file is meant to be read by people and by AI tools before they design or build anything.
+> **Status: draft 5.** Inferred from the Vegetable Chart prototype and the components in this repo, then corrected by the designer. Items still marked **(?)** need a decision. Edit freely; this file is meant to be read by people and by AI tools before they design or build anything.
 
 ## 1. What we are designing
 
@@ -26,6 +26,7 @@ All values live in `src/tokens/tokens.css` as CSS variables starting with `--cg-
 - **Never use a raw hex colour, pixel size or font name in a component.** Use a token. If none fits, propose a new token instead of hard-coding a value.
 - **Colours are named by job, not by hue.** For example `--cg-color-ink` is "text and borders", not "brown".
 - **Accent (vivid green) is for two things only:** keyboard focus and data marks (bars, highlighted points). Do not use it for decoration or for buttons. In light mode it is as bright as a 3:1 contrast on cream allows (`#168F00`); in dark mode it is a true neon (`#8CFF45`).
+- **Header band:** `--cg-color-header` is a dark band with `--cg-color-on-header` for its light text (9:1 or better). It is used for table headers by default and may be used for other dark header bars. In dark mode the band is a lighter brown than the page so it still reads as a band. Never put body text on it that is not `on-header`.
 - **Status colours:** `error` (red), `warning` (orange) and `success` (green). Each has three tokens: the plain one is bright and used for icons, borders and stripes (3:1 or better); `-text` is deeper and used for words (4.5:1 or better); `-bg` is a soft tint behind a message. In light mode the plain colours are bright and vivid. In dark mode the three are the same colour, because the bright one already reads well. Success is calmer than the accent so the two are never confused. Always pair a status colour with an icon or words, so it still works for people who cannot tell red and green apart. Use the accent for "this is data", and success for "this worked".
 - **Fonts:** Alegreya Sans for headings and interface. Alegreya (serif) for numbers and chart text. Numbers in columns use tabular figures.
 - **Spacing scale:** 4, 8, 12, 16, 24, 40 px. No in-between values.
@@ -43,7 +44,7 @@ All values live in `src/tokens/tokens.css` as CSS variables starting with `--cg-
 | The main action on a screen | **Button, primary** (one per view) | Two primary buttons side by side |
 | Any other action | **Button, secondary** or **link** | Link buttons for destructive actions |
 | Hide secondary detail | **Disclosure** | Hiding information people need to make a decision |
-| Show many rows of numbers | **Table** | Using it for layout |
+| Show many rows of numbers | **Table** (dark header, light text; rows highlight on hover) | Using it for layout |
 | Explain a chart marker | **Legend marker** | Colour-only legends |
 | Show an item's score out of a maximum | **Score bar** | Scores without the number beside the bar |
 | Tell people something happened or needs attention | **Banner** (error, warning, success, info) | Using colour without the icon and words; stacking more than two at once |

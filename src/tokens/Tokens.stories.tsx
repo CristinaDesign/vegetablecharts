@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const colors: [string, string][] = [
   ['--cg-color-bg', 'Page background'], ['--cg-color-panel', 'Raised surface / selected'], ['--cg-color-line', 'Subtle strokes'],
   ['--cg-color-ink', 'Primary text and borders'], ['--cg-color-ink-2', 'Secondary text'], ['--cg-color-muted', 'Inactive text'],
-  ['--cg-color-accent', 'Vivid green: focus and data'], ['--cg-color-on-ink', 'Text on ink fills'],
+  ['--cg-color-accent', 'Vivid green: focus and data'], ['--cg-color-on-ink', 'Text on ink fills'], ['--cg-color-header', 'Dark header band'], ['--cg-color-on-header', 'Text on header band'],
   ['--cg-color-error', 'Error: icons, borders'], ['--cg-color-warning', 'Warning: icons, borders'], ['--cg-color-success', 'Success: icons, borders'],
   ['--cg-color-error-text', 'Error: text'], ['--cg-color-warning-text', 'Warning: text'], ['--cg-color-success-text', 'Success: text'],
   ['--cg-color-error-bg', 'Error tint'], ['--cg-color-warning-bg', 'Warning tint'], ['--cg-color-success-bg', 'Success tint'],
