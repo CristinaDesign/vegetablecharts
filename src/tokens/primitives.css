@@ -1,0 +1,68 @@
+/* Primitive colours: the raw palette. Every colour that exists, with a number and no meaning attached.
+   Higher number = darker. Steps marked 'in use' are the colours the interface uses today. Steps marked
+   'spare' are interpolated so each ramp is complete; they have NOT been contrast-tested yet.
+   Components must never use these directly. Use semantic tokens (semantic.css). */
+:root {
+  /* brown */
+  --cg-brown-50: #FFF5ED;  /* in use */
+  --cg-brown-100: #FAE5D5;  /* in use */
+  --cg-brown-150: #F2E4D6;  /* in use */
+  --cg-brown-200: #F1DFD1;  /* in use */
+  --cg-brown-300: #D8B898;  /* in use */
+  --cg-brown-400: #CDAE92;  /* in use */
+  --cg-brown-500: #A88A70;  /* in use */
+  --cg-brown-550: #9C8370;  /* in use */
+  --cg-brown-600: #6A5646;  /* in use */
+  --cg-brown-650: #724318;  /* in use */
+  --cg-brown-700: #5A3C21;  /* in use */
+  --cg-brown-750: #4A392C;  /* in use */
+  --cg-brown-800: #3A2E26;  /* in use */
+  --cg-brown-850: #2B221C;  /* in use */
+  --cg-brown-900: #1C1612;  /* in use */
+  /* lime */
+  --cg-lime-50: #F2FFE3;  /* spare */
+  --cg-lime-100: #C3FFA0;  /* spare */
+  --cg-lime-200: #8CFF45;  /* in use */
+  --cg-lime-300: #68D831;  /* spare */
+  --cg-lime-400: #43B31B;  /* spare */
+  --cg-lime-500: #168F00;  /* in use */
+  --cg-lime-600: #147700;  /* spare */
+  --cg-lime-700: #115F00;  /* spare */
+  --cg-lime-800: #0E4800;  /* spare */
+  --cg-lime-900: #0A3300;  /* spare */
+  /* green */
+  --cg-green-50: #DEF5E4;  /* in use */
+  --cg-green-100: #B6E4C3;  /* spare */
+  --cg-green-200: #8DD3A3;  /* spare */
+  --cg-green-300: #5FC283;  /* in use */
+  --cg-green-400: #3EA968;  /* spare */
+  --cg-green-500: #11914D;  /* in use */
+  --cg-green-600: #007527;  /* in use */
+  --cg-green-700: #165D28;  /* spare */
+  --cg-green-800: #1B4526;  /* spare */
+  --cg-green-900: #1B2F22;  /* in use */
+  /* red */
+  --cg-red-50: #FCE4E0;  /* in use */
+  --cg-red-100: #FFC7C0;  /* spare */
+  --cg-red-200: #FFA9A0;  /* spare */
+  --cg-red-300: #FF8A80;  /* in use */
+  --cg-red-400: #FD6051;  /* spare */
+  --cg-red-500: #F91C0C;  /* in use */
+  --cg-red-600: #C90D00;  /* in use */
+  --cg-red-700: #981F15;  /* spare */
+  --cg-red-800: #69221B;  /* spare */
+  --cg-red-900: #3D1E1B;  /* in use */
+  /* orange */
+  --cg-orange-50: #FFEBD3;  /* in use */
+  --cg-orange-100: #FFD3AA;  /* spare */
+  --cg-orange-200: #FFBB7F;  /* spare */
+  --cg-orange-300: #FFA24D;  /* in use */
+  --cg-orange-400: #E6802F;  /* spare */
+  --cg-orange-500: #CC5E04;  /* in use */
+  --cg-orange-600: #A34900;  /* in use */
+  --cg-orange-700: #7E3E0D;  /* spare */
+  --cg-orange-800: #5B3311;  /* spare */
+  --cg-orange-900: #3A2711;  /* in use */
+  --cg-white: #FFFFFF;
+  --cg-black: #000000;
+}

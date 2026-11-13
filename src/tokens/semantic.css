@@ -1,0 +1,81 @@
+/* Semantic colours: what a colour is FOR. Each one points at a primitive (primitives.css).
+   Light and dark map the same roles to different primitives, so dark mode is a re-mapping, not new colours.
+   Switch theme with <html data-theme="light|dark">; without it, follows the OS setting. */
+:root {
+  --cg-color-bg: var(--cg-brown-50);
+  --cg-color-panel: var(--cg-brown-200);
+  --cg-color-line: var(--cg-brown-100);
+  --cg-color-ink: var(--cg-brown-700);
+  --cg-color-ink-2: var(--cg-brown-650);
+  --cg-color-muted: var(--cg-brown-500);
+  --cg-color-accent: var(--cg-lime-500);
+  --cg-color-on-ink: var(--cg-brown-50);
+  --cg-color-border-soft: var(--cg-brown-400);
+  --cg-color-header: var(--cg-brown-700);
+  --cg-color-on-header: var(--cg-brown-50);
+  --cg-color-error: var(--cg-red-500);
+  --cg-color-error-text: var(--cg-red-600);
+  --cg-color-error-bg: var(--cg-red-50);
+  --cg-color-warning: var(--cg-orange-500);
+  --cg-color-warning-text: var(--cg-orange-600);
+  --cg-color-warning-bg: var(--cg-orange-50);
+  --cg-color-success: var(--cg-green-500);
+  --cg-color-success-text: var(--cg-green-600);
+  --cg-color-success-bg: var(--cg-green-50);
+  --cg-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%235A3C21' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");  /* dropdown arrow: a hex inside an image cannot use var(), so it repeats the ink colour */
+  --cg-shadow-color: color-mix(in srgb, var(--cg-brown-700) 15%, transparent);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --cg-color-bg: var(--cg-brown-900);
+    --cg-color-panel: var(--cg-brown-850);
+    --cg-color-line: var(--cg-brown-800);
+    --cg-color-ink: var(--cg-brown-150);
+    --cg-color-ink-2: var(--cg-brown-300);
+    --cg-color-muted: var(--cg-brown-550);
+    --cg-color-accent: var(--cg-lime-200);
+    --cg-color-on-ink: var(--cg-brown-900);
+    --cg-color-header: var(--cg-brown-750);
+    --cg-color-on-header: var(--cg-brown-150);
+    --cg-color-border-soft: var(--cg-brown-600);
+    --cg-color-error: var(--cg-red-300);
+    --cg-color-error-text: var(--cg-red-300);
+    --cg-color-error-bg: var(--cg-red-900);
+    --cg-color-warning: var(--cg-orange-300);
+    --cg-color-warning-text: var(--cg-orange-300);
+    --cg-color-warning-bg: var(--cg-orange-900);
+    --cg-color-success: var(--cg-green-300);
+    --cg-color-success-text: var(--cg-green-300);
+    --cg-color-success-bg: var(--cg-green-900);
+    --cg-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23F2E4D6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");  /* dropdown arrow: a hex inside an image cannot use var(), so it repeats the ink colour */
+    --cg-shadow-color: color-mix(in srgb, var(--cg-black) 45%, transparent);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --cg-color-bg: var(--cg-brown-900);
+  --cg-color-panel: var(--cg-brown-850);
+  --cg-color-line: var(--cg-brown-800);
+  --cg-color-ink: var(--cg-brown-150);
+  --cg-color-ink-2: var(--cg-brown-300);
+  --cg-color-muted: var(--cg-brown-550);
+  --cg-color-accent: var(--cg-lime-200);
+  --cg-color-on-ink: var(--cg-brown-900);
+  --cg-color-header: var(--cg-brown-750);
+  --cg-color-on-header: var(--cg-brown-150);
+  --cg-color-border-soft: var(--cg-brown-600);
+  --cg-color-error: var(--cg-red-300);
+  --cg-color-error-text: var(--cg-red-300);
+  --cg-color-error-bg: var(--cg-red-900);
+  --cg-color-warning: var(--cg-orange-300);
+  --cg-color-warning-text: var(--cg-orange-300);
+  --cg-color-warning-bg: var(--cg-orange-900);
+  --cg-color-success: var(--cg-green-300);
+  --cg-color-success-text: var(--cg-green-300);
+  --cg-color-success-bg: var(--cg-green-900);
+  --cg-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23F2E4D6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");  /* dropdown arrow: a hex inside an image cannot use var(), so it repeats the ink colour */
+  --cg-shadow-color: color-mix(in srgb, var(--cg-black) 45%, transparent);
+  color-scheme: dark;
+}

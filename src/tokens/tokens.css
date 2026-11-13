@@ -1,31 +1,13 @@
-/* Design tokens extracted from the Vegetable Chart prototype.
-   Light = cream paper. Dark = the same browns at night.
-   Switch theme with <html data-theme="light|dark">; without it, follows the OS setting. */
+/* Cool Graphs design tokens. Three layers, each pointing at the one before:
+     1. primitives.css  the raw palette (brown-700, lime-500 ...), no meaning
+     2. semantic.css    roles (ink, panel, accent, error ...), light and dark
+     3. component.css   colours for one component (table, banner, card, button)
+   Non-colour tokens (type, shape, spacing, motion) live below. */
+@import './primitives.css';
+@import './semantic.css';
+@import './component.css';
+
 :root {
-  /* Colour (semantic names: what it is FOR, not what colour it is) */
-  --cg-color-bg: #FFF5ED;        /* page background */
-  --cg-color-panel: #F1DFD1;     /* raised surface, selected state */
-  --cg-color-line: #FAE5D5;      /* subtle strokes */
-  --cg-color-ink: #5A3C21;       /* primary text, borders */
-  --cg-color-ink-2: #724318;     /* secondary text, labels */
-  --cg-color-muted: #A88A70;     /* inactive text */
-  --cg-color-accent: #168F00;    /* vivid green: focus ring, data marks (as bright as 3:1 on cream allows) */
-  --cg-color-on-ink: #FFF5ED;    /* text placed on an ink-coloured fill */
-  --cg-color-border-soft: #CDAE92; /* soft border for decorative containers and cards (about 2:1 on the page; never the only cue) */
-  --cg-color-header: #5A3C21;    /* dark header band (tables): background */
-  --cg-color-on-header: #FFF5ED; /* light text on the header band (9:1 or better) */
-  --cg-shadow-color: rgb(90 60 33 / .15);
-
-  /* Status colours. Each has three parts:
-       color      bright, for icons, borders and stripes (3:1 or better on bg and panel)
-       color-text deeper, for text (4.5:1 or better on bg, panel and its own tint)
-       color-bg   soft tint behind the message
-     Always pair with an icon or words, never colour alone. */
-  --cg-color-error: #F91C0C;   --cg-color-error-text: #C90D00;   --cg-color-error-bg: #FCE4E0;
-  --cg-color-warning: #CC5E04; --cg-color-warning-text: #A34900; --cg-color-warning-bg: #FFEBD3;
-  --cg-color-success: #11914D; --cg-color-success-text: #007527; --cg-color-success-bg: #DEF5E4;
-  --cg-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%235A3C21' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");  /* dropdown arrow */
-
   /* Typography */
   --cg-font-display: "Alegreya Sans", "Trebuchet MS", system-ui, sans-serif;
   --cg-font-data: "Alegreya", Georgia, "Times New Roman", serif;
@@ -52,34 +34,6 @@
   --cg-focus-ring: 3px solid var(--cg-color-accent);
   --cg-duration: .25s;
   --cg-ease: cubic-bezier(.2, .7, .2, 1);
-  color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --cg-color-bg: #1C1612; --cg-color-panel: #2B221C; --cg-color-line: #3A2E26;
-    --cg-color-ink: #F2E4D6; --cg-color-ink-2: #D8B898; --cg-color-muted: #9C8370;
-    --cg-color-accent: #8CFF45; --cg-color-on-ink: #1C1612;
-    --cg-color-header: #4A392C; --cg-color-on-header: #F2E4D6; --cg-color-border-soft: #6A5646;
-    --cg-shadow-color: rgb(0 0 0 / .45);
-    --cg-color-error: #FF8A80;   --cg-color-error-text: #FF8A80;   --cg-color-error-bg: #3D1E1B;
-    --cg-color-warning: #FFA24D; --cg-color-warning-text: #FFA24D; --cg-color-warning-bg: #3A2711;
-    --cg-color-success: #5FC283; --cg-color-success-text: #5FC283; --cg-color-success-bg: #1B2F22;
-    --cg-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23F2E4D6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --cg-color-bg: #1C1612; --cg-color-panel: #2B221C; --cg-color-line: #3A2E26;
-  --cg-color-ink: #F2E4D6; --cg-color-ink-2: #D8B898; --cg-color-muted: #9C8370;
-  --cg-color-accent: #8CFF45; --cg-color-on-ink: #1C1612;
-  --cg-color-header: #4A392C; --cg-color-on-header: #F2E4D6; --cg-color-border-soft: #6A5646;
-  --cg-shadow-color: rgb(0 0 0 / .45);
-  --cg-color-error: #FF8A80;   --cg-color-error-text: #FF8A80;   --cg-color-error-bg: #3D1E1B;
-  --cg-color-warning: #FFA24D; --cg-color-warning-text: #FFA24D; --cg-color-warning-bg: #3A2711;
-  --cg-color-success: #5FC283; --cg-color-success-text: #5FC283; --cg-color-success-bg: #1B2F22;
-  --cg-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23F2E4D6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  color-scheme: dark;
 }
 
 body {

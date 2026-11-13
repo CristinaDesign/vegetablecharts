@@ -1,6 +1,33 @@
 {
   "v": 0,
   "components": {
+    "foundations-colour": {
+      "id": "foundations-colour",
+      "name": "Colour",
+      "path": "./src/tokens/Colours.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component found",
+        "message": "We could not detect the component from your story file. Specify meta.component.\n  82 | }\n  83 |\n> 84 | const meta = { title: 'Foundations/Colour', parameters: { layout: 'padded' } } satisfies Meta\n     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  85 | export default meta\n  86 | export const Primitive: StoryObj = { name: '1. Primitive', render: () => <Primitives /> }\n  87 | export const SemanticRoles: StoryObj = { name: '2. Semantic', render: () => <Semantic /> }\n\n./src/tokens/Colours.stories.tsx:\nimport type { Meta, StoryObj } from '@storybook/react-vite'\nimport { ramps, semantic, components } from './colorMap'\n\nconst sw = (v: string, size = 40) => ({ width: size, height: size, borderRadius: 8, border: '1px solid var(--cg-color-border-soft)', background: `var(${v})`, flex: 'none' } as const)\nconst th = { textAlign: 'left', padding: '6px 10px', fontSize: 13 } as const\nconst td = { padding: '6px 10px', borderBottom: '1px solid var(--cg-color-panel)', fontSize: 14, verticalAlign: 'middle' } as const\n\nfunction Primitives() {\n  return (\n    <div style={{ display: 'grid', gap: 28, maxWidth: 1000 }}>\n      <p style={{ margin: 0, maxWidth: 70 + 'ch' }}>\n        The raw palette. Every colour that exists, with a number and no meaning attached. Higher number means darker. Values are hex.\n        <b> In use</b> steps are the colours the interface uses today. <b>Spare</b> steps are interpolated so each ramp is complete; they have not been contrast-tested yet.\n        Components never use these directly.\n      </p>\n      {Object.entries(ramps).map(([name, steps]) => (\n        <section key={name}>\n          <h3 style={{ margin: '0 0 8px' }}>{name}</h3>\n          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(92px, 1fr))', gap: 8 }}>\n            {steps.map(([step, hex, used]) => (\n              <div key={step}>\n                <div style={{ ...sw(`--cg-${name}-${step}`, 56), width: '100%' }} />\n                <b style={{ display: 'block', fontSize: 14 }}>{name}-{step}</b>\n                <code style={{ fontSize: 12 }}>{hex}</code>\n                <div style={{ fontSize: 12 }}>{used ? 'in use' : 'spare'}</div>\n              </div>\n            ))}\n          </div>\n        </section>\n      ))}\n    </div>\n  )\n}\n\nconst primOf = (sem: string, mode: 'light' | 'dark') => semantic[sem][mode]\n\nfunction Semantic() {\n  return (\n    <div style={{ display: 'grid', gap: 16, maxWidth: 900 }}>\n      <p style={{ margin: 0, maxWidth: 70 + 'ch' }}>What a colour is for. Each role points at a primitive; light and dark point at different ones, so dark mode is a re-mapping and not new colours.</p>\n      <table style={{ borderCollapse: 'collapse', width: '100%' }}>\n        <thead><tr style={{ background: 'var(--cg-table-header-bg)', color: 'var(--cg-table-header-text)' }}>\n          <th style={th}>Role</th><th style={th}>Used for</th><th style={th}>Light uses</th><th style={th}>Dark uses</th></tr></thead>\n        <tbody>\n          {Object.entries(semantic).map(([role, s]) => (\n            <tr key={role}>\n              <td style={td}><code>--cg-color-{role}</code></td><td style={td}>{s.desc}</td>\n              <td style={td}><span style={{ display: 'flex', gap: 8, alignItems: 'center' }}><i style={sw(`--cg-${s.light}`, 20)} />{s.light}</span></td>\n              <td style={td}><span style={{ display: 'flex', gap: 8, alignItems: 'center' }}><i style={sw(`--cg-${s.dark}`, 20)} />{s.dark}</span></td>\n            </tr>\n          ))}\n        </tbody>\n      </table>\n    </div>\n  )\n}\n\nfunction ComponentColours() {\n  return (\n    <div style={{ display: 'grid', gap: 28, maxWidth: 900 }}>\n      <p style={{ margin: 0, maxWidth: 70 + 'ch' }}>Colours for one component. Each points at a semantic role, so they follow the theme without any dark-mode overrides. Add one only when a component needs a colour that must change on its own.</p>\n      {components.map((c) => (\n        <section key={c.key}>\n          <h3 style={{ margin: '0 0 8px' }}>{c.label}</h3>\n          <table style={{ borderCollapse: 'collapse', width: '100%' }}>\n            <thead><tr style={{ background: 'var(--cg-table-header-bg)', color: 'var(--cg-table-header-text)' }}>\n              <th style={th}>Component token</th><th style={th}>Semantic role</th><th style={th}>Light</th><th style={th}>Dark</th></tr></thead>\n            <tbody>\n              {c.rows.map((r) => (\n                <tr key={r.part}>\n                  <td style={td}><code>--cg-{c.key}-{r.part}</code></td><td style={td}><code>{r.sem}</code></td>\n                  <td style={td}><span style={{ display: 'flex', gap: 8, alignItems: 'center' }}><i style={sw(`--cg-${primOf(r.sem, 'light')}`, 20)} />{primOf(r.sem, 'light')}</span></td>\n                  <td style={td}><span style={{ display: 'flex', gap: 8, alignItems: 'center' }}><i style={sw(`--cg-${primOf(r.sem, 'dark')}`, 20)} />{primOf(r.sem, 'dark')}</span></td>\n                </tr>\n              ))}\n            </tbody>\n          </table>\n        </section>\n      ))}\n    </div>\n  )\n}\n\nconst meta = { title: 'Foundations/Colour', parameters: { layout: 'padded' } } satisfies Meta\nexport default meta\nexport const Primitive: StoryObj = { name: '1. Primitive', render: () => <Primitives /> }\nexport const SemanticRoles: StoryObj = { name: '2. Semantic', render: () => <Semantic /> }\nexport const Component: StoryObj = { name: '3. Component', render: () => <ComponentColours /> }\n"
+      },
+      "stories": [
+        {
+          "id": "foundations-colour--primitive",
+          "name": "1. Primitive",
+          "snippet": "const Primitive = () => <Primitives />;"
+        },
+        {
+          "id": "foundations-colour--semantic-roles",
+          "name": "2. Semantic",
+          "snippet": "const SemanticRoles = () => <Semantic />;"
+        },
+        {
+          "id": "foundations-colour--component",
+          "name": "3. Component",
+          "snippet": "const Component = () => <ComponentColours />;"
+        }
+      ]
+    },
     "foundations-tokens": {
       "id": "foundations-tokens",
       "name": "Tokens",
@@ -949,6 +976,6 @@
   },
   "meta": {
     "docgen": "react-docgen",
-    "durationMs": 368
+    "durationMs": 300
   }
 }

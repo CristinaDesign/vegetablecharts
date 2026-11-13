@@ -1,0 +1,37 @@
+/* Component colours: colours for one component, each pointing at a semantic token.
+   They are defined once and follow the theme automatically. Add one only when a component needs a colour
+   that must change independently of the rest. Format: --cg-<component>-<part>. */
+:root {
+  /* Table */
+  --cg-table-header-bg: var(--cg-color-header);
+  --cg-table-header-text: var(--cg-color-on-header);
+  --cg-table-row-border: var(--cg-color-panel);
+  --cg-table-row-hover-bg: var(--cg-color-panel);
+  /* Banner */
+  --cg-banner-info-border: var(--cg-color-ink);
+  --cg-banner-info-bg: var(--cg-color-panel);
+  --cg-banner-info-text: var(--cg-color-ink);
+  --cg-banner-error-border: var(--cg-color-error);
+  --cg-banner-error-bg: var(--cg-color-error-bg);
+  --cg-banner-error-text: var(--cg-color-error-text);
+  --cg-banner-warning-border: var(--cg-color-warning);
+  --cg-banner-warning-bg: var(--cg-color-warning-bg);
+  --cg-banner-warning-text: var(--cg-color-warning-text);
+  --cg-banner-success-border: var(--cg-color-success);
+  --cg-banner-success-bg: var(--cg-color-success-bg);
+  --cg-banner-success-text: var(--cg-color-success-text);
+  /* Card */
+  --cg-card-text: var(--cg-color-ink);
+  --cg-card-border: var(--cg-color-ink);
+  --cg-card-border-soft: var(--cg-color-border-soft);
+  --cg-card-border-selected: var(--cg-color-ink);
+  --cg-card-bg-selected: var(--cg-color-panel);
+  /* Button */
+  --cg-button-primary-bg: var(--cg-color-ink);
+  --cg-button-primary-text: var(--cg-color-on-ink);
+  --cg-button-secondary-border: var(--cg-color-ink);
+  --cg-button-secondary-text: var(--cg-color-ink);
+  --cg-button-secondary-hover-bg: var(--cg-color-panel);
+  --cg-button-link-text: var(--cg-color-ink-2);
+  --cg-button-link-hover-text: var(--cg-color-ink);
+}

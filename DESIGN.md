@@ -2,7 +2,7 @@
 
 _Cool Graphs is the name of this design system. The Vegetable Chart prototype is only the example it was built from._
 
-> **Status: draft 6.** Inferred from the Vegetable Chart prototype and the components in this repo, then corrected by the designer. Items still marked **(?)** need a decision. Edit freely; this file is meant to be read by people and by AI tools before they design or build anything.
+> **Status: draft 7.** Inferred from the Vegetable Chart prototype and the components in this repo, then corrected by the designer. Items still marked **(?)** need a decision. Edit freely; this file is meant to be read by people and by AI tools before they design or build anything.
 
 ## 1. What we are designing
 
@@ -21,10 +21,27 @@ A calm, trustworthy way to see which vegetables give the most nutrition for the 
 
 ## 3. Tokens: the rules
 
-All values live in `src/tokens/tokens.css` as CSS variables starting with `--cg-`. Rules:
+All values are CSS variables starting with `--cg-`, in `src/tokens/`. Colour has three layers, and each one points at the one before:
+
+| Layer | File | What it is | Example |
+|---|---|---|---|
+| **1. Primitive** | `primitives.css` | The raw palette: every colour that exists, with a number and no meaning. Higher number means darker. | `--cg-brown-700`, `--cg-lime-500` |
+| **2. Semantic** | `semantic.css` | What a colour is *for*. Light and dark point the same role at different primitives. | `--cg-color-ink`, `--cg-color-error` |
+| **3. Component** | `component.css` | A colour for one component. Points at a semantic role, so it follows the theme automatically. | `--cg-table-header-bg`, `--cg-banner-error-border` |
+
+Non-colour tokens (type, spacing, shape, motion) are in `tokens.css`.
+
+**Colour rules**
+- **Components use component or semantic colours only.** Never a primitive directly, and never a raw hex.
+- **Semantic roles point at primitives only.** The one exception is the dropdown arrow image, which repeats the ink colour because an image cannot use variables.
+- **Dark mode is a re-mapping.** To change a dark colour, point its role at a different primitive. Do not type a new hex in the dark block.
+- **Add a component colour only when a component needs a colour that must change on its own.** Otherwise use the semantic role. Today only Table, Banner, Card and Button have them.
+- **Spare primitives must be contrast-tested before a semantic role uses them.** Text 4.5:1, icons and borders 3:1.
+- **To add a new colour:** add a primitive step, point a semantic role at it, then (only if needed) add a component colour.
+
 
 - **Never use a raw hex colour, pixel size or font name in a component.** Use a token. If none fits, propose a new token instead of hard-coding a value.
-- **Colours are named by job, not by hue.** For example `--cg-color-ink` is "text and borders", not "brown".
+- **Semantic colours are named by job, not by hue.** For example `--cg-color-ink` is "text and borders", not "brown". Primitives are named by hue and number.
 - **Accent (vivid green) is for two things only:** keyboard focus and data marks (bars, highlighted points). Do not use it for decoration or for buttons. In light mode it is as bright as a 3:1 contrast on cream allows (`#168F00`); in dark mode it is a true neon (`#8CFF45`).
 - **Soft border:** `--cg-color-border-soft` is a softer, lighter-brown outline for cards that hold content (for example the illustration cards on a browse page). It is about 2:1 against the page, so it never carries meaning alone: the label, the picture and the selected state do that. A selected card changes its border to full `--cg-color-ink`. Controls such as switches, buttons and inputs keep the full 2px ink border.
 - **Header band:** `--cg-color-header` is a dark band with `--cg-color-on-header` for its light text (9:1 or better). It is used for table headers by default and may be used for other dark header bars. In dark mode the band is a lighter brown than the page so it still reads as a band. Never put body text on it that is not `on-header`.
@@ -103,7 +120,8 @@ An instruction file for building new pages with this system is in `.claude/skill
 
 ## 10. How to change this system
 
-1. Change or add a token first, in `src/tokens/tokens.css`.
+1. Change or add a token first, in `src/tokens/` (the right layer, see section 3).
 2. Build or update the component in `src/components/<Name>/` with a story for each state, in light and dark.
 3. Update this file if a rule or recommendation changes.
 4. Run `npm run build-docs` so the published Storybook stays current.
+5. If you change a colour token, also update the list in `src/tokens/colorMap.ts`, which the Storybook Colour pages read.

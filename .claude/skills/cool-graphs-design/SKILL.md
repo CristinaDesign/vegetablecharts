@@ -17,7 +17,7 @@ Use this skill for any new page, site, screen or component. The designer is a UX
 
 1. **Write the introduction first.** Two to four sentences that say what the page shows, the unit of every number (€ / kg, %, per 100 kcal), where the data comes from, how recent it is, and what it does not cover. If it cannot be written, the page is not clear yet. Always follow this for every page.
 2. **Pick components from the table in `DESIGN.md` section 4.** Reuse before inventing.
-3. **Build with tokens only.** Never hard-code a hex colour, pixel size, font or radius. Use `--cg-*` variables.
+3. **Build with tokens only.** Never hard-code a hex colour, pixel size, font or radius. Use `--cg-*` variables. For colour use component tokens where one exists (for example `--cg-table-header-bg`), otherwise semantic ones (`--cg-color-ink`). Never use a primitive (such as `--cg-brown-700`) in a component or page.
 4. **Check both themes** (light and dark) and a phone width of 400 px.
 5. **Check accessibility:** text 4.5:1 contrast, icons and borders 3:1, everything clickable at least 30 px, visible keyboard focus, everything usable without a mouse, meaning never carried by colour alone.
 6. **Verify by looking.** Build it, take screenshots in light, dark and phone width, and fix what is off before showing the designer.
@@ -34,7 +34,7 @@ Use this skill for any new page, site, screen or component. The designer is a UX
 
 ## 4. When something is missing
 
-Do not improvise a one-off style. Instead:
+Do not improvise a one-off style. For a missing colour, follow "To add a new colour" in `DESIGN.md` section 3: primitive first, then a semantic role, then a component token only if needed. Otherwise:
 1. Say what is missing (for example, "a field error message", "a tooltip").
 2. Propose a new token or component in the style of the existing ones.
 3. If the designer agrees, add it in `src/`, with a story for every state in light and dark, and update `DESIGN.md` and the Storybook Introduction.
