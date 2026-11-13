@@ -11,6 +11,7 @@
   --cg-color-muted: #A88A70;     /* inactive text */
   --cg-color-accent: #168F00;    /* vivid green: focus ring, data marks (as bright as 3:1 on cream allows) */
   --cg-color-on-ink: #FFF5ED;    /* text placed on an ink-coloured fill */
+  --cg-color-border-soft: #CDAE92; /* soft border for decorative containers and cards (about 2:1 on the page; never the only cue) */
   --cg-color-header: #5A3C21;    /* dark header band (tables): background */
   --cg-color-on-header: #FFF5ED; /* light text on the header band (9:1 or better) */
   --cg-shadow-color: rgb(90 60 33 / .15);
@@ -59,7 +60,7 @@
     --cg-color-bg: #1C1612; --cg-color-panel: #2B221C; --cg-color-line: #3A2E26;
     --cg-color-ink: #F2E4D6; --cg-color-ink-2: #D8B898; --cg-color-muted: #9C8370;
     --cg-color-accent: #8CFF45; --cg-color-on-ink: #1C1612;
-    --cg-color-header: #4A392C; --cg-color-on-header: #F2E4D6;
+    --cg-color-header: #4A392C; --cg-color-on-header: #F2E4D6; --cg-color-border-soft: #6A5646;
     --cg-shadow-color: rgb(0 0 0 / .45);
     --cg-color-error: #FF8A80;   --cg-color-error-text: #FF8A80;   --cg-color-error-bg: #3D1E1B;
     --cg-color-warning: #FFA24D; --cg-color-warning-text: #FFA24D; --cg-color-warning-bg: #3A2711;
@@ -72,7 +73,7 @@
   --cg-color-bg: #1C1612; --cg-color-panel: #2B221C; --cg-color-line: #3A2E26;
   --cg-color-ink: #F2E4D6; --cg-color-ink-2: #D8B898; --cg-color-muted: #9C8370;
   --cg-color-accent: #8CFF45; --cg-color-on-ink: #1C1612;
-  --cg-color-header: #4A392C; --cg-color-on-header: #F2E4D6;
+  --cg-color-header: #4A392C; --cg-color-on-header: #F2E4D6; --cg-color-border-soft: #6A5646;
   --cg-shadow-color: rgb(0 0 0 / .45);
   --cg-color-error: #FF8A80;   --cg-color-error-text: #FF8A80;   --cg-color-error-bg: #3D1E1B;
   --cg-color-warning: #FFA24D; --cg-color-warning-text: #FFA24D; --cg-color-warning-bg: #3A2711;
