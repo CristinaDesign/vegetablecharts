@@ -68,10 +68,13 @@ Non-colour tokens (type, spacing, shape, motion) are in `tokens.css`.
 | Show an item's score out of a maximum | **Score bar** | Scores without the number beside the bar |
 | Tell people something happened or needs attention | **Banner** (error, warning, success, info) | Using colour without the icon and words; stacking more than two at once |
 | Make a label or control easier to recognise | **Icon** | Using an icon alone when its meaning is not obvious |
+| Show a short fact, a count or a label | **Chip** (outline, solid or dashed) | Making it clickable, or using the dashed tone without words that say "provisional" or "estimated" |
 
 **Icons:** 20 Material Design icons (outlined), 24px by default, and 16 or 32px when needed. An icon next to words that say the same thing is hidden from screen readers. An icon that stands alone must have a text label. A clickable icon-only control must still be at least 30px wide and tall.
 
 **Banners:** the icon and the words are always shown together. Say what happened and what to do next, in plain language. Errors interrupt screen readers, the others do not. Use **info** for neutral notes that are not a status.
+
+**Chips:** a small pill of text, not clickable. Outline is for a fact or a count ("10 questions"), solid for a label that stands out ("Try this"), dashed for provisional or estimated information, like the dashed ring on estimated chart points. The words always say what it is. A clickable filter would need a separate component, not built yet.
 
 **Touch targets:** all of these meet the 30px minimum. The Segmented control and Disclosure were raised to meet it.
 
@@ -110,6 +113,7 @@ People should be able to trust and understand what they see. For every page, scr
 ## 8. Known gaps and open questions
 
 - **Button** is new; the prototype had no standalone button. Review its look.
+- **(?)** Clickable chips (filters) are not built. The Chip is read-only.
 - **(?)** Form field errors (a message under an input) are not built yet. The Banner covers page-level messages.
 - The icon set has 20 icons. More can be added from the same Material set when a screen needs them.
 - The GitHub repository is still called `vegetablecharts`. It can be renamed to `cool-graphs` in the repository's settings on GitHub.

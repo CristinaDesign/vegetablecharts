@@ -1,0 +1,14 @@
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{n as t,p as n}from"./iframe-B_A5Sc53.js";function r({label:e,checked:t,onChange:n,iconOff:r,iconOn:a,disabled:o}){return(0,i.jsxs)(`button`,{type:`button`,role:`switch`,"aria-checked":t,disabled:o,className:`cg-switch`,onClick:()=>n(!t),children:[(0,i.jsx)(`span`,{className:`cg-switch__track`,children:(0,i.jsx)(`span`,{className:`cg-switch__knob`,children:t?a:r})}),(0,i.jsx)(`span`,{className:`cg-switch__label`,children:e})]})}var i;function a(){return(a=e((()=>{i=t(),r.__docgenInfo={description:`On/off switch. Origin: the light/dark mode toggle in the Vegetable Chart header.`,methods:[],displayName:`Switch`,props:{label:{required:!0,tsType:{name:`string`},description:`Visible label next to the switch. Also read by screen readers.`},checked:{required:!0,tsType:{name:`boolean`},description:``},onChange:{required:!0,tsType:{name:`signature`,type:`function`,raw:`(checked: boolean) => void`,signature:{arguments:[{type:{name:`boolean`},name:`checked`}],return:{name:`void`}}},description:``},iconOff:{required:!1,tsType:{name:`ReactReactNode`,raw:`React.ReactNode`},description:`Optional icons shown on the knob: off state and on state (e.g. sun / moon).`},iconOn:{required:!1,tsType:{name:`ReactReactNode`,raw:`React.ReactNode`},description:``},disabled:{required:!1,tsType:{name:`boolean`},description:``}}}})))()}var o,s,c,l,u,d,f,p;function m(){return(m=e((()=>{o=n(),a(),s=t(),c={title:`Components/Switch`,component:r,tags:[`autodocs`],args:{label:`Dark mode`,checked:!1,onChange:()=>{},iconOff:(0,s.jsxs)(`svg`,{viewBox:`0 0 24 24`,fill:`none`,stroke:`currentColor`,strokeWidth:`2.5`,strokeLinecap:`round`,children:[(0,s.jsx)(`circle`,{cx:`12`,cy:`12`,r:`4`}),(0,s.jsx)(`path`,{d:`M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2`})]}),iconOn:(0,s.jsx)(`svg`,{viewBox:`0 0 24 24`,fill:`currentColor`,children:(0,s.jsx)(`path`,{d:`M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z`})})}},l={},u={args:{checked:!0}},d={args:{disabled:!0}},f={render:e=>{let[t,n]=(0,o.useState)(!1);return(0,s.jsx)(r,{...e,checked:t,onChange:n})}},p=[`Off`,`On`,`Disabled`,`Interactive`],l.parameters={...l.parameters,docs:{...l.parameters?.docs,source:{originalSource:`{}`,...l.parameters?.docs?.source}}},u.parameters={...u.parameters,docs:{...u.parameters?.docs,source:{originalSource:`{
+  args: {
+    checked: true
+  }
+}`,...u.parameters?.docs?.source}}},d.parameters={...d.parameters,docs:{...d.parameters?.docs,source:{originalSource:`{
+  args: {
+    disabled: true
+  }
+}`,...d.parameters?.docs?.source}}},f.parameters={...f.parameters,docs:{...f.parameters?.docs,source:{originalSource:`{
+  render: args => {
+    const [on, setOn] = useState(false);
+    return <Switch {...args} checked={on} onChange={setOn} />;
+  }
+}`,...f.parameters?.docs?.source}}}})))()}m();export{d as Disabled,f as Interactive,l as Off,u as On,p as __namedExportsOrder,c as default};

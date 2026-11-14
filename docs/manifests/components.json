@@ -238,6 +238,180 @@
       ],
       "import": "import { Button } from 'cool-graphs';"
     },
+    "components-chip": {
+      "id": "components-chip",
+      "name": "Chip",
+      "path": "./src/components/Chip/Chip.stories.tsx",
+      "jsDocTags": {},
+      "description": "Small pill of text for a fact, a count or a short label. It is not clickable.\n The dashed tone is for provisional or estimated information, and the words must say so:\n the dashed line alone never carries the meaning.",
+      "reactDocgen": {
+        "description": "Small pill of text for a fact, a count or a short label. It is not clickable.\n The dashed tone is for provisional or estimated information, and the words must say so:\n the dashed line alone never carries the meaning.",
+        "methods": [],
+        "displayName": "Chip",
+        "definedInFile": "/home/claude/vegetablecharts/src/components/Chip/Chip.tsx",
+        "actualName": "Chip",
+        "exportName": "Chip",
+        "props": {
+          "tone": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "'outline' | 'solid' | 'dashed'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'outline'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'solid'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'dashed'"
+                }
+              ]
+            },
+            "description": "outline = a fact or a count. solid = a label that stands out. dashed = provisional or estimated.",
+            "defaultValue": {
+              "value": "'outline'",
+              "computed": false
+            }
+          },
+          "icon": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "keyof typeof icons",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "download"
+                },
+                {
+                  "name": "literal",
+                  "value": "description"
+                },
+                {
+                  "name": "literal",
+                  "value": "restaurant"
+                },
+                {
+                  "name": "literal",
+                  "value": "shopping_cart"
+                },
+                {
+                  "name": "literal",
+                  "value": "euro"
+                },
+                {
+                  "name": "literal",
+                  "value": "bar_chart"
+                },
+                {
+                  "name": "literal",
+                  "value": "scatter_plot"
+                },
+                {
+                  "name": "literal",
+                  "value": "table_chart"
+                },
+                {
+                  "name": "literal",
+                  "value": "search"
+                },
+                {
+                  "name": "literal",
+                  "value": "filter_list"
+                },
+                {
+                  "name": "literal",
+                  "value": "info"
+                },
+                {
+                  "name": "literal",
+                  "value": "warning"
+                },
+                {
+                  "name": "literal",
+                  "value": "error"
+                },
+                {
+                  "name": "literal",
+                  "value": "check_circle"
+                },
+                {
+                  "name": "literal",
+                  "value": "close"
+                },
+                {
+                  "name": "literal",
+                  "value": "expand_more"
+                },
+                {
+                  "name": "literal",
+                  "value": "light_mode"
+                },
+                {
+                  "name": "literal",
+                  "value": "dark_mode"
+                },
+                {
+                  "name": "literal",
+                  "value": "grass"
+                },
+                {
+                  "name": "literal",
+                  "value": "help_outline"
+                }
+              ]
+            },
+            "description": "Optional icon shown before the words."
+          },
+          "children": {
+            "required": true,
+            "tsType": {
+              "name": "ReactReactNode",
+              "raw": "React.ReactNode"
+            },
+            "description": "Short words. Wrap a number in <b> to show it larger, for example: <b>10</b> questions."
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "components-chip--outline",
+          "name": "Outline",
+          "snippet": "const Outline = () => <Chip tone=\"outline\">Vegetables sold in Spain</Chip>;"
+        },
+        {
+          "id": "components-chip--solid",
+          "name": "Solid",
+          "snippet": "const Solid = () => <Chip tone=\"solid\">Try this</Chip>;"
+        },
+        {
+          "id": "components-chip--dashed",
+          "name": "Dashed",
+          "snippet": "const Dashed = () => <Chip tone=\"dashed\">Prototype · provisional data, July 2026 prices</Chip>;"
+        },
+        {
+          "id": "components-chip--with-icon",
+          "name": "With Icon",
+          "snippet": "const WithIcon = () => <Chip tone=\"outline\" icon=\"info\">Prices in € per kg</Chip>;"
+        },
+        {
+          "id": "components-chip--with-numbers",
+          "name": "With Numbers",
+          "snippet": "const WithNumbers = () => (\n  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>\n    <Chip><b>10</b> questions</Chip><Chip><b>4</b> vegetables each</Chip><Chip>about <b>2</b> minutes</Chip>\n  </div>);"
+        },
+        {
+          "id": "components-chip--on-a-panel",
+          "name": "On A Panel",
+          "snippet": "const OnAPanel = () => (\n  <div style={{ background: 'var(--cg-color-panel)', padding: 24, borderRadius: 16, display: 'flex', gap: 8, flexWrap: 'wrap' }}>\n    <Chip tone=\"solid\">New</Chip><Chip>July 2026</Chip><Chip tone=\"dashed\">Estimated</Chip>\n  </div>);"
+        }
+      ],
+      "import": "import { Chip } from 'cool-graphs';"
+    },
     "components-disclosure": {
       "id": "components-disclosure",
       "name": "Disclosure",
@@ -976,6 +1150,6 @@
   },
   "meta": {
     "docgen": "react-docgen",
-    "durationMs": 263
+    "durationMs": 357
   }
 }
