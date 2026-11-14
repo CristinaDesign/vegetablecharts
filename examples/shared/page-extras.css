@@ -1,0 +1,5 @@
+/* Small helpers the example pages need on top of the design system. */
+.cg-switch__knob .moon, .cg-switch[aria-checked="true"] .cg-switch__knob .sun { display: none; }
+.cg-switch[aria-checked="true"] .cg-switch__knob .moon { display: block; }
+.select-wrap { width: min(320px, 100%); }
+.ranking .cg-score { grid-template-columns: minmax(70px, 150px) minmax(0, 1fr) 40px; }

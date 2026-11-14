@@ -1,0 +1,770 @@
+<title>Vegetable Explorer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;700&family=Alegreya+Sans:wght@400;500;700&display=swap">
+<style>
+/* Primitive colours: the raw palette. Every colour that exists, with a number and no meaning attached.
+   Higher number = darker. Steps marked 'in use' are the colours the interface uses today. Steps marked
+   'spare' are interpolated so each ramp is complete; they have NOT been contrast-tested yet.
+   Components must never use these directly. Use semantic tokens (semantic.css). */
+:root {
+  /* brown */
+  --cg-brown-50: #FFF5ED;  /* in use */
+  --cg-brown-100: #FAE5D5;  /* in use */
+  --cg-brown-150: #F2E4D6;  /* in use */
+  --cg-brown-200: #F1DFD1;  /* in use */
+  --cg-brown-300: #D8B898;  /* in use */
+  --cg-brown-400: #CDAE92;  /* in use */
+  --cg-brown-500: #A88A70;  /* in use */
+  --cg-brown-550: #9C8370;  /* in use */
+  --cg-brown-600: #6A5646;  /* in use */
+  --cg-brown-650: #724318;  /* in use */
+  --cg-brown-700: #5A3C21;  /* in use */
+  --cg-brown-750: #4A392C;  /* in use */
+  --cg-brown-800: #3A2E26;  /* in use */
+  --cg-brown-850: #2B221C;  /* in use */
+  --cg-brown-900: #1C1612;  /* in use */
+  /* lime */
+  --cg-lime-50: #F2FFE3;  /* spare */
+  --cg-lime-100: #C3FFA0;  /* spare */
+  --cg-lime-200: #8CFF45;  /* in use */
+  --cg-lime-300: #68D831;  /* spare */
+  --cg-lime-400: #43B31B;  /* spare */
+  --cg-lime-500: #168F00;  /* in use */
+  --cg-lime-600: #147700;  /* spare */
+  --cg-lime-700: #115F00;  /* spare */
+  --cg-lime-800: #0E4800;  /* spare */
+  --cg-lime-900: #0A3300;  /* spare */
+  /* green */
+  --cg-green-50: #DEF5E4;  /* in use */
+  --cg-green-100: #B6E4C3;  /* spare */
+  --cg-green-200: #8DD3A3;  /* spare */
+  --cg-green-300: #5FC283;  /* in use */
+  --cg-green-400: #3EA968;  /* spare */
+  --cg-green-500: #11914D;  /* in use */
+  --cg-green-600: #007527;  /* in use */
+  --cg-green-700: #165D28;  /* spare */
+  --cg-green-800: #1B4526;  /* spare */
+  --cg-green-900: #1B2F22;  /* in use */
+  /* red */
+  --cg-red-50: #FCE4E0;  /* in use */
+  --cg-red-100: #FFC7C0;  /* spare */
+  --cg-red-200: #FFA9A0;  /* spare */
+  --cg-red-300: #FF8A80;  /* in use */
+  --cg-red-400: #FD6051;  /* spare */
+  --cg-red-500: #F91C0C;  /* in use */
+  --cg-red-600: #C90D00;  /* in use */
+  --cg-red-700: #981F15;  /* spare */
+  --cg-red-800: #69221B;  /* spare */
+  --cg-red-900: #3D1E1B;  /* in use */
+  /* orange */
+  --cg-orange-50: #FFEBD3;  /* in use */
+  --cg-orange-100: #FFD3AA;  /* spare */
+  --cg-orange-200: #FFBB7F;  /* spare */
+  --cg-orange-300: #FFA24D;  /* in use */
+  --cg-orange-400: #E6802F;  /* spare */
+  --cg-orange-500: #CC5E04;  /* in use */
+  --cg-orange-600: #A34900;  /* in use */
+  --cg-orange-700: #7E3E0D;  /* spare */
+  --cg-orange-800: #5B3311;  /* spare */
+  --cg-orange-900: #3A2711;  /* in use */
+  --cg-white: #FFFFFF;
+  --cg-black: #000000;
+}
+
+/* Semantic colours: what a colour is FOR. Each one points at a primitive (primitives.css).
+   Light and dark map the same roles to different primitives, so dark mode is a re-mapping, not new colours.
+   Switch theme with <html data-theme="light|dark">; without it, follows the OS setting. */
+:root {
+  --cg-color-bg: var(--cg-brown-50);
+  --cg-color-panel: var(--cg-brown-200);
+  --cg-color-line: var(--cg-brown-100);
+  --cg-color-ink: var(--cg-brown-700);
+  --cg-color-ink-2: var(--cg-brown-650);
+  --cg-color-muted: var(--cg-brown-500);
+  --cg-color-control-off: var(--cg-brown-550);
+  --cg-color-accent: var(--cg-lime-500);
+  --cg-color-on-ink: var(--cg-brown-50);
+  --cg-color-border-soft: var(--cg-brown-400);
+  --cg-color-header: var(--cg-brown-700);
+  --cg-color-on-header: var(--cg-brown-50);
+  --cg-color-error: var(--cg-red-500);
+  --cg-color-error-text: var(--cg-red-600);
+  --cg-color-error-bg: var(--cg-red-50);
+  --cg-color-warning: var(--cg-orange-500);
+  --cg-color-warning-text: var(--cg-orange-600);
+  --cg-color-warning-bg: var(--cg-orange-50);
+  --cg-color-success: var(--cg-green-500);
+  --cg-color-success-text: var(--cg-green-600);
+  --cg-color-success-bg: var(--cg-green-50);
+  --cg-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%235A3C21' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");  /* dropdown arrow: a hex inside an image cannot use var(), so it repeats the ink colour */
+  --cg-shadow-color: color-mix(in srgb, var(--cg-brown-700) 15%, transparent);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --cg-color-bg: var(--cg-brown-900);
+    --cg-color-panel: var(--cg-brown-850);
+    --cg-color-line: var(--cg-brown-800);
+    --cg-color-ink: var(--cg-brown-150);
+    --cg-color-ink-2: var(--cg-brown-300);
+    --cg-color-muted: var(--cg-brown-550);
+    --cg-color-control-off: var(--cg-brown-550);
+    --cg-color-accent: var(--cg-lime-200);
+    --cg-color-on-ink: var(--cg-brown-900);
+    --cg-color-header: var(--cg-brown-750);
+    --cg-color-on-header: var(--cg-brown-150);
+    --cg-color-border-soft: var(--cg-brown-600);
+    --cg-color-error: var(--cg-red-300);
+    --cg-color-error-text: var(--cg-red-300);
+    --cg-color-error-bg: var(--cg-red-900);
+    --cg-color-warning: var(--cg-orange-300);
+    --cg-color-warning-text: var(--cg-orange-300);
+    --cg-color-warning-bg: var(--cg-orange-900);
+    --cg-color-success: var(--cg-green-300);
+    --cg-color-success-text: var(--cg-green-300);
+    --cg-color-success-bg: var(--cg-green-900);
+    --cg-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23F2E4D6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");  /* dropdown arrow: a hex inside an image cannot use var(), so it repeats the ink colour */
+    --cg-shadow-color: color-mix(in srgb, var(--cg-black) 45%, transparent);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --cg-color-bg: var(--cg-brown-900);
+  --cg-color-panel: var(--cg-brown-850);
+  --cg-color-line: var(--cg-brown-800);
+  --cg-color-ink: var(--cg-brown-150);
+  --cg-color-ink-2: var(--cg-brown-300);
+  --cg-color-muted: var(--cg-brown-550);
+  --cg-color-control-off: var(--cg-brown-550);
+  --cg-color-accent: var(--cg-lime-200);
+  --cg-color-on-ink: var(--cg-brown-900);
+  --cg-color-header: var(--cg-brown-750);
+  --cg-color-on-header: var(--cg-brown-150);
+  --cg-color-border-soft: var(--cg-brown-600);
+  --cg-color-error: var(--cg-red-300);
+  --cg-color-error-text: var(--cg-red-300);
+  --cg-color-error-bg: var(--cg-red-900);
+  --cg-color-warning: var(--cg-orange-300);
+  --cg-color-warning-text: var(--cg-orange-300);
+  --cg-color-warning-bg: var(--cg-orange-900);
+  --cg-color-success: var(--cg-green-300);
+  --cg-color-success-text: var(--cg-green-300);
+  --cg-color-success-bg: var(--cg-green-900);
+  --cg-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23F2E4D6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");  /* dropdown arrow: a hex inside an image cannot use var(), so it repeats the ink colour */
+  --cg-shadow-color: color-mix(in srgb, var(--cg-black) 45%, transparent);
+  color-scheme: dark;
+}
+
+/* Component colours: colours for one component, each pointing at a semantic token.
+   They are defined once and follow the theme automatically. Add one only when a component needs a colour
+   that must change independently of the rest. Format: --cg-<component>-<part>. */
+:root {
+  /* Table */
+  --cg-table-header-bg: var(--cg-color-header);
+  --cg-table-header-text: var(--cg-color-on-header);
+  --cg-table-row-border: var(--cg-color-panel);
+  --cg-table-row-hover-bg: var(--cg-color-panel);
+  /* Banner */
+  --cg-banner-info-border: var(--cg-color-ink);
+  --cg-banner-info-bg: var(--cg-color-panel);
+  --cg-banner-info-text: var(--cg-color-ink);
+  --cg-banner-error-border: var(--cg-color-error);
+  --cg-banner-error-bg: var(--cg-color-error-bg);
+  --cg-banner-error-text: var(--cg-color-error-text);
+  --cg-banner-warning-border: var(--cg-color-warning);
+  --cg-banner-warning-bg: var(--cg-color-warning-bg);
+  --cg-banner-warning-text: var(--cg-color-warning-text);
+  --cg-banner-success-border: var(--cg-color-success);
+  --cg-banner-success-bg: var(--cg-color-success-bg);
+  --cg-banner-success-text: var(--cg-color-success-text);
+  /* Card */
+  --cg-card-text: var(--cg-color-ink);
+  --cg-card-border: var(--cg-color-ink);
+  --cg-card-border-soft: var(--cg-color-border-soft);
+  --cg-card-border-selected: var(--cg-color-ink);
+  --cg-card-bg-selected: var(--cg-color-panel);
+  /* Switch */
+  --cg-switch-off-border: var(--cg-color-control-off);
+  --cg-switch-off-knob: var(--cg-color-control-off);
+  --cg-switch-on-bg: var(--cg-color-ink);
+  --cg-switch-on-knob: var(--cg-color-on-ink);
+  /* Button */
+  --cg-button-primary-bg: var(--cg-color-ink);
+  --cg-button-primary-text: var(--cg-color-on-ink);
+  --cg-button-secondary-border: var(--cg-color-ink);
+  --cg-button-secondary-text: var(--cg-color-ink);
+  --cg-button-secondary-hover-bg: var(--cg-color-panel);
+  --cg-button-link-text: var(--cg-color-ink-2);
+  --cg-button-link-hover-text: var(--cg-color-ink);
+}
+
+:root {
+  /* Typography */
+  --cg-font-display: "Alegreya Sans", "Trebuchet MS", system-ui, sans-serif;
+  --cg-font-data: "Alegreya", Georgia, "Times New Roman", serif;
+  --cg-text-sm: 14px;
+  --cg-text-md: 16px;
+  --cg-text-lg: 18px;
+  --cg-text-xl: 20px;
+  --cg-text-title: 24px;
+
+  /* Shape, spacing, motion */
+  --cg-radius-sm: 8px;
+  --cg-radius-lg: 16px;
+  --cg-radius-pill: 999px;
+  --cg-border-width: 2px;
+  --cg-target-min: 30px;        /* minimum height/width of anything clickable */
+  --cg-icon-size: 24px;         /* default icon size */
+  --cg-space-1: 4px;
+  --cg-space-2: 8px;
+  --cg-space-3: 12px;
+  --cg-space-4: 16px;
+  --cg-space-5: 24px;
+  --cg-space-6: 40px;
+  --cg-shadow-raised: 0 6px 18px var(--cg-shadow-color);
+  --cg-focus-ring: 3px solid var(--cg-color-accent);
+  --cg-duration: .25s;
+  --cg-ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+body {
+  background: var(--cg-color-bg);
+  color: var(--cg-color-ink);
+  font: var(--cg-text-md)/1.5 var(--cg-font-display);
+  transition: background-color var(--cg-duration), color var(--cg-duration);
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+.cg-switch { display: inline-flex; align-items: center; gap: 10px; background: none; border: 0; padding: var(--cg-space-1);
+  cursor: pointer; font: 500 var(--cg-text-sm) var(--cg-font-display); color: var(--cg-color-ink-2); }
+.cg-switch__track { position: relative; width: 58px; height: 30px; border-radius: var(--cg-radius-pill);
+  background: transparent; border: var(--cg-border-width) solid var(--cg-switch-off-border);
+  transition: background-color var(--cg-duration), border-color var(--cg-duration); }
+.cg-switch__knob { position: absolute; top: 2px; left: 2px; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--cg-switch-off-knob); color: var(--cg-color-bg); display: grid; place-items: center;
+  transition: transform var(--cg-duration) var(--cg-ease), background-color var(--cg-duration); }
+.cg-switch__knob svg { width: 14px; height: 14px; }
+.cg-switch[aria-checked="true"] .cg-switch__track { background: var(--cg-switch-on-bg); border-color: var(--cg-switch-on-bg); }
+.cg-switch[aria-checked="true"] .cg-switch__knob { transform: translateX(28px); background: var(--cg-switch-on-knob); color: var(--cg-switch-on-bg); }
+.cg-switch:focus-visible { outline: var(--cg-focus-ring); outline-offset: 3px; border-radius: var(--cg-radius-pill); }
+.cg-switch:disabled { opacity: .4; cursor: not-allowed; }
+.cg-seg { display: inline-flex; border: var(--cg-border-width) solid var(--cg-color-ink); border-radius: var(--cg-radius-pill); padding: 2px; }
+.cg-seg button { min-height: var(--cg-target-min); font: 500 var(--cg-text-sm) var(--cg-font-display); color: var(--cg-color-ink); background: none; border: 0;
+  border-radius: var(--cg-radius-pill); padding: var(--cg-space-1) var(--cg-space-4); cursor: pointer; opacity: .55; }
+.cg-seg button:hover { opacity: .85; }
+.cg-seg button[aria-checked="true"] { background: var(--cg-color-panel); opacity: 1; font-weight: 700; }
+.cg-seg button:focus-visible { outline: var(--cg-focus-ring); outline-offset: 2px; }
+.cg-btn { font: 700 var(--cg-text-md) var(--cg-font-display); letter-spacing: .25px; cursor: pointer;
+  border: var(--cg-border-width) solid var(--cg-button-secondary-border); border-radius: var(--cg-radius-sm);
+  padding: var(--cg-space-3) var(--cg-space-5); transition: background-color .2s, opacity .2s; }
+.cg-btn--primary { background: var(--cg-button-primary-bg); border-color: var(--cg-button-primary-bg); color: var(--cg-button-primary-text); }
+.cg-btn--primary:hover { opacity: .85; }
+.cg-btn--secondary { background: transparent; color: var(--cg-button-secondary-text); }
+.cg-btn--secondary:hover { background: var(--cg-button-secondary-hover-bg); }
+.cg-btn--link { background: none; border-color: transparent; color: var(--cg-button-link-text); font-weight: 500;
+  text-decoration: underline; text-underline-offset: 3px; padding-inline: var(--cg-space-2); }
+.cg-btn--link:hover { color: var(--cg-button-link-hover-text); }
+.cg-btn:focus-visible { outline: var(--cg-focus-ring); outline-offset: 3px; }
+.cg-btn:disabled { opacity: .4; cursor: not-allowed; }
+.cg-select { width: 100%; font: 700 var(--cg-text-md) var(--cg-font-display); letter-spacing: .25px; color: var(--cg-color-ink);
+  background-color: var(--cg-color-panel); border: var(--cg-border-width) solid var(--cg-color-ink); border-radius: var(--cg-radius-sm);
+  padding: var(--cg-space-3) 44px var(--cg-space-3) 14px; appearance: none; -webkit-appearance: none; cursor: pointer;
+  background-image: var(--cg-chevron); background-repeat: no-repeat; background-position: right 16px center; }
+.cg-select:focus-visible { outline: var(--cg-focus-ring); outline-offset: 3px; }
+.cg-select:disabled { opacity: .4; cursor: not-allowed; }
+.cg-card { font: inherit; text-align: center; cursor: pointer; background: transparent; color: var(--cg-card-text);
+  border: var(--cg-border-width) solid var(--cg-card-border); border-radius: var(--cg-radius-sm); padding: var(--cg-space-3) 14px;
+  display: grid; gap: 6px; align-content: start; width: 100%; opacity: .42; transition: opacity .2s, background .2s; }
+.cg-card:hover { opacity: .75; }
+.cg-card[aria-pressed="true"] { background: var(--cg-card-bg-selected); border-color: var(--cg-card-border-selected); opacity: 1; }
+.cg-card:focus-visible { outline: var(--cg-focus-ring); outline-offset: 3px; }
+.cg-card b { font-size: var(--cg-text-md); letter-spacing: .25px; }
+.cg-card span { font-size: 13px; line-height: 20px; letter-spacing: .25px; }
+.cg-disclosure { font-size: 15px; }
+.cg-disclosure summary { min-height: var(--cg-target-min); display: flex; align-items: center; cursor: pointer; color: var(--cg-color-ink-2); font-weight: 500; }
+.cg-disclosure summary:hover { color: var(--cg-color-ink); }
+.cg-disclosure summary:focus-visible { outline: var(--cg-focus-ring); outline-offset: 3px; border-radius: 4px; }
+.cg-disclosure__body { margin-top: var(--cg-space-3); }
+.cg-table { overflow-x: auto; }
+.cg-table table { border-collapse: separate; border-spacing: 0; width: 100%; font: var(--cg-text-sm) var(--cg-font-data); font-variant-numeric: tabular-nums; }
+.cg-table th, .cg-table td { padding: 6px 10px; text-align: right; border-bottom: 1px solid var(--cg-table-row-border); white-space: nowrap; }
+.cg-table th:first-child, .cg-table td:first-child { text-align: left; }
+/* Dark header band with light text. Rounded at the outer top corners. */
+.cg-table thead th { font: 700 13px var(--cg-font-display); letter-spacing: .25px; color: var(--cg-table-header-text); background: var(--cg-table-header-bg);
+  padding-block: var(--cg-space-3); border-bottom: 0; }
+.cg-table thead th:first-child { border-top-left-radius: var(--cg-radius-sm); }
+.cg-table thead th:last-child { border-top-right-radius: var(--cg-radius-sm); }
+.cg-table tbody tr:hover td { background: var(--cg-table-row-hover-bg); }
+.cg-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.cg-legend { display: inline-block; font-size: var(--cg-text-sm); color: var(--cg-color-ink-2); }
+.cg-legend__dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 1px solid var(--cg-color-ink);
+  vertical-align: -1px; margin-right: 6px; background: var(--cg-color-panel); }
+.cg-legend__dot--est { border: 1.2px dashed var(--cg-color-ink-2); outline: 1px solid var(--cg-color-ink); outline-offset: 2px; margin-left: 3px; margin-right: 9px; }
+.cg-score { display: grid; grid-template-columns: 170px minmax(0, 1fr) 44px; align-items: center; gap: 10px; }
+.cg-score__label { font-size: var(--cg-text-sm); }
+.cg-score__bar { height: 12px; border-radius: 0 4px 4px 0; background: var(--cg-color-accent); min-width: 2px; }
+.cg-score__value { font: 700 var(--cg-text-sm) var(--cg-font-data); text-align: right; font-variant-numeric: tabular-nums; }
+.cg-icon { display: inline-block; flex: none; vertical-align: middle; }
+.cg-banner { --accent: var(--cg-banner-info-border); --accent-text: var(--cg-banner-info-text); --fill: var(--cg-banner-info-bg);
+  display: flex; align-items: flex-start; gap: var(--cg-space-3); padding: var(--cg-space-3) var(--cg-space-4);
+  background: var(--fill); color: var(--cg-banner-info-text); border: var(--cg-border-width) solid var(--accent); border-radius: var(--cg-radius-sm);
+  font: var(--cg-text-md)/1.5 var(--cg-font-display); }
+.cg-banner--error   { --accent: var(--cg-banner-error-border);   --accent-text: var(--cg-banner-error-text);   --fill: var(--cg-banner-error-bg); }
+.cg-banner--warning { --accent: var(--cg-banner-warning-border); --accent-text: var(--cg-banner-warning-text); --fill: var(--cg-banner-warning-bg); }
+.cg-banner--success { --accent: var(--cg-banner-success-border); --accent-text: var(--cg-banner-success-text); --fill: var(--cg-banner-success-bg); }
+.cg-banner__icon { color: var(--accent); display: flex; align-items: center; min-height: var(--cg-target-min); }
+.cg-banner__body { flex: 1; min-width: 0; padding-block: 3px; display: grid; gap: 2px; }
+.cg-banner__title { color: var(--accent-text); font-weight: 700; }
+.cg-banner__close { flex: none; display: grid; place-items: center; width: var(--cg-target-min); height: var(--cg-target-min);
+  margin: 0 calc(var(--cg-space-1) * -1); background: none; border: 0; border-radius: var(--cg-radius-sm); color: var(--cg-color-ink); cursor: pointer; }
+.cg-banner__close:hover { background: color-mix(in srgb, var(--cg-color-ink) 12%, transparent); }
+.cg-banner__close:focus-visible { outline: var(--cg-focus-ring); outline-offset: 2px; }
+/* Chip: a small pill of text. Not clickable. Colours are semantic roles, so it follows the theme. */
+.cg-chip { display: inline-block; padding: 4px 12px; border-radius: 999px;
+  font-family: var(--cg-font-display); font-size: var(--cg-text-sm); line-height: 1.3; white-space: nowrap;
+  color: var(--cg-color-ink); background: var(--cg-color-bg); border: 1px solid var(--cg-color-border-soft); }
+.cg-chip b { font-family: var(--cg-font-data); font-size: 17px; font-weight: 700; }
+.cg-chip .cg-icon { width: 16px; height: 16px; margin-right: 6px; vertical-align: -3px; }
+/* Solid: a label that stands out, such as "Try this" or "New". */
+.cg-chip--solid { background: var(--cg-color-ink); color: var(--cg-color-on-ink); border-color: var(--cg-color-ink);
+  font-size: 12px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; padding: 2px 10px; }
+/* Dashed: provisional or estimated, matching the dashed ring used on estimated chart points. */
+.cg-chip--dashed { background: transparent; border: 1px dashed var(--cg-color-ink); }
+
+/* Small helpers the example pages need on top of the design system. */
+.cg-switch__knob .moon, .cg-switch[aria-checked="true"] .cg-switch__knob .sun { display: none; }
+.cg-switch[aria-checked="true"] .cg-switch__knob .moon { display: block; }
+.select-wrap { width: min(320px, 100%); }
+.ranking .cg-score { grid-template-columns: minmax(70px, 150px) minmax(0, 1fr) 40px; }
+
+/* Page layout: header and introduction on top; below, a list of vegetables on the left (stays in view on wide
+   screens) and the details of the selected vegetable on the right. On phones it is one column. */
+* { box-sizing: border-box; }
+body { background: var(--cg-color-bg); color: var(--cg-color-ink); font: var(--cg-text-md)/1.5 var(--cg-font-display);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 32px 64px;
+  transition: background-color var(--cg-duration), color var(--cg-duration); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+.wrap { max-width: 1180px; margin: 0 auto; display: grid; gap: 32px; }
+.wrap > * { min-width: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+h1, h2, h3, p, dl, dd { margin: 0; }
+h1 { font-weight: 500; font-size: 32px; line-height: 1.1; letter-spacing: -.3px; text-wrap: balance; }
+h2 { font-weight: 700; font-size: 26px; line-height: 1.15; text-wrap: balance; }
+h3 { font-weight: 700; font-size: var(--cg-text-lg); }
+code { font: 13px ui-monospace, Menlo, monospace; }
+.num { font-family: var(--cg-font-data); font-variant-numeric: tabular-nums; }
+
+/* Header and introduction */
+.top { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--cg-space-4); flex-wrap: wrap; }
+.lede { margin-top: 8px; color: var(--cg-color-ink-2); font-size: var(--cg-text-lg); max-width: 60ch; }
+.about { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--cg-space-5); padding-top: var(--cg-space-4); border-top: 1px solid var(--cg-color-panel); }
+.about dt { font-weight: 700; margin-bottom: 4px; }
+.about dd { font-size: 15px; color: var(--cg-color-ink-2); max-width: 60ch; }
+.about dd + dt { margin-top: 0; }
+.about > div { min-width: 0; }
+#banners { display: grid; gap: var(--cg-space-3); max-width: 820px; }
+
+/* Layout */
+.layout { display: grid; gap: var(--cg-space-6); align-items: start; }
+@media (min-width: 1000px) { .layout { grid-template-columns: 372px minmax(0, 1fr); } }
+.browse { display: flex; flex-direction: column; gap: var(--cg-space-3); min-height: 0; }
+@media (min-width: 1000px) { .browse { position: sticky; top: 16px; max-height: calc(100vh - 32px); } }
+.field { display: grid; gap: 6px; }
+.field label, .field .lbl { font-weight: 700; font-size: var(--cg-text-sm); color: var(--cg-color-ink-2); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: var(--cg-space-2); padding: 4px; margin: -4px; min-height: 0; }
+@media (min-width: 1000px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); overflow-y: auto; } }
+
+/* Vegetable card: works like the Selectable card, with an illustration */
+.veg { font: inherit; color: var(--cg-color-ink); background: transparent; border: var(--cg-border-width) solid var(--cg-card-border-soft); border-radius: var(--cg-radius-sm);
+  padding: var(--cg-space-2) 6px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; opacity: .8;
+  transition: opacity .2s, background .2s; }
+.veg:hover { opacity: 1; }
+.veg[aria-pressed="true"] { background: var(--cg-card-bg-selected); border-color: var(--cg-card-border-selected); opacity: 1; }
+.veg:focus-visible { outline: var(--cg-focus-ring); outline-offset: 3px; }
+.veg .pic { height: 64px; width: 100%; display: flex; align-items: center; justify-content: center; flex: none; }
+.veg img { max-height: 64px; max-width: 84%; object-fit: contain; }
+.veg .dot-fallback { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--cg-color-ink); }
+.veg b { font-size: var(--cg-text-sm); letter-spacing: .25px; text-align: center; line-height: 1.2; min-height: 2.4em; display: flex; align-items: center; justify-content: center; }
+.veg[aria-pressed="true"] b { font-weight: 700; }
+
+/* Details */
+.detail { display: grid; gap: var(--cg-space-5); min-width: 0; }
+.basis { display: flex; flex-wrap: wrap; align-items: center; gap: var(--cg-space-3); }
+.basis .lbl { font-weight: 700; font-size: var(--cg-text-sm); color: var(--cg-color-ink-2); }
+#dyn { display: grid; gap: var(--cg-space-6); }
+.d-head { display: flex; gap: var(--cg-space-5); align-items: center; }
+.d-head .pic { flex: none; width: 128px; height: 128px; display: grid; place-items: center; background: var(--cg-color-panel); border-radius: var(--cg-radius-lg); }
+.d-head .pic img { max-width: 100px; max-height: 100px; object-fit: contain; }
+.d-head .pic .dot-fallback { width: 64px; height: 64px; border-radius: 50%; border: 1px solid var(--cg-color-ink); }
+.d-head h2:focus { outline: none; }
+.sentence { margin-top: 6px; color: var(--cg-color-ink-2); max-width: 56ch; }
+.back { display: none; }
+@media (max-width: 999px) { .back { display: inline-block; align-self: start; } }
+@media (max-width: 520px) { .d-head { flex-direction: column; align-items: flex-start; } }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--cg-space-5) var(--cg-space-6); }
+.fact { display: grid; gap: 4px; align-content: start; min-width: 0; }
+.fact dt { font-size: var(--cg-text-sm); font-weight: 700; color: var(--cg-color-ink-2); }
+.fact .big { font: 700 30px/1.1 var(--cg-font-data); font-variant-numeric: tabular-nums; }
+.fact .big small { font: 500 var(--cg-text-sm) var(--cg-font-display); color: var(--cg-color-ink-2); margin-left: 4px; }
+.fact .more { font-size: var(--cg-text-sm); color: var(--cg-color-ink-2); }
+.block { display: grid; gap: var(--cg-space-3); }
+.block > p { color: var(--cg-color-ink-2); max-width: 62ch; font-size: 15px; }
+.nutrients { display: grid; gap: var(--cg-space-2); max-width: 640px; }
+.nutrients .cg-score { grid-template-columns: minmax(120px, 190px) minmax(0, 1fr) 52px; }
+.nutrients .cg-score__label small { display: block; color: var(--cg-color-ink-2); font-size: 13px; line-height: 1.2; }
+.cg-score__label { line-height: 1.25; }
+.chart { width: 100%; max-width: 560px; height: auto; display: block; overflow: visible; }
+.chart text { font: 16px var(--cg-font-data); fill: var(--cg-color-ink-2); }
+.chart .ttl { font: 700 15px var(--cg-font-data); }
+.chart .plot { fill: var(--cg-color-panel); stroke: var(--cg-color-line); }
+.chart .gridl { stroke: var(--cg-color-bg); stroke-opacity: .8; }
+.chart .pt circle.mark { fill: var(--cg-color-panel); stroke: var(--cg-color-ink); stroke-width: 1.2; }
+.chart .pt { cursor: pointer; }
+.chart .pt .ring { fill: none; stroke: var(--cg-color-ink-2); stroke-dasharray: 2 2.5; stroke-width: 1.2; }
+.chart .pt.sel circle.mark { fill: var(--cg-color-accent); stroke: var(--cg-color-ink); stroke-width: 2; }
+.chart .sel-label { fill: var(--cg-color-ink); font: 700 17px var(--cg-font-display); paint-order: stroke; stroke: var(--cg-color-panel); stroke-width: 4px; stroke-linejoin: round; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px var(--cg-space-5); }
+.legend .cg-legend__dot.cg-legend__dot--sel { background: var(--cg-color-accent); border-width: 2px; }
+.note { color: var(--cg-color-ink-2); font-size: var(--cg-text-sm); }
+.cmp { max-width: 640px; }
+.cg-table.cmp th, .cg-table.cmp td { white-space: normal; vertical-align: top; }
+.cg-table.cmp th:not(:first-child), .cg-table.cmp td:not(:first-child) { min-width: 56px; }
+.tablewrap { padding-top: var(--cg-space-3); }
+#alltable table { min-width: 720px; }
+footer { display: grid; gap: var(--cg-space-2); padding-top: var(--cg-space-5); border-top: 1px solid var(--cg-color-panel); font-size: 15px; color: var(--cg-color-ink-2); }
+footer ul { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; max-width: 80ch; }
+.cg-score__bar { transition: width .3s var(--cg-ease); }
+
+/* Explanations: collapsed behind a Disclosure on small screens, always open on wide ones */
+.about-wrap > summary { font-weight: 700; color: var(--cg-color-ink); }
+.about-wrap .about { margin-top: var(--cg-space-3); }
+@media (min-width: 1000px) { .cg-disclosure.about-wrap > summary { display: none; } .about-wrap .about { margin-top: 0; } }
+
+/* Arrow so it is clear the Disclosure opens (page-level for now) */
+.cg-disclosure summary { gap: var(--cg-space-2); }
+.cg-disclosure summary::before { content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform var(--cg-duration) var(--cg-ease); flex: none; margin-right: 2px; }
+.cg-disclosure[open] > summary::before { transform: rotate(45deg); }
+.cg-disclosure summary::-webkit-details-marker { display: none; }
+
+.fun p { background: var(--cg-color-panel); border-radius: var(--cg-radius-sm); padding: var(--cg-space-3) var(--cg-space-4); max-width: 66ch; }
+
+</style>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Vegetable Explorer</h1>
+      <p class="lede">Select a vegetable to see what it gives you and what it costs, and how it compares with 26 others sold in Spain. Nutrition is per 100 g of raw vegetable (USDA); prices are in &#8364; per kg, July 2026 (MAPA).</p>
+    </div>
+    <button class="cg-switch" id="theme" type="button" role="switch" aria-checked="false">
+      <span class="cg-switch__track"><span class="cg-switch__knob">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>
+      </span></span><span>Dark mode</span>
+    </button>
+  </header>
+
+  <div id="banners"></div>
+
+  <details class="cg-disclosure about-wrap" id="about-wrap">
+    <summary>How the data and scores work</summary>
+  <dl class="about" aria-label="About the data">
+    <div><dt>Nutrition</dt><dd>Approximate amounts per 100 g of raw vegetable, from USDA FoodData Central. The <b>Nutrient Density Score</b> (0 to 100) is the average of 12 nutrients: protein, fiber, vitamins A, C, E, K and B6, folate, potassium, magnesium, calcium and iron. Each nutrient is the share of the EU daily reference found in 100 g, capped at 100%. It measures a 100 g portion, not calories.</dd></div>
+    <div><dt>Prices</dt><dd>Average consumer prices in &#8364; per kilo, July 2026, from the MAPA panel (Spain's Ministry of Agriculture, Fisheries and Food). <b>As bought</b> is the price of the whole product. <b>Edible part</b> is the price of what you actually eat after trimming, peeling or shelling.</dd></div>
+    <div><dt>Per &#8364;1</dt><dd>How much of your daily needs the edible part of one euro of the vegetable covers, on average across the same 12 nutrients, each capped at 100%.</dd></div>
+  </dl>
+  </details>
+
+  <main class="layout">
+    <div class="browse">
+      <div class="field">
+        <label for="sort">Sort vegetables by</label>
+        <select class="cg-select" id="sort">
+          <option value="name">Name (A to Z)</option>
+          <option value="score">Nutrient Density Score (highest first)</option>
+          <option value="price">Price (lowest first)</option>
+        </select>
+      </div>
+      <div class="grid" id="grid" role="group" aria-label="27 vegetables. Select one to see its details."></div>
+    </div>
+
+    <article class="detail" id="detail" aria-labelledby="veg-name">
+      <div class="basis">
+        <span class="lbl" id="basis-lbl">Show prices for</span>
+        <div class="cg-seg" role="radiogroup" aria-labelledby="basis-lbl" id="basis">
+          <button type="button" role="radio" aria-checked="true" data-mode="edible">Edible part</button>
+          <button type="button" role="radio" aria-checked="false" data-mode="bought">Whole, as bought</button>
+        </div>
+      </div>
+      <div id="dyn"></div>
+    </article>
+  </main>
+
+  <section aria-labelledby="all-h" class="block">
+    <h2 id="all-h">All 27 vegetables</h2>
+    <p class="note" style="max-width:70ch">The same information as a table, for reading across or for when you prefer not to use the pictures. It follows the sort order above.</p>
+    <details class="cg-disclosure"><summary>Show all data as a table</summary>
+      <div class="cg-disclosure__body cg-table" id="alltable"></div>
+    </details>
+  </section>
+
+  <footer>
+    <b>Sources and notes</b>
+    <ul>
+      <li>Nutrition: approximate values per 100 g raw, USDA FoodData Central. They are provisional until Spain's BEDCA food database is imported, and vegetables eaten cooked will change.</li>
+      <li>Daily references: EU Regulation 1169/2011, Annex XIII. Fiber uses the EFSA reference of 25 g.</li>
+      <li>Prices: average Spanish consumer prices, July 2026, MAPA panel. Four vegetables only have the price of their product group, and six are estimates until wholesale prices from Mercamadrid are connected.</li>
+      <li>Edible share of each vegetable is approximate (USDA refuse factors) and will be replaced by BEDCA values. Tomato, peppers, romaine lettuce and endive are treated as eaten whole.</li>
+      <li>Fun facts are general knowledge and are not part of the data.</li>
+      <li>Illustrations come from the Vegetable Chart prototype. Page built with the Cool Graphs design system, draft 7, 13 November 2026.</li>
+    </ul>
+  </footer>
+</div>
+<div class="sr-only" role="status" aria-live="polite" id="live"></div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var ICONS = {"warning": ["M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"], "error": ["M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"], "close": ["M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"], "info": ["M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"], "check_circle": ["M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.59-12.42L10 14.17l-2.59-2.58L6 13l4 4 8-8z"]};
+  function icon(n, size) { size = size || 24; return '<svg class="cg-icon" width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">' + ICONS[n].map(function (d) { return '<path d="' + d + '"/>'; }).join('') + '</svg>'; }
+
+    /* ---------- Data (from the Vegetable Chart prototype) ---------- */
+  // Reference daily intakes: EU Reg. 1169/2011 Annex XIII (fiber: EFSA 25 g).
+  var REF = { prot: 50, fib: 25, a: 800, c: 80, e: 12, k: 75, fol: 200, b6: 1.4, pot: 2000, mg: 375, ca: 800, fe: 14 };
+  var NUTRIENTS = Object.keys(REF);
+  var NAMES = { prot: ['Protein', 'g'], fib: ['Fiber', 'g'], a: ['Vitamin A', '\u00b5g'], c: ['Vitamin C', 'mg'], e: ['Vitamin E', 'mg'], k: ['Vitamin K', '\u00b5g'],
+    fol: ['Folate', '\u00b5g'], b6: ['Vitamin B6', 'mg'], pot: ['Potassium', 'mg'], mg: ['Magnesium', 'mg'], ca: ['Calcium', 'mg'], fe: ['Iron', 'mg'] };
+  // [slug, name, color, kcal, prot, fib, a, c, e, k, fol, b6, pot, mg, ca, fe, price \u20ac/kg, price source]
+  var RAW = [
+   ["esparrago-verde","Green asparagus","#7FA650",20,2.2,2.1,38,5.6,1.1,41.6,52,.091,202,14,24,2.14,4.47,"panel"],
+   ["champinon","Mushroom","#D8C8B4",22,3.1,1.0,0,2.1,.01,0,17,.104,318,9,3,.5,5.66,"grupo"],
+   ["lechuga-romana","Romaine lettuce","#8DBB5A",17,1.2,2.1,436,4,.13,102.5,136,.074,247,14,33,.97,3.22,"grupo"],
+   ["alcachofa","Artichoke","#6E8B4E",47,3.3,5.4,1,11.7,.19,14.8,68,.116,370,60,44,1.28,4.39,"panel"],
+   ["remolacha","Beetroot","#8E2449",43,1.6,2.8,2,4.9,.04,.2,109,.067,325,23,16,.8,2.2,"estimado"],
+   ["puerro","Leek","#B4CC86",61,1.5,1.8,83,12,.92,47,64,.233,180,28,59,2.1,4.44,"panel"],
+   ["cebolleta","Spring onion","#9CC26A",32,1.8,2.6,50,18.8,.55,207,64,.061,276,20,72,1.48,2.6,"estimado"],
+   ["maiz","Sweet corn","#E8B93A",86,3.3,2.0,9,6.8,.07,.3,42,.093,270,37,2,.52,3.5,"estimado"],
+   ["apio","Celery","#A9C98A",16,.7,1.6,22,3.1,.27,29.3,36,.074,260,11,40,.2,1.76,"panel"],
+   ["berenjena","Eggplant","#4B2E5A",25,1.0,3.0,1,2.2,.3,3.5,22,.084,229,14,9,.23,2.08,"panel"],
+   ["calabaza","Butternut squash","#E0913A",45,1.0,2.0,532,21,1.44,1.1,27,.154,352,34,48,.7,2.14,"panel"],
+   ["pepino","Cucumber","#3F7A3A",15,.65,.5,5,2.8,.03,16.4,7,.04,147,13,16,.28,1.8,"panel"],
+   ["patata","Potato","#C9A15A",77,2.0,2.2,0,19.7,.01,2,15,.298,425,23,12,.81,1.22,"panel"],
+   ["cebolla","Onion","#C98A5A",40,1.1,1.7,0,7.4,.02,.4,19,.12,146,10,23,.21,1.92,"panel"],
+   ["zanahoria","Carrot","#E8762D",41,.9,2.8,835,5.9,.66,13.2,19,.138,320,12,33,.3,1.49,"panel"],
+   ["tomate","Tomato","#D9412F",18,.9,1.2,42,13.7,.54,7.9,15,.08,237,11,10,.27,2.3,"panel"],
+   ["calabacin","Zucchini","#4F7D3A",17,1.2,1.0,10,17.9,.12,4.3,24,.163,261,18,16,.37,1.61,"panel"],
+   ["acelga","Swiss chard","#3F8F4A",19,1.8,1.6,306,30,1.89,830,14,.099,379,81,51,1.8,2.74,"panel"],
+   ["espinaca","Spinach","#2F6B35",23,2.9,2.2,469,28.1,2.03,483,194,.195,558,79,99,2.71,4.87,"grupo"],
+   ["repollo","Cabbage","#B9D39A",25,1.3,2.5,5,36.6,.15,76,43,.124,170,12,40,.47,1.6,"panel"],
+   ["guisantes","Green peas","#6FA83E",81,5.4,5.7,38,40,.13,24.8,65,.169,244,33,25,1.47,6.0,"estimado"],
+   ["coliflor","Cauliflower","#EDE3C8",25,1.9,2.0,0,48.2,.08,15.5,57,.184,299,15,22,.42,2.1,"panel"],
+   ["col-bruselas","Brussels sprouts","#5E8F3A",43,3.4,3.8,38,85,.88,177,61,.219,389,23,42,1.4,4.2,"estimado"],
+   ["brocoli","Broccoli","#3E7A35",34,2.8,2.6,31,89.2,.78,101.6,63,.175,316,21,47,.73,2.48,"panel"],
+   ["pimiento-rojo","Red bell pepper","#C8302A",31,1.0,2.1,157,127.7,1.58,4.9,46,.291,211,12,7,.43,2.68,"panel"],
+   ["kale","Kale","#355E3B",35,2.9,4.1,241,93.4,.66,389.6,62,.147,348,33,254,1.6,6.5,"estimado"],
+   ["endibia","Belgian endive","#E9E3A8",17,.9,3.1,1,2.8,0,0,37,.042,211,10,19,.24,3.22,"grupo"]
+  ];
+  // Edible portion: share of the weight bought that you actually eat (USDA refuse factors, approximate).
+  var EDIBLE = { "esparrago-verde": .55, champinon: .97, "lechuga-romana": 1, alcachofa: .40, remolacha: .80, puerro: .60, cebolleta: .85, maiz: .45, apio: .80, berenjena: .90,
+    calabaza: .75, pepino: .80, patata: .80, cebolla: .90, zanahoria: .88, tomate: 1, calabacin: .95, acelga: .85, espinaca: .85, repollo: .80, guisantes: .80,
+    coliflor: .60, "col-bruselas": .90, brocoli: .65, "pimiento-rojo": 1, kale: .75, endibia: 1 };
+  var SRC = { panel: 'Official consumer price \u00b7 MAPA panel', grupo: 'Price of its product group \u00b7 MAPA panel', estimado: 'Estimated price \u00b7 to confirm with Mercamadrid' };
+  var SRC_SHORT = { panel: 'MAPA', grupo: 'MAPA group', estimado: 'Estimate' };
+
+  var veg = RAW.map(function (r) {
+    var n = {}; NUTRIENTS.forEach(function (k, i) { n[k] = r[4 + i]; });
+    var kcal = r[3], price = r[16], edible = EDIBLE[r[0]] || 1, priceEdible = price / edible;
+    var capped = {}, score = 0, perEuro = 0, gramsPerEuro = 1000 / priceEdible;
+    NUTRIENTS.forEach(function (k) {
+      capped[k] = Math.min(100, n[k] / REF[k] * 100); score += capped[k];
+      perEuro += Math.min(100, n[k] * gramsPerEuro / 100 / REF[k] * 100);
+    });
+    return { slug: r[0], name: r[1], color: r[2], kcal: kcal, n: n, capped: capped, price: price, priceEdible: priceEdible, edible: edible, source: r[17],
+      score: score / NUTRIENTS.length, perEuro: perEuro / NUTRIENTS.length, gramsPerEuro: gramsPerEuro };
+  });
+
+  var FACTS = {
+    "esparrago-verde": "An asparagus plant keeps sending up new spears for around 15 years or more.",
+    champinon: "Mushrooms are fungi, not plants. Left in sunlight or UV light, they make vitamin D.",
+    "lechuga-romana": "Also called cos lettuce. Unlike round lettuces, it grows as a tall, upright head.",
+    alcachofa: "An artichoke is the unopened flower bud of a thistle plant. Left to bloom, it opens into a large purple flower.",
+    remolacha: "Its deep red comes from pigments called betalains. In some people they turn urine pink or red, which is harmless.",
+    puerro: "The leek is a national emblem of Wales.",
+    cebolleta: "Spring onions are picked before the bulb swells, so the green tops are eaten as well as the white base.",
+    maiz: "Each silky thread on a corn cob is attached to one kernel, so a cob has as many silks as it has kernels.",
+    apio: "Celery is about 95% water.",
+    berenjena: "Botanically an eggplant is a berry, and it belongs to the same plant family as tomatoes and potatoes.",
+    calabaza: "Its orange flesh is rich in beta-carotene, which the body turns into vitamin A. That is why its vitamin A figure is so high.",
+    pepino: "Gherkins and pickles are cucumbers preserved in brine or vinegar.",
+    patata: "Potatoes come from the Andes in South America and reached Europe through Spain in the 16th century.",
+    cebolla: "Cutting an onion releases sulfur compounds that irritate the eyes. Chilling it first helps.",
+    zanahoria: "Early cultivated carrots were purple or yellow. Orange ones became common in Europe several centuries ago.",
+    tomate: "Botanically a tomato is a fruit. It came to Europe from the Americas in the 16th century.",
+    calabacin: "The zucchini flowers are edible too, often stuffed or fried.",
+    acelga: "Despite the name, Swiss chard is not Swiss. It is the same species as beetroot, grown for its leaves instead of its root.",
+    espinaca: "Popeye made spinach famous for strength, but the iron in spinach is absorbed less easily than iron from meat.",
+    repollo: "Fermented cabbage becomes sauerkraut.",
+    guisantes: "Gregor Mendel worked out the basic rules of inheritance by crossing pea plants.",
+    coliflor: "The white head is a cluster of flower buds that never opened. Cauliflower, broccoli, cabbage, kale and Brussels sprouts all come from one species.",
+    "col-bruselas": "Brussels sprouts grow as rows of tiny buds along a tall stalk and are close relatives of cabbage.",
+    brocoli: "Broccoli is a cluster of flower buds. Its name comes from the Italian word for the flowering top of a cabbage.",
+    "pimiento-rojo": "A red pepper is usually a green pepper left to ripen on the plant for longer.",
+    kale: "A 100 g portion has about three times the daily reference for vitamin K, which helps blood to clot.",
+    endibia: "It is grown twice: roots first, then sprouted in the dark, which keeps the leaves pale and mild."
+  };
+  var bySlug = {}; veg.forEach(function (v) { bySlug[v.slug] = v; });
+  var nGroup = veg.filter(function (v) { return v.source === 'grupo'; }).length;
+  var nEst = veg.filter(function (v) { return v.source === 'estimado'; }).length;
+
+  /* ---------- State ---------- */
+  var state = { sel: 'espinaca', basis: 'edible', sort: 'name' };
+  try { var h = (location.hash || '').slice(1); if (bySlug[h]) state.sel = h; } catch (e) {}
+  function pr(v) { return state.basis === 'edible' ? v.priceEdible : v.price; }
+  function basisText() { return state.basis === 'edible' ? 'edible part' : 'as bought'; }
+  function ord(n) { var s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }
+  function rankOf(v, get, desc) { var sorted = veg.slice().sort(function (a, b) { return desc ? get(b) - get(a) : get(a) - get(b); }); return sorted.indexOf(v) + 1; }
+  function median(arr) { var s = arr.slice().sort(function (a, b) { return a - b; }); return s[Math.floor(s.length / 2)]; }
+  function sorted() {
+    var a = veg.slice();
+    if (state.sort === 'name') a.sort(function (x, y) { return x.name.localeCompare(y.name); });
+    if (state.sort === 'score') a.sort(function (x, y) { return y.score - x.score; });
+    if (state.sort === 'price') a.sort(function (x, y) { return pr(x) - pr(y); });
+    return a;
+  }
+  var imgFailed = 0;
+  function pic(v) { return '<img src="../shared/icons/' + v.slug + '.png" alt="" loading="lazy" data-fb="' + v.color + '">'; }
+  function lc(n) { return n.charAt(0).toLowerCase() + n.slice(1); }
+  function euro(x) { return x.toFixed(2); }
+
+  /* ---------- Theme switch ---------- */
+  var t = document.getElementById('theme');
+  var dark = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches;
+  if (root.getAttribute('data-theme')) dark = root.getAttribute('data-theme') === 'dark';
+  function setTheme(d) { dark = d; root.setAttribute('data-theme', d ? 'dark' : 'light'); t.setAttribute('aria-checked', String(d)); }
+  setTheme(dark);
+  t.addEventListener('click', function () { setTheme(!dark); });
+
+  /* ---------- Banners ---------- */
+  function banner(kind, name, title, text) {
+    return '<div class="cg-banner cg-banner--' + kind + '" role="' + (kind === 'error' ? 'alert' : 'status') + '"><span class="cg-banner__icon">' + icon(name) + '</span><div class="cg-banner__body"><strong class="cg-banner__title">' + title + '</strong><div>' + text + '</div></div></div>';
+  }
+  var bn = document.getElementById('banners');
+  bn.innerHTML = banner('warning', 'warning', 'Provisional data',
+    'Nutrition is approximate until Spain\u2019s BEDCA database is added. ' + (nGroup + nEst) + ' prices are for a product group or estimated. They are marked with a dashed ring.') + '<div id="imgerr"></div>';
+  function onImgError(img) {
+    var fb = document.createElement('span'); fb.className = 'dot-fallback'; fb.style.background = img.getAttribute('data-fb');
+    img.replaceWith(fb); imgFailed++;
+    document.getElementById('imgerr').innerHTML = banner('error', 'error', 'Some illustrations did not load', imgFailed + ' illustration' + (imgFailed > 1 ? 's' : '') + ' could not be loaded and a coloured dot is shown instead. Names and data are not affected. Reload the page to try again.');
+  }
+  document.addEventListener('error', function (e) { if (e.target && e.target.tagName === 'IMG' && e.target.hasAttribute('data-fb')) onImgError(e.target); }, true);
+
+  /* ---------- Grid of vegetables ---------- */
+  var grid = document.getElementById('grid');
+  function renderGrid() {
+    grid.innerHTML = sorted().map(function (v) {
+      return '<button type="button" class="veg" data-slug="' + v.slug + '" aria-pressed="' + (v.slug === state.sel) + '"><span class="pic">' + pic(v) + '</span><b>' + v.name + '</b></button>';
+    }).join('');
+  }
+  function markSelected() {
+    grid.querySelectorAll('.veg').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-slug') === state.sel)); });
+  }
+  grid.addEventListener('click', function (e) {
+    var b = e.target.closest('.veg'); if (!b) return;
+    select(b.getAttribute('data-slug'), true);
+  });
+
+  /* ---------- Details ---------- */
+  var dyn = document.getElementById('dyn');
+  function nutrientRows(v) {
+    return NUTRIENTS.map(function (k) {
+      var val = Math.round(v.capped[k]), amt = v.n[k], d = amt < 1 ? amt.toFixed(2) : (amt < 10 ? amt.toFixed(1) : Math.round(amt));
+      return '<div class="cg-score"><span class="cg-score__label">' + NAMES[k][0] + '<small>' + d + ' ' + NAMES[k][1] + ' per 100 g</small></span>' +
+        '<div class="cg-score__track" role="meter" aria-label="' + NAMES[k][0] + ', share of daily reference in 100 g" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + val + '"><div class="cg-score__bar" style="width:' + val + '%"></div></div>' +
+        '<span class="cg-score__value">' + val + '%</span></div>';
+    }).join('');
+  }
+  function scatter(sel) {
+    var W = 480, H = 340, m = { l: 58, r: 14, t: 12, b: 62 }, pw = W - m.l - m.r, ph = H - m.t - m.b;
+    var xmax = Math.ceil(Math.max.apply(null, veg.map(function (v) { return v.score; })) / 10) * 10, xs = xmax <= 60 ? 10 : 20;
+    var ymax = Math.ceil(Math.max.apply(null, veg.map(pr))), ys = ymax <= 6 ? 1 : 2; ymax = Math.ceil(ymax / ys) * ys;
+    function X(v) { return m.l + v / xmax * pw; } function Y(v) { return m.t + ph - v / ymax * ph; }
+    var s = '<rect class="plot" x="' + m.l + '" y="' + m.t + '" width="' + pw + '" height="' + ph + '"/>';
+    for (var x = 0; x <= xmax; x += xs) s += '<line class="gridl" x1="' + X(x) + '" x2="' + X(x) + '" y1="' + m.t + '" y2="' + (m.t + ph) + '"/><text x="' + X(x) + '" y="' + (m.t + ph + 20) + '" text-anchor="middle">' + x + '</text>';
+    for (var y = 0; y <= ymax; y += ys) s += '<line class="gridl" y1="' + Y(y) + '" y2="' + Y(y) + '" x1="' + m.l + '" x2="' + (m.l + pw) + '"/><text x="' + (m.l - 8) + '" y="' + (Y(y) + 5) + '" text-anchor="end">' + y + '</text>';
+    s += '<text class="ttl" x="' + (m.l + pw / 2) + '" y="' + (H - 10) + '" text-anchor="middle">Nutrient Density Score (0 to 100, higher is better)</text>';
+    s += '<text class="ttl" transform="translate(16 ' + (m.t + ph / 2) + ') rotate(-90)" text-anchor="middle">Price (\u20ac per kg, ' + basisText() + ')</text>';
+    var others = veg.filter(function (v) { return v !== sel; }).concat([sel]);
+    others.forEach(function (v) {
+      var cx = X(v.score), cy = Y(pr(v)), isSel = v === sel, r = isSel ? 9 : 6;
+      s += '<g class="pt' + (isSel ? ' sel' : '') + '" data-slug="' + v.slug + '"><title>' + v.name + ': score ' + v.score.toFixed(0) + ' of 100, \u20ac ' + euro(pr(v)) + ' per kg (' + basisText() + '), ' + SRC_SHORT[v.source] + '</title>' +
+        (v.source !== 'panel' ? '<circle class="ring" cx="' + cx + '" cy="' + cy + '" r="' + (r + 3.5) + '"/>' : '') + '<circle class="mark" cx="' + cx + '" cy="' + cy + '" r="' + r + '"/></g>';
+    });
+    var sx = X(sel.score), sy = Y(pr(sel)), left = sx > m.l + pw * 0.7;
+    s += '<text class="sel-label" x="' + (left ? sx - 15 : sx + 15) + '" y="' + (sy - 12) + '" text-anchor="' + (left ? 'end' : 'start') + '">' + sel.name + '</text>';
+    return '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Scatter chart of price against Nutrient Density Score for all 27 vegetables. ' + sel.name + ' is highlighted. The same figures are in the table at the end of the page.">' + s + '</svg>';
+  }
+  function renderDetail() {
+    var v = bySlug[state.sel];
+    var rs = rankOf(v, function (x) { return x.score; }, true), rp = rankOf(v, pr, false), re = rankOf(v, function (x) { return x.perEuro; }, true);
+    var top = NUTRIENTS.slice().sort(function (a, b) { return v.n[b] / REF[b] - v.n[a] / REF[a]; })[0];
+    var topPct = Math.round(v.n[top] / REF[top] * 100);
+    var est = v.source !== 'panel';
+    var priceMain = euro(pr(v)), priceAlt = state.basis === 'edible' ? euro(v.price) + ' per kg as bought' : euro(v.priceEdible) + ' per kg edible part';
+    var sentence = v.name + ' ranks ' + ord(rs) + ' of 27 for nutrient density and is the ' + (rp === 1 ? 'cheapest' : ord(rp) + ' cheapest') + ' of 27 per kilo (' + basisText() + '). Its strongest nutrient is ' + lc(NAMES[top][0]) + ': 100 g covers ' + topPct + '% of the daily reference.';
+    var meds = { s: median(veg.map(function (x) { return x.score; })), p: median(veg.map(pr)), e: median(veg.map(function (x) { return x.perEuro; })) };
+    var best = { s: Math.max.apply(null, veg.map(function (x) { return x.score; })), p: Math.min.apply(null, veg.map(pr)), e: Math.max.apply(null, veg.map(function (x) { return x.perEuro; })) };
+    var cmp = '<div class="cg-table cmp"><table><thead><tr><th scope="col">Measure</th><th scope="col">' + v.name + '</th><th scope="col">Median of 27</th><th scope="col">Best of 27</th></tr></thead><tbody>' +
+      '<tr><td>Nutrient Density Score (out of 100)</td><td>' + v.score.toFixed(0) + '</td><td>' + meds.s.toFixed(0) + '</td><td>' + best.s.toFixed(0) + '</td></tr>' +
+      '<tr><td>Price (\u20ac per kg, ' + basisText() + ')</td><td>' + euro(pr(v)) + '</td><td>' + euro(meds.p) + '</td><td>' + euro(best.p) + '</td></tr>' +
+      '<tr><td>Per \u20ac1 (% of daily needs)</td><td>' + v.perEuro.toFixed(0) + '%</td><td>' + meds.e.toFixed(0) + '%</td><td>' + best.e.toFixed(0) + '%</td></tr></tbody></table></div>';
+    dyn.innerHTML =
+      '<div class="d-head"><span class="pic">' + pic(v) + '</span><div><h2 id="veg-name" tabindex="-1">' + v.name + '</h2><p class="sentence">' + sentence + '</p></div></div>' +
+      '<button type="button" class="cg-btn cg-btn--link back" id="back">Back to all vegetables</button>' +
+      '<dl class="facts">' +
+        '<div class="fact"><dt>Nutrient Density Score</dt><dd class="big">' + v.score.toFixed(0) + '<small>out of 100</small></dd><dd><div class="cg-score" style="grid-template-columns:minmax(0,1fr) 0 0;gap:0"><div class="cg-score__track" role="meter" aria-label="Nutrient Density Score" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + v.score.toFixed(0) + '"><div class="cg-score__bar" style="width:' + v.score.toFixed(0) + '%"></div></div></div></dd><dd class="more">' + ord(rs) + ' of 27 \u00b7 average of 12 nutrients per 100 g</dd></div>' +
+        '<div class="fact"><dt>Price, ' + basisText() + '</dt><dd class="big">\u20ac ' + priceMain + '<small>per kg</small></dd><dd class="more">\u20ac ' + priceAlt + '</dd><dd class="more"><span class="cg-legend"><i class="cg-legend__dot' + (est ? ' cg-legend__dot--est' : '') + '"></i>' + SRC[v.source] + '</span></dd></div>' +
+        '<div class="fact"><dt>Per \u20ac1 spent</dt><dd class="big">' + v.perEuro.toFixed(0) + '%<small>of daily needs</small></dd><dd class="more">' + Math.round(v.gramsPerEuro) + ' g of edible part for \u20ac1 \u00b7 ' + ord(re) + ' of 27</dd></div>' +
+        '<div class="fact"><dt>Energy and edible share</dt><dd class="big">' + v.kcal + '<small>kcal per 100 g</small></dd><dd class="more">' + Math.round(v.edible * 100) + '% of the weight bought is edible</dd></div>' +
+      '</dl>' +
+      '<section class="block fun" aria-labelledby="h-f"><h3 id="h-f">Fun fact</h3><p>' + (FACTS[v.slug] || '') + '</p></section>' +
+      '<section class="block" aria-labelledby="h-n"><h3 id="h-n">12 nutrients in 100 g</h3><p>Each bar is the share of the EU daily reference found in 100 g of raw ' + lc(v.name) + ', capped at 100%. The Nutrient Density Score is the average of these 12 bars. The amount of each nutrient is shown under its name.</p><div class="nutrients">' + nutrientRows(v) + '</div></section>' +
+      '<section class="block" aria-labelledby="h-s"><h3 id="h-s">Price and nutrition compared with the other 26</h3><p>Each dot is a vegetable. Further right means more nutritious, lower means cheaper, so the bottom right is where the best buys are. Select a dot to jump to that vegetable.</p>' + scatter(v) +
+        '<div class="legend"><span class="cg-legend"><i class="cg-legend__dot cg-legend__dot--sel"></i>' + v.name + '</span><span class="cg-legend"><i class="cg-legend__dot"></i>Official consumer price (MAPA panel)</span><span class="cg-legend"><i class="cg-legend__dot cg-legend__dot--est"></i>Price from a product group or estimated</span></div></section>' +
+      '<section class="block" aria-labelledby="h-c"><h3 id="h-c">' + v.name + ' compared with the median and the best</h3>' + cmp + '<p class="note">For price, best means the lowest of the 27. Median is the middle vegetable when all 27 are ranked.</p></section>';
+    var back = document.getElementById('back');
+    if (back) back.addEventListener('click', function () { var b = grid.querySelector('.veg[aria-pressed="true"]'); if (b) { b.scrollIntoView({ block: 'center' }); b.focus(); } });
+    dyn.querySelectorAll('.pt').forEach(function (g) { g.addEventListener('click', function () { select(g.getAttribute('data-slug'), true); }); });
+  }
+
+  /* ---------- Table of everything ---------- */
+  function renderTable() {
+    document.getElementById('alltable').innerHTML = '<table><thead><tr><th scope="col">Vegetable</th><th scope="col">Price as bought (\u20ac / kg)</th><th scope="col">Edible share (%)</th><th scope="col">Price, edible part (\u20ac / kg)</th><th scope="col">Price type</th><th scope="col">Score (out of 100)</th><th scope="col">Per \u20ac1 (% of daily needs)</th><th scope="col">Energy (kcal / 100 g)</th></tr></thead><tbody>' +
+      sorted().map(function (v) { return '<tr><td>' + v.name + '</td><td>' + euro(v.price) + '</td><td>' + Math.round(v.edible * 100) + '</td><td>' + euro(v.priceEdible) + '</td><td>' + SRC_SHORT[v.source] + '</td><td>' + v.score.toFixed(0) + '</td><td>' + v.perEuro.toFixed(0) + '</td><td>' + v.kcal + '</td></tr>'; }).join('') + '</tbody></table>';
+  }
+
+  /* ---------- Interactions ---------- */
+  var narrow = window.matchMedia('(max-width: 999px)');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function select(slug, user) {
+    state.sel = slug; markSelected(); renderDetail();
+    document.getElementById('live').textContent = 'Showing details for ' + bySlug[slug].name;
+    try { history.replaceState(null, '', '#' + slug); } catch (e) {}
+    if (user && narrow.matches) { var d = document.getElementById('veg-name'); d.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth', block: 'start' }); d.focus({ preventScroll: true }); }
+  }
+  document.getElementById('sort').addEventListener('change', function (e) { state.sort = e.target.value; renderGrid(); renderTable(); });
+  document.getElementById('basis').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    state.basis = b.getAttribute('data-mode');
+    document.querySelectorAll('#basis button').forEach(function (x) { x.setAttribute('aria-checked', String(x === b)); });
+    if (state.sort === 'price') renderGrid(); renderDetail();
+  });
+  renderGrid(); renderTable(); renderDetail();
+})();
+
+(function () {
+  var d = document.getElementById('about-wrap'), mq = window.matchMedia('(min-width: 1000px)');
+  function sync() { if (mq.matches) d.open = true; }
+  sync(); if (mq.addEventListener) mq.addEventListener('change', sync);
+})();
+
+</script>

@@ -1,0 +1,71 @@
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Vegetable Explorer</h1>
+      <p class="lede">Select a vegetable to see what it gives you and what it costs, and how it compares with 26 others sold in Spain. Nutrition is per 100 g of raw vegetable (USDA); prices are in € per kg, July 2026 (MAPA).</p>
+    </div>
+    <button class="cg-switch" id="theme" type="button" role="switch" aria-checked="false">
+      <span class="cg-switch__track"><span class="cg-switch__knob">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>
+      </span></span><span>Dark mode</span>
+    </button>
+  </header>
+
+  <div id="banners"></div>
+
+  <details class="cg-disclosure about-wrap" id="about-wrap">
+    <summary>How the data and scores work</summary>
+  <dl class="about" aria-label="About the data">
+    <div><dt>Nutrition</dt><dd>Approximate amounts per 100 g of raw vegetable, from USDA FoodData Central. The <b>Nutrient Density Score</b> (0 to 100) is the average of 12 nutrients: protein, fiber, vitamins A, C, E, K and B6, folate, potassium, magnesium, calcium and iron. Each nutrient is the share of the EU daily reference found in 100 g, capped at 100%. It measures a 100 g portion, not calories.</dd></div>
+    <div><dt>Prices</dt><dd>Average consumer prices in € per kilo, July 2026, from the MAPA panel (Spain's Ministry of Agriculture, Fisheries and Food). <b>As bought</b> is the price of the whole product. <b>Edible part</b> is the price of what you actually eat after trimming, peeling or shelling.</dd></div>
+    <div><dt>Per €1</dt><dd>How much of your daily needs the edible part of one euro of the vegetable covers, on average across the same 12 nutrients, each capped at 100%.</dd></div>
+  </dl>
+  </details>
+
+  <main class="layout">
+    <div class="browse">
+      <div class="field">
+        <label for="sort">Sort vegetables by</label>
+        <select class="cg-select" id="sort">
+          <option value="name">Name (A to Z)</option>
+          <option value="score">Nutrient Density Score (highest first)</option>
+          <option value="price">Price (lowest first)</option>
+        </select>
+      </div>
+      <div class="grid" id="grid" role="group" aria-label="27 vegetables. Select one to see its details."></div>
+    </div>
+
+    <article class="detail" id="detail" aria-labelledby="veg-name">
+      <div class="basis">
+        <span class="lbl" id="basis-lbl">Show prices for</span>
+        <div class="cg-seg" role="radiogroup" aria-labelledby="basis-lbl" id="basis">
+          <button type="button" role="radio" aria-checked="true" data-mode="edible">Edible part</button>
+          <button type="button" role="radio" aria-checked="false" data-mode="bought">Whole, as bought</button>
+        </div>
+      </div>
+      <div id="dyn"></div>
+    </article>
+  </main>
+
+  <section aria-labelledby="all-h" class="block">
+    <h2 id="all-h">All 27 vegetables</h2>
+    <p class="note" style="max-width:70ch">The same information as a table, for reading across or for when you prefer not to use the pictures. It follows the sort order above.</p>
+    <details class="cg-disclosure"><summary>Show all data as a table</summary>
+      <div class="cg-disclosure__body cg-table" id="alltable"></div>
+    </details>
+  </section>
+
+  <footer>
+    <b>Sources and notes</b>
+    <ul>
+      <li>Nutrition: approximate values per 100 g raw, USDA FoodData Central. They are provisional until Spain's BEDCA food database is imported, and vegetables eaten cooked will change.</li>
+      <li>Daily references: EU Regulation 1169/2011, Annex XIII. Fiber uses the EFSA reference of 25 g.</li>
+      <li>Prices: average Spanish consumer prices, July 2026, MAPA panel. Four vegetables only have the price of their product group, and six are estimates until wholesale prices from Mercamadrid are connected.</li>
+      <li>Edible share of each vegetable is approximate (USDA refuse factors) and will be replaced by BEDCA values. Tomato, peppers, romaine lettuce and endive are treated as eaten whole.</li>
+      <li>Fun facts are general knowledge and are not part of the data.</li>
+      <li>Illustrations come from the Vegetable Chart prototype. Page built with the Cool Graphs design system, draft 7, 13 November 2026.</li>
+    </ul>
+  </footer>
+</div>
+<div class="sr-only" role="status" aria-live="polite" id="live"></div>

@@ -1,0 +1,29 @@
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Vegetable face-off</h1>
+      <p class="lede">Four vegetables, one odd question. Pick the winner. Ten random questions per game.</p>
+    </div>
+    <button class="cg-switch" id="theme" type="button" role="switch" aria-checked="false">
+      <span class="cg-switch__track"><span class="cg-switch__knob">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>
+      </span></span><span>Dark mode</span>
+    </button>
+  </header>
+
+  <main id="game" aria-live="off"></main>
+  <div class="sr" id="live" role="status" aria-live="polite"></div>
+
+  <section class="notes" aria-labelledby="notes-h">
+    <h2 id="notes-h">Sources and notes</h2>
+    <ul>
+      <li><b>Nutrient Density Score (0 to 100):</b> the average, across 12 nutrients, of the share of the EU daily reference found in 100 g of raw vegetable, each capped at 100%. It measures a 100 g portion, not calories. Nutrients: protein, fiber, vitamins A, C, E, K and B6, folate, potassium, magnesium, calcium and iron. Higher is more nutritious.</li>
+      <li>Nutrition: approximate amounts per 100 g of raw vegetable, USDA FoodData Central. Provisional until Spain's BEDCA food database is imported. Daily references: EU Regulation 1169/2011, Annex XIII; fiber uses the EFSA reference of 25 g.</li>
+      <li>Prices: average Spanish consumer prices in € per kg as bought (the whole product, before trimming or peeling), July 2026, MAPA panel (Spain's Ministry of Agriculture, Fisheries and Food). Price questions only use vegetables with an official price. Vegetables with a product-group price or an estimate are left out.</li>
+      <li>Questions are picked at random from many kinds: most or least nutritious, price, energy, the smallest portion that gives a whole day of one nutrient (the EU daily reference), the cheapest way to get a whole day of a nutrient or to eat 1,000 kcal, how much you need to eat to reach 2,000 kcal (a round number for fun, not advice), how much vegetable €1 buys, nutrient per 100 kcal, and how much is waste after trimming. Energy and nutrient amounts are per 100 g of raw vegetable. Costs use the edible part.</li>
+      <li>Every question has one clear winner: the best of the four is clearly ahead of the second best, so there are no near ties.</li>
+      <li>Illustrations come from the Vegetable Chart prototype. Page built with the Cool Graphs design system, draft 7, 13 November 2026.</li>
+    </ul>
+  </section>
+</div>

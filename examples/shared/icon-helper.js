@@ -1,0 +1,1 @@
+  function icon(n, size) { size = size || 24; return '<svg class="cg-icon" width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">' + ICONS[n].map(function (d) { return '<path d="' + d + '"/>'; }).join('') + '</svg>'; }

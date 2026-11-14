@@ -10,7 +10,7 @@ Use this skill for any new page, site, screen or component. The designer is a UX
 ## 1. Before you start
 
 1. Read `DESIGN.md` (rules) and `src/tokens/tokens.css` (the values). Both are the source of truth.
-2. List `src/components/` to see what already exists. Open the published Storybook if available.
+2. List `src/components/` to see what already exists. Open the published Storybook if available. Look at `examples/` for finished pages (a browse page and a game) before starting something similar.
 3. Understand the job of the page in one sentence, and who it is for. Ask the designer one short question if the audience, the data or the goal is unclear. Do not ask about things the design system already decides.
 
 ## 2. Workflow
@@ -38,7 +38,7 @@ Do not improvise a one-off style. For a missing colour, follow "To add a new col
 1. Say what is missing (for example, "a field error message", "a tooltip").
 2. Propose a new token or component in the style of the existing ones.
 3. If the designer agrees, add it in `src/`, with a story for every state in light and dark, and update `DESIGN.md` and the Storybook Introduction.
-4. Run `npm run build-docs` so the published Storybook stays current.
+4. Run `npm run build-docs` so the published Storybook stays current, and add a line to `CHANGELOG.md`.
 
 ## 5. Working from Figma
 

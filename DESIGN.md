@@ -121,7 +121,7 @@ People should be able to trust and understand what they see. For every page, scr
 
 ## 9. For AI agents and teammates
 
-An instruction file for building new pages with this system is in `.claude/skills/cool-graphs-design/SKILL.md`. It covers the workflow, the rules that never bend, how to work from Figma designs, and a pattern for clickable illustration pages.
+An instruction file for building new pages with this system is in `.claude/skills/cool-graphs-design/SKILL.md`. It covers the workflow, the rules that never bend, how to work from Figma designs, and a pattern for clickable illustration pages. Two finished example pages that follow it are in `examples/`, and `CHANGELOG.md` lists what changed and when.
 
 ## 10. How to change this system
 
@@ -130,3 +130,4 @@ An instruction file for building new pages with this system is in `.claude/skill
 3. Update this file if a rule or recommendation changes.
 4. Run `npm run build-docs` so the published Storybook stays current.
 5. If you change a colour token, also update the list in `src/tokens/colorMap.ts`, which the Storybook Colour pages read.
+6. Add a line to `CHANGELOG.md`, and rebuild any example page in `examples/` that uses what you changed.
